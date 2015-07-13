@@ -1,0 +1,353 @@
+  <html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+          }"></script>
+
+    <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Minimum Wage', 'Tuition'],
+          ['1979',  -1.75,      -4.87],
+          ['1980',  -6.18,      -13.5],
+          ['1981',  -2.08,       4.38],
+          ['1982',  -6.16,      9.27],
+            ['1983', -3.21, 6.96],
+            ['1984', -4.32, .31],
+            ['1985', -3.56, 2.89],
+            ['1986', -1.86, 1.72],
+            ['1987', -3.65, .59],
+            ['1988', -4.14, 4.66],
+            ['1989', -4.82, 2.76],
+            ['1990', 7.08, 2.85],
+            ['1991', 6.83, 2.58],
+            ['1992', -3.01, 5.35],
+            ['1993', -2.99, 5.67],
+            ['1994', -2.56, 2.44],
+            ['1995', -2.83, 2.05],
+            ['1996', 7.88, .47],
+            ['1997', 5.65, 6.51],
+            ['1998', -1.56, 3.15],
+            ['1999', -2.21, 3.55],
+            ['2000', -3.36, 2.47],
+            ['2001', -2.85, 2.94],
+            ['2002', -1.58, 5.96],
+            ['2003', -2.28, 6.94],
+            ['2004', -2.26, 8],
+            ['2005', -3.39, 5.16],
+            ['2006', -3.23, .64],
+            ['2007', 9.46, 2.49],
+            ['2008', 7.26, 3.12],
+            ['2009', 9.98, .36],
+            ['2010', -1.64, -1.64],
+            ['2011', -3.16, 1.48],
+            ['2012', -2.07, .3],
+            ['2013', -1.46, .92],
+            ['2014', -2.18, -1.08]
+        ]);
+
+        var options = {
+          title: 'Percentage Change in Minimum Wage and Tuition',
+          vAxis: {title: "Percent Change"},
+          hAxis: {title: "Year"},
+ 
+          legend: { position: 'right' }
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('percentChart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+          <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data2 = google.visualization.arrayToDataTable([
+          ['Year', 'Wage', 'Adjusted'],
+          ['1978', 2.65, 9.47],
+          ['1979',  2.9,      9.31],
+          ['1980',  3.1,      8.76],
+          ['1981',  3.35,       8.59],
+          ['1982',  3.35,      8.09],
+            ['1983', 3.35, 7.84],
+            ['1984', 3.35, 7.51],
+            ['1985', 3.35, 7.25],
+            ['1986', 3.35, 7.12],
+            ['1987', 3.35, 6.87],
+            ['1988', 3.35, 6.6],
+            ['1989', 3.35, 6.29],
+            ['1990', 3.8, 6.77],
+            ['1991', 4.25, 7.27],
+            ['1992', 4.25, 7.06],
+            ['1993', 4.25, 6.85],
+            ['1994', 4.25, 6.88],
+            ['1995', 4.25, 6.5],
+            ['1996', 4.75, 7.05],
+            ['1997', 5.15, 7.47],
+            ['1998', 5.15, 7.36],
+            ['1999', 5.15, 7.2],
+            ['2000', 5.15, 6.97],
+            ['2001', 5.15, 6.77],
+            ['2002', 5.15, 6.67],
+            ['2003', 5.15, 6.52],
+            ['2004', 5.15, 6.35],
+            ['2005', 5.15, 6.14],
+            ['2006', 5.15, 5.95],
+            ['2007', 5.85, 6.57],
+            ['2008', 6.55, 7.09],
+            ['2009', 7.25, 7.87],
+            ['2010', 7.25, 7.75],
+            ['2011', 7.25, 7.51],
+            ['2012', 7.25, 7.36],
+            ['2013', 7.25, 7.25],
+            ['2013', 7.25, 7.1]
+        ]);
+
+        var options2 = {
+          title: 'Nominal Minimum Wage in Ohio v. Minimum Wage (Adjusted for Inflation)',
+          vAxis: {title: "Dollar Amount"},
+          hAxis: {title: "Year"},
+          legend: { position: 'right' },
+          seriesType: "bars",
+          series: {1: {type: "line"}}
+        };
+
+        var chart2 = new google.visualization.ComboChart(document.getElementById('wage'));
+
+        chart2.draw(data2, options2);
+      }
+    </script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data3 = google.visualization.arrayToDataTable([
+          ['Year', 'In-State', 'Out-Of State'],
+          ['1978',  3537.23,8092.75],
+          ['1979',  3388.47,7701.07],
+          ['1980',  2985.47,6785.16],
+          ['1981',  3090.72,7127.11],
+          ['1982',  3577.64,7683.96],
+          ['1983', 3957.46, 8146.47],
+            ['1984', 3995.47, 8145.65],
+            ['1985', 4150.36, 8352.68],
+            ['1986', 4234.04, 8487.21],
+            ['1987', 4244.9, 8551.32],
+            ['1988', 4436.62, 8985.48],
+            ['1989', 4497.57, 9395.12],
+            ['1990', 4555.76, 9651.58],
+            ['1991', 4654.01, 9928.9],
+            ['1992', 4926.47, 10480.58],
+            ['1993', 5213.72, 11119.06],
+            ['1994', 5319.34, 11412.49],
+            ['1995', 5429.55, 11661.61],
+            ['1996', 5434.18, 11736.94],
+            ['1997', 5921.9, 12444.7],
+            ['1998', 6109.76, 12854.08],
+            ['1999', 6334.3, 13327.2],
+            ['2000', 6493.57, 13664.91],
+            ['2001', 6688.8, 14080.02],
+            ['2002', 7113.02, 14971.92],
+            ['2003', 7642, 16089.22],
+            ['2004', 8376.09, 17418.12],
+            ['2005', 8831.61, 18364.60],
+            ['2006', 9068.68, 18303.76],
+            ['2007', 9545.59, 18524.92],
+            ['2008', 9637.34, 19336.35],
+            ['2009', 9671.75, 19405.39],
+            ['2010', 9515.67, 19092.24],
+            ['2011', 9876.95, 19160.48],
+            ['2012', 10014.57, 19109.87],
+            ['2013', 10216, 19180],
+            ['2014', 10158.73, 18931.64]
+        ]);
+
+        var options3 = {
+          title: 'Tuition Costs Per Year (Adjusted for Inflation)',
+          hAxis: {title: 'Year'},
+          vAxis: {title: 'Dollar Amount'}
+        };
+
+        var chart3 = new google.visualization.AreaChart(document.getElementById('tuition'));
+        chart3.draw(data3, options3);
+      }
+    </script>
+     <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawVisualization);
+
+function drawVisualization() {
+  // Some raw data (not necessarily accurate)
+  var data4 = google.visualization.arrayToDataTable([
+    ['Academic Year', 'Instuctional Fee', 'General Fee', 'In-State Tuition', 'Out-Of-State Tuition',  'National Average'],
+    ['1977/78',  70,      260,         990,             2265,                 804],
+    ['1981/82',  110,      384,        1482,             3183,             1228],
+    ['1985/86',  140,      524,        1992,             3993,             1646],
+    ['1989/90',  172,      680,        2556,             5415,           2349],
+    ['1993/94',  231,      897,         3384,             7266,                 2987],
+    ['1997/98',  335,      1090,        4275,             8994,             3501],
+    ['2001/02',  430,      1401,        5493,             11562,             5027],
+    ['2005/06',  516,      2100,        7848,             15840,           6312],
+    ['2009/10',  513,      2456,         8907,             17871,           6695],
+    ['2013/14',  628,      4562,         10380,             19344,           6918]
+  ]);
+
+  var options4 = {
+    title : 'Total Cost of College For OU Students vs. National Average (Adjusted for Inflation)',
+    vAxis: {title: "Dollar Amount"},
+    hAxis: {title: "Academic Year"},
+    seriesType: "bars",
+    series: {4: {type: "line"}}
+  };
+
+  var chart4 = new google.visualization.ComboChart(document.getElementById('combo'));
+  chart4.draw(data4, options4);
+}
+    </script>
+      <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data5 = google.visualization.arrayToDataTable([
+          ['Year', 'In-State', 'Out-Of State'],
+    ['1977/78',  373.58,      854.72],
+    ['1978/79',  364.14,      827.59],
+    ['1979/80',  340.65,      774.19],
+    ['1980/81',  360,      830.15],
+    ['1981/82',  442.39,      950.15],
+    ['1982/83',  505.07,      1039.7],
+    ['1983/84',  531.94,	1084.48],
+    ['1984/85',  572.24,	1151.64],
+['1985/86', 594.63,	1191.94],
+['1986/87', 617.91,	1244.78],
+['1987/88',672.54,	1362.09],
+['1988/89',714.63,	1478.51],
+['1989/90',672.63,	1425.00],
+['1990/91',640.24,	1365.88],
+['1991/92',698.12,	1485.18],
+['1992/93',760.94,	1622.82],
+['1993/94',796.24,	1709.65],
+['1994/95',835.76,	1795.06],
+['1995/96',770.53,	1664.21],
+['1996/97',792.23,	1664.85],
+['1997/98',830.1,	1746.41],
+['1998/99',879.61,	1850.68],
+['1999/00',932.04,	1961.36],
+['2000/01',987.38,	2078.45],
+['2001/02',1066.60,	2245.05],
+['2002/03',1172.04,	2467.57],
+['2003/04',1318.83,	2742.52],
+['2004/05',1437.67,	2989.51],
+['2005/06',1523.88,	3075.73],
+['2006/07',1452.31,	2818.46],
+['2007/08',1359.85,	2728.40],
+['2008/09',1228.55,	2464.97],
+['2009/10',1228.55,	2464.97],
+['2010/11',1315.45,	2551.86],
+['2011/12',1361.38,	2597.79],
+['2012/13',1409.10,	2645.52],
+['2013/14',1431.72,	2668.14]
+        ]);
+
+        var options5 = {
+          title: 'Number of Minimum Wage Hours to Pay off Tuition Per Year',
+          hAxis: {title: 'Academic Year'},
+          vAxis: {title: 'Hours'}
+        };
+
+        var chart5 = new google.visualization.AreaChart(document.getElementById('20hr'));
+        chart5.draw(data5, options5);
+      }
+    </script>
+              <script type="text/javascript">
+      google.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data6 = google.visualization.arrayToDataTable([
+          ['Year', 'Tuition', 'Adjusted'],
+          ['1977/78', 1627.5,	5814.99],
+          ['1978/79',        1728,	5544.77],
+          ['1979/80', 1728,	4885.31],
+          ['1980/81', 1993.5,	5108.91],
+          ['1981/82',2332.5,	5630.80],
+          ['1982/83', 2587.5,	6051.97],
+          ['1983/84',2707.5,	6070.56],
+          ['1984/85',2887.5,	6251.52],
+          ['1985/86',2992.5,	6360.62],
+          ['1986/87', 3120,	6398.11],
+          ['1987/88', 3408,	6711.05],
+          ['1988/89',      3673.5,	6901.35],
+          ['1989/90',      3985.5,	7103.67],
+          ['1990/91',     4263,	7291.45],
+          ['1991/92', 4639.5,	7703.52],
+          ['1992/93', 5065.5,	8166.39],
+          ['1993/94', 5325,	8370.42],
+          ['1994/95',5590.5,	8545.58],
+          ['1995/96', 5782.5,	8585.56],
+          ['1996/97',6327,	9183.30],
+          ['1997/98',6634.5,	9481.92],
+          ['1998/99',7030.5,	9830.75],
+          ['1999/00',7450.5,	10079.24],
+          ['2000/01',7894.5,	10384.41],
+          ['2001/02',8527.5,	11042.47],
+          ['2002/03',9372,	11865.61],
+          ['2003/04',10458,	12897.11],
+          ['2004/05',11400,	13598.10],
+          ['2005/06',11844,	13686.22],
+          ['2006/07',12492,	14035.25],
+          ['2007/08',13389,	14486.85],
+          ['2008/09',13389,	14538.57],
+          ['2009/10',13389,	14303.95],
+          ['2010/11',14019,	14518.71],
+          ['2011/12',14352,	14562.22],
+          ['2012/13',14698,	14698.00],
+          ['2013/14',14862,	14545.19]
+
+        ]);
+
+        var options6 = {
+          title: 'Ohio University Average Tuition v. Average Tuition (Adjusted for Inflation)',
+          vAxis: {title: "Dollar Amount"},
+          hAxis: {title: "Year"},
+          legend: { position: 'right' }
+
+        };
+
+        var chart6 = new google.visualization.LineChart(document.getElementById('tuitionfinal'));
+
+        chart6.draw(data6, options6);
+      }
+    </script>
+  </head>
+  <body>
+    <h1 align="center">Fun with Graphs and Monies</h1>
+    <section class="col-md-12">
+    <div id="percentChart" style="width: 100%; height: 500px;"></div>
+    </section>
+    <section class="col-md-6">
+    <div id="wage" style="width: 100%; height: 500px;"></div>
+    </section>
+    <section class="col-md-6">
+    <div id="tuitionfinal" style="width: 100%; height: 500px;"></div>
+    </section>
+    <section class="col-md-12">
+    <div id="combo" style="width: 100%; height: 500px;"></div>
+    </section>
+    <section class="col-md-6">
+    <div id="tuition" style="width: 100%; height: 500px;"></div>
+    </section>
+    <section class="col-md-6">
+    <div id="20hr" style="width: 100%; height: 500px;"></div>
+    </section>
+  </body>
+</html>
