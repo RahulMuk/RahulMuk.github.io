@@ -1,0 +1,375 @@
+html
+{
+	background-color: #FFFFFF;
+}
+
+#page
+{
+	z-index: 1;
+	width: 920px;
+	min-height: 421px;
+	background-image: none;
+	border-style: none;
+	border-color: transparent;
+	background-color: #FFFFFF;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 17px 19px 62px 21px;
+}
+
+#pu435-4
+{
+	width: 0.01px;
+	margin-left: 1px;
+	position: relative;
+}
+
+#u435-4
+{
+	z-index: 9;
+	position: relative;
+	width: 114px;
+	margin-right: -10000px;
+	margin-top: 26px;
+}
+
+#u435-4_img
+{
+	display: block;
+	vertical-align: top;
+}
+
+#u434-4
+{
+	z-index: 5;
+	width: 293px;
+	min-height: 36px;
+	text-align: center;
+	font-size: 48px;
+	font-family: bree-serif, sans-serif;
+	font-weight: 400;
+	position: relative;
+	margin-right: -10000px;
+	left: 312px;
+}
+
+#pu455
+{
+	width: 0.01px;
+	margin-top: 44px;
+	position: relative;
+}
+
+#u455
+{
+	z-index: 3;
+	width: 311px;
+	height: 207px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 203px;
+	left: 608px;
+	background: transparent url("../images/tapride-u455-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u455:hover
+{
+	margin: 203px -10000px 0px 0px;
+	background: transparent url("../images/tapride-u455-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u455.MuseLinkActive
+{
+	margin: 203px -10000px 0px 0px;
+	background: transparent url("../images/tapride-u455-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u443
+{
+	z-index: 13;
+	width: 306px;
+	height: 204px;
+	position: relative;
+	margin-right: -10000px;
+	left: 613px;
+	background: transparent url("../images/artsforohio-u443-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u443:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/artsforohio-u443-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u443.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/artsforohio-u443-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u479
+{
+	z-index: 15;
+	width: 613px;
+	height: 409px;
+	position: relative;
+	margin-right: -10000px;
+	background: transparent url("../images/fire-u479-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u479:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/fire-u479-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u479.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/fire-u479-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#pu491
+{
+	width: 0.01px;
+	margin-left: 1px;
+	top: -1px;
+	margin-bottom: -1px;
+	position: relative;
+}
+
+#u491
+{
+	z-index: 2;
+	width: 613px;
+	height: 409px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 204px;
+	left: 305px;
+	background: transparent url("../images/thingstobringtocollege-u491-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u491:hover
+{
+	margin: 204px -10000px 0px 0px;
+	background: transparent url("../images/thingstobringtocollege-u491-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u491.MuseLinkActive
+{
+	margin: 204px -10000px 0px 0px;
+	background: transparent url("../images/thingstobringtocollege-u491-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u515
+{
+	z-index: 4;
+	width: 310px;
+	height: 207px;
+	position: relative;
+	margin-right: -10000px;
+	left: 609px;
+	background: transparent url("../images/feelingathome-u515-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u515:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/feelingathome-u515-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u515.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/feelingathome-u515-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u467
+{
+	z-index: 14;
+	width: 307px;
+	height: 205px;
+	position: relative;
+	margin-right: -10000px;
+	left: 305px;
+	background: transparent url("../images/finance-u467-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u467:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/finance-u467-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u467.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/finance-u467-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u503
+{
+	z-index: 16;
+	width: 306px;
+	height: 415px;
+	position: relative;
+	margin-right: -10000px;
+	background: transparent url("../images/favoriteplaces-u503-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u503:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/favoriteplaces-u503-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u503.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/favoriteplaces-u503-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u527
+{
+	z-index: 17;
+	width: 306px;
+	height: 204px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 408px;
+	background: transparent url("../images/delivery-u527-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u527:hover
+{
+	margin: 408px -10000px 0px 0px;
+	background: transparent url("../images/delivery-u527-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u527.MuseLinkActive
+{
+	margin: 408px -10000px 0px 0px;
+	background: transparent url("../images/delivery-u527-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#pu539
+{
+	width: 0.01px;
+	top: -1px;
+	margin-bottom: -1px;
+	position: relative;
+}
+
+#u539
+{
+	z-index: 18;
+	width: 307px;
+	height: 205px;
+	position: relative;
+	margin-right: -10000px;
+	background: transparent url("../images/fests-u539-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u539:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/fests-u539-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u539.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/fests-u539-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u551
+{
+	z-index: 19;
+	width: 306px;
+	height: 204px;
+	position: relative;
+	margin-right: -10000px;
+	left: 307px;
+	background: transparent url("../images/shortcuts-u551-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u551:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/shortcuts-u551-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u551.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/shortcuts-u551-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u668
+{
+	z-index: 20;
+	width: 306px;
+	height: 204px;
+	position: relative;
+	margin-right: -10000px;
+	left: 613px;
+	background: transparent url("../images/dormroom-u668-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u668:hover
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/dormroom-u668-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u668.MuseLinkActive
+{
+	margin: 0px -10000px 0px 0px;
+	background: transparent url("../images/dormroom-u668-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+body
+{
+	padding-top: 36px;
+	padding-bottom: 36px;
+}
+
+#page .verticalspacer
+{
+	clear: both;
+}
+
