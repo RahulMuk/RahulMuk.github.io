@@ -44,14 +44,14 @@ html
 	height: 305px;
 	position: relative;
 	margin-right: -10000px;
-	background: transparent url("../images/_newsmain-u575-fr.png") no-repeat left top;
+	background: transparent url("../images/newsmain-u575-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u575:hover
 {
 	margin: 0px -10000px 0px 0px;
-	background: transparent url("../images/_newsmain-u575-r-fr.jpg") no-repeat left top;
+	background: transparent url("../images/newsmain-u575-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
@@ -63,14 +63,14 @@ html
 	position: relative;
 	margin-right: -10000px;
 	left: 458px;
-	background: transparent url("../images/_culturemain-u563-fr.png") no-repeat left top;
+	background: transparent url("../images/culturemain-u563-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u563:hover
 {
 	margin: 0px -10000px 0px 0px;
-	background: transparent url("../images/_culturemain-u563-r-fr.jpg") no-repeat left top;
+	background: transparent url("../images/culturemain-u563-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
@@ -87,14 +87,14 @@ html
 	height: 305px;
 	position: relative;
 	margin-right: -10000px;
-	background: transparent url("../images/_sportsmain-u587-fr.png") no-repeat left top;
+	background: transparent url("../images/sportsmain-u587-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u587:hover
 {
 	margin: 0px -10000px 0px 0px;
-	background: transparent url("../images/_sportsmain-u587-r-fr.jpg") no-repeat left top;
+	background: transparent url("../images/sportsmain-u587-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
@@ -106,14 +106,14 @@ html
 	position: relative;
 	margin-right: -10000px;
 	left: 458px;
-	background: transparent url("../images/_opiniontitle-u698-fr.jpg") no-repeat left top;
+	background: transparent url("../images/opiniontitle-u698-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u698:hover
 {
 	margin: 0px -10000px 0px 0px;
-	background: transparent url("../images/_opiniontitle-u698-r-fr.jpg") no-repeat left top;
+	background: transparent url("../images/opiniontitle-u698-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 

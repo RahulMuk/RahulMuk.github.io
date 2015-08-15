@@ -6,7 +6,7 @@ html
 #page
 {
 	z-index: 1;
-	width: 919px;
+	width: 616px;
 	min-height: 418px;
 	background-image: none;
 	border-style: none;
@@ -14,7 +14,7 @@ html
 	background-color: #FFFFFF;
 	margin-left: auto;
 	margin-right: auto;
-	padding: 20px 19px 62px 22px;
+	padding: 20px 16px 62px 22px;
 }
 
 #u433-4
@@ -43,14 +43,14 @@ html
 	font-weight: 400;
 	position: relative;
 	margin-right: -10000px;
-	left: 312px;
+	left: 160px;
 }
 
 #u384
 {
 	z-index: 20;
-	width: 918px;
-	height: 612px;
+	width: 616px;
+	height: 411px;
 	margin-top: 40px;
 	position: relative;
 	background: transparent url("../images/wbasketball2-u384-fr.png") no-repeat left top;
@@ -71,10 +71,17 @@ html
 	background-size: contain !important;
 }
 
+#ppu372
+{
+	width: 0.01px;
+	top: -1px;
+	margin-bottom: -1px;
+	position: relative;
+}
+
 #pu372
 {
 	width: 0.01px;
-	padding-bottom: 0px;
 	position: relative;
 	margin-right: -10000px;
 }
@@ -82,8 +89,8 @@ html
 #u372
 {
 	z-index: 12;
-	width: 612px;
-	height: 408px;
+	width: 410px;
+	height: 274px;
 	position: relative;
 	background: transparent url("../images/athletstowatch-u372-fr.png") no-repeat left top;
 	background-size: contain !important;
@@ -103,17 +110,11 @@ html
 	background-size: contain !important;
 }
 
-#pu433-4,#pu295
-{
-	width: 0.01px;
-	position: relative;
-}
-
 #u295
 {
 	z-index: 8;
-	width: 306px;
-	height: 204px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
 	background: transparent url("../images/hockey-u295-fr.png") no-repeat left top;
@@ -137,11 +138,11 @@ html
 #u421
 {
 	z-index: 14;
-	width: 306px;
-	height: 204px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
-	left: 306px;
+	left: 205px;
 	background: transparent url("../images/men-sbasketball-u421-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
@@ -163,11 +164,11 @@ html
 #u283
 {
 	z-index: 2;
-	width: 306px;
-	height: 459px;
+	width: 205px;
+	height: 308px;
 	position: relative;
 	margin-right: -10000px;
-	left: 612px;
+	left: 410px;
 	background: transparent url("../images/sportscolumn-u283-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
@@ -189,35 +190,43 @@ html
 #u815
 {
 	z-index: 21;
-	width: 306px;
-	height: 204px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
-	margin-top: 408px;
-	left: 612px;
+	margin-top: 273px;
+	left: 410px;
 	background: transparent url("../images/athletsindorms-u815-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u815:hover
 {
-	margin: 408px -10000px 0px 0px;
+	margin: 273px -10000px 0px 0px;
 	background: transparent url("../images/athletsindorms-u815-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u815.MuseLinkActive
 {
-	margin: 408px -10000px 0px 0px;
+	margin: 273px -10000px 0px 0px;
 	background: transparent url("../images/athletsindorms-u815-fr.png") no-repeat left top;
 	background-size: contain !important;
+}
+
+#pu409
+{
+	width: 0.01px;
+	top: -2px;
+	margin-bottom: -2px;
+	position: relative;
 }
 
 #u409
 {
 	z-index: 3;
-	width: 612px;
-	height: 408px;
+	width: 410px;
+	height: 274px;
 	position: relative;
 	margin-right: -10000px;
 	background: transparent url("../images/baseball-u409-fr.png") no-repeat left top;
@@ -238,87 +247,78 @@ html
 	background-size: contain !important;
 }
 
-#pu754
-{
-	width: 0.01px;
-	padding-bottom: 1px;
-	position: relative;
-	margin-right: -10000px;
-	margin-top: 1px;
-	left: 611px;
-}
-
-#u754
-{
-	z-index: 19;
-	width: 306px;
-	height: 204px;
-	margin-left: 1px;
-	position: relative;
-	background: transparent url("../images/boldon-u754-fr.png") no-repeat left top;
-	background-size: contain !important;
-}
-
-#u754:hover
-{
-	margin: 0px 0px 0px 1px;
-	background: transparent url("../images/boldon-u754-r-fr.jpg") no-repeat left top;
-	background-size: contain !important;
-}
-
-#u754:active
-{
-	margin: 0px 0px 0px 1px;
-	background: transparent url("../images/boldon-u754-m-fr.png") no-repeat left top;
-	background-size: contain !important;
-}
-
-#u754.MuseLinkActive
-{
-	margin: 0px 0px 0px 1px;
-	background: transparent url("../images/boldon-u754-fr.png") no-repeat left top;
-	background-size: contain !important;
-}
-
 #u307
 {
 	z-index: 9;
-	width: 307px;
-	height: 205px;
-	top: -2px;
-	margin-bottom: -2px;
+	width: 206px;
+	height: 137px;
 	position: relative;
+	margin-right: -10000px;
+	margin-top: 136px;
+	left: 410px;
 	background: transparent url("../images/softball-u307-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u307:hover
 {
-	margin: 0px 0px -2px;
+	margin: 136px -10000px 0px 0px;
 	background: transparent url("../images/softball-u307-r-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
 #u307.MuseLinkActive
 {
-	margin: 0px 0px -2px;
+	margin: 136px -10000px 0px 0px;
 	background: transparent url("../images/softball-u307-fr.jpg") no-repeat left top;
 	background-size: contain !important;
 }
 
-#ppu372,#pu409,#pu319
+#u754
+{
+	z-index: 19;
+	width: 205px;
+	height: 137px;
+	position: relative;
+	margin-right: -10000px;
+	margin-top: 1px;
+	left: 411px;
+	background: transparent url("../images/boldon-u754-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u754:hover
+{
+	margin: 1px -10000px 0px 0px;
+	background: transparent url("../images/boldon-u754-r-fr.jpg") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u754:active
+{
+	margin: 1px -10000px 0px 0px;
+	background: transparent url("../images/boldon-u754-m-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#u754.MuseLinkActive
+{
+	margin: 1px -10000px 0px 0px;
+	background: transparent url("../images/boldon-u754-fr.png") no-repeat left top;
+	background-size: contain !important;
+}
+
+#pu433-4,#pu295,#pu319
 {
 	width: 0.01px;
-	top: -1px;
-	margin-bottom: -1px;
 	position: relative;
 }
 
 #u319
 {
 	z-index: 10;
-	width: 306px;
-	height: 205px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
 	background: transparent url("../images/volleyball-u319-fr.png") no-repeat left top;
@@ -342,11 +342,11 @@ html
 #u348
 {
 	z-index: 11;
-	width: 306px;
-	height: 204px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
-	left: 306px;
+	left: 205px;
 	background: transparent url("../images/hockeypreview-u348-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
@@ -368,11 +368,11 @@ html
 #u397
 {
 	z-index: 13;
-	width: 306px;
-	height: 204px;
+	width: 205px;
+	height: 137px;
 	position: relative;
 	margin-right: -10000px;
-	left: 612px;
+	left: 410px;
 	background: transparent url("../images/wbasketball1-u397-fr.png") no-repeat left top;
 	background-size: contain !important;
 }
