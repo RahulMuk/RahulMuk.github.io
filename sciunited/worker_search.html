@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cravious</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link id="main" rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="icons.css">
+	<link rel="stylesheet" type="text/css" href="css/owl.css">
+	<link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+	<link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="css/animate.css" rel="stylesheet" type="text/css">
+	<link rel="icon" 
+      type="image/png" 
+      href="img/favico.png" />
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-top text-right">
+<div class="social">
+				<a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+				<a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+				<a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+			</div>
+	</div>
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<i class="fa fa-ellipsis-v"></i>
+			</button>
+			<a class="navbar-brand" href="index.html"><img src="img/logo.png" width="25%"  alt=""></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="active"><a href="index.html">Home</a></li>
+				<li class="active"><a href="plans_and_pricings.html">Pricing</a></li>
+				<li class="active"><a href="plans_and_pricings1.html">Our Team</a></li>
+				<li class="active"><a href="login.html">Login</a></li>
+				<li class="active"><a href="contact.html">Contact</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>
+
+<section>
+	<div class="container">
+		<div class="row title text-left">
+			<h3 class="small-margin">Search for a worker</h3>
+			<h6 class="alt small-margin">See search results</h6>
+		</div>
+		<div class="row text-left">
+			<div class="col-md-3">
+				<input type="text" class="form-control" placeholder="Keyword e.g. (Job Title, Description)">
+			</div>
+			<div class="col-md-3">
+				<input type="text" class="form-control" placeholder="Location ( Country, etc.. )">
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="dropdown-input">Budget: $500 - $1000</a>
+				<ul class="dropdown">
+					<li><a href="#">$500</a></li>
+					<li><a href="#">$750</a></li>
+					<li><a href="#">$1000</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				<a href="#" class="btn green submit">Search worker <i class="fa fa-chevron-right"></i></a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 checks">
+				<input type="checkbox" id="checkbox1" class="css-checkbox" checked="checked"/><label for="checkbox1">Full Time</label>
+
+				<input type="checkbox" id="checkbox2" class="css-checkbox"/><label for="checkbox2">Part Time</label>
+
+				<input type="checkbox" id="checkbox3" class="css-checkbox" checked="checked"/><label for="checkbox3">Weekend</label>
+
+				<input type="checkbox" id="checkbox4" class="css-checkbox" /><label for="checkbox4">Freelance</label>
+
+				<input type="range" min="0" max="100" value="3" id="fader"/>
+				<label for="fader">Distance</label>
+				<b><span class="distance">20</span></b> km
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="tabs-container">
+					<h6 class="blue-color">24123 Jobs Found</h6>
+					<div class="tab-nav">
+						<a href="#">For Job Seeker</a>
+						<a href="#" class="active">For Companies</a>
+						<a href="#">Find Candidates</a>
+					</div>
+					<div class="tab-holder">
+						<div class="tab">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th>Person</th>
+									<th>Experience</th>
+									<th>Interests</th>
+									<th>Languages</th>
+									<th>Location</th>
+									<th>Budget</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/1.png" alt="">
+											<span>James Dean</span>
+										</td>
+										<td>
+											Mid-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Development</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Los Angeles
+										</td>
+										<td>
+											49$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/2.png" alt="">
+											<span>Josephine Carter</span>
+										</td>
+										<td>
+											Mid-level
+										</td>
+										<td>
+											<a href="#" class="tag">SEO</a>
+											<a href="#" class="tag">Wordpress</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+											<img src="img/languages/us.png" alt="">
+										</td>
+										<td>
+											Ohio
+										</td>
+										<td>
+											30$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/3.png" alt="">
+											<span>Caroline Markings</span>
+										</td>
+										<td>
+											High-level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Marketing</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Lisabon
+										</td>
+										<td>
+											16$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/4.png" alt="">
+											<span>Anna Hawkings</span>
+										</td>
+										<td>
+											High-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Typography</a>
+										</td>
+										<td>
+											<img src="img/languages/us.png" alt="">
+											<img src="img/languages/fr.png" alt="">
+										</td>
+										<td>
+											New York City
+										</td>
+										<td>
+											20$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/1.png" alt="">
+											<span>Johnathan Opera</span>
+										</td>
+										<td>
+											Low-level
+										</td>
+										<td>
+											<a href="#" class="tag">Adobe Photoshop</a>
+										</td>
+										<td>
+											<img src="img/languages/us.png" alt="">
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											New York City
+										</td>
+										<td>
+											24$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/2.png" alt="">
+											<span>Kevin Darrell</span>
+										</td>
+										<td>
+											Low-level
+										</td>
+										<td>
+											<a href="#" class="tag">Sports</a>
+											<a href="#" class="tag">Fitness</a>
+										</td>
+										<td>
+											<img src="img/languages/pl.png" alt="">
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Paris
+										</td>
+										<td>
+											44$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/3.png" alt="">
+											<span>Jennifer Aniston</span>
+										</td>
+										<td>
+											Mid-level
+										</td>
+										<td>
+											<a href="#" class="tag">Health</a>
+											<a href="#" class="tag">Medical</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+											<img src="img/languages/pl.png" alt="">
+										</td>
+										<td>
+											Berlin
+										</td>
+										<td>
+											38$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th>Person</th>
+									<th>Experience</th>
+									<th>Interests</th>
+									<th>Languages</th>
+									<th>Location</th>
+									<th>Budget</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/1.png" alt="">
+											<span>James Dean</span>
+										</td>
+										<td>
+											Mid-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Development</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Los Angeles
+										</td>
+										<td>
+											49$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/2.png" alt="">
+											<span>Josephine Carter</span>
+										</td>
+										<td>
+											Mid-level
+										</td>
+										<td>
+											<a href="#" class="tag">SEO</a>
+											<a href="#" class="tag">Wordpress</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+											<img src="img/languages/us.png" alt="">
+										</td>
+										<td>
+											Ohio
+										</td>
+										<td>
+											30$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/3.png" alt="">
+											<span>Caroline Markings</span>
+										</td>
+										<td>
+											High-level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Marketing</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Lisabon
+										</td>
+										<td>
+											16$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/4.png" alt="">
+											<span>Anna Hawkings</span>
+										</td>
+										<td>
+											High-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Typography</a>
+										</td>
+										<td>
+											<img src="img/languages/us.png" alt="">
+											<img src="img/languages/fr.png" alt="">
+										</td>
+										<td>
+											New York City
+										</td>
+										<td>
+											20$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab">
+							<table class="table table-striped">
+								<thead>
+								<tr>
+									<th>Person</th>
+									<th>Experience</th>
+									<th>Interests</th>
+									<th>Languages</th>
+									<th>Location</th>
+									<th>Budget</th>
+									<th></th>
+								</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/1.png" alt="">
+											<span>James Dean</span>
+										</td>
+										<td>
+											Mid-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Development</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Los Angeles
+										</td>
+										<td>
+											49$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/2.png" alt="">
+											<span>Josephine Carter</span>
+										</td>
+										<td>
+											Mid-level
+										</td>
+										<td>
+											<a href="#" class="tag">SEO</a>
+											<a href="#" class="tag">Wordpress</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+											<img src="img/languages/us.png" alt="">
+										</td>
+										<td>
+											Ohio
+										</td>
+										<td>
+											30$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/3.png" alt="">
+											<span>Caroline Markings</span>
+										</td>
+										<td>
+											High-level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Marketing</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Lisabon
+										</td>
+										<td>
+											16$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/4.png" alt="">
+											<span>Anna Hawkings</span>
+										</td>
+										<td>
+											High-Level
+										</td>
+										<td>
+											<a href="#" class="tag">Design</a>
+											<a href="#" class="tag">Typography</a>
+										</td>
+										<td>
+											<img src="img/languages/us.png" alt="">
+											<img src="img/languages/fr.png" alt="">
+										</td>
+										<td>
+											New York City
+										</td>
+										<td>
+											20$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/1.png" alt="">
+											<span>Johnathan Opera</span>
+										</td>
+										<td>
+											Low-level
+										</td>
+										<td>
+											<a href="#" class="tag">Adobe Photoshop</a>
+										</td>
+										<td>
+											<img src="img/languages/us.png" alt="">
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											New York City
+										</td>
+										<td>
+											24$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/2.png" alt="">
+											<span>Kevin Darrell</span>
+										</td>
+										<td>
+											Low-level
+										</td>
+										<td>
+											<a href="#" class="tag">Sports</a>
+											<a href="#" class="tag">Fitness</a>
+										</td>
+										<td>
+											<img src="img/languages/pl.png" alt="">
+											<img src="img/languages/de.png" alt="">
+										</td>
+										<td>
+											Paris
+										</td>
+										<td>
+											44$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img class="worker-img" src="img/people/3.png" alt="">
+											<span>Jennifer Aniston</span>
+										</td>
+										<td>
+											Mid-level
+										</td>
+										<td>
+											<a href="#" class="tag">Health</a>
+											<a href="#" class="tag">Medical</a>
+										</td>
+										<td>
+											<img src="img/languages/de.png" alt="">
+											<img src="img/languages/pl.png" alt="">
+										</td>
+										<td>
+											Berlin
+										</td>
+										<td>
+											38$/h
+										</td>
+										<td class="text-right">
+											<a href="#" class="btn btn-small blue btn-apply">Hire</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<a href="#"><i class="fa fa-angle-double-right"></i> see all jobs</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<nav class="text-center">
+					<ul class="pagination text-center">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 text-left">
+				<h4 class="heading no-margin">Sitemap</h4>
+				<hr class="blue">
+				<div class="col-md-6 no-padding">
+					<a href="#">Home</a>
+					<a href="#">Pricing</a>
+					<a href="#">Our Team</a>
+				</div>
+				<div class="col-md-6 no-padding">
+					<a href="#">Login</a>
+					<a href="#">Contact</a>
+				</div>
+			</div>
+			<div class="col-md-6 text-left">
+				<h4 class="heading no-margin">Follow Us!</h4>
+				<hr class="blue">
+                <a href="www.facebook.com">Facebook</a>
+                <a href="facebook.com">Twitter</a>
+			</div>
+		</div>
+	</div>
+	<div class="row bottom no-padding no-margin">
+		<div class="container">
+			<div class="col-md-12 no-padding text-left column-bottom">
+				<p>Copyright &copy; <span class="blue-color">Cravious</span> | All right reserved</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/smoothWheel.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/images-loaded.js"></script>
+	<script src="js/jquery.count.js"></script>
+	<script src="js/knobify.js"></script>
+	<script src="js/isotope.js"></script>
+	<script src="js/main.js"></script>
+
+</body>
+</html>
