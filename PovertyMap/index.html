@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Athens County Poverty Map</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+		<link rel="stylesheet" type="text/css" href="css/own_style.css">
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+		<script src="js/leaflet-hash.js"></script>
+		<script src="js/Autolinker.min.js"></script>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	</head>
+	<body>
+		<div id="map"></div>
+		<script src="data/exp_PovertyRate.js"></script>
+		<script src="data/exp_AverageIncome.js"></script>
+		<script>
+		var map = L.map('map', {
+			zoomControl:true, maxZoom:19
+		}).fitBounds([[40.6932014754,-65.7361653489],[41.5805186157,-62.9620896334]]);
+		var hash = new L.Hash(map);
+		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
+		var feature_group = new L.featureGroup([]);
+		var raster_group = new L.LayerGroup([]);	
+		var layerOrder=new Array();
+		function pop_AverageIncome(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">TOWNSHIP_N</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Income</th><td>' + Autolinker.link(String(feature.properties['Income'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleAverageIncome(feature) {
+			if (feature.properties.Income >= 26800.0 && feature.properties.Income <= 31700.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fcfbfd',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 31700.0 && feature.properties.Income <= 36600.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#dbdbeb',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 36600.0 && feature.properties.Income <= 41500.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#a29fcb',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 41500.0 && feature.properties.Income <= 46400.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#6a51a3',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 46400.0 && feature.properties.Income <= 51300.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#3f007d',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_AverageIncomeJSON = new L.geoJson(exp_AverageIncome,{
+			onEachFeature: pop_AverageIncome,
+			style: doStyleAverageIncome
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		feature_group.addLayer(exp_AverageIncomeJSON);
+		function pop_PovertyRate(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">TOWNSHIP_N</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Poverty</th><td>' + Autolinker.link(String(feature.properties['Poverty'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStylePovertyRate(feature) {
+			if (feature.properties.Poverty >= 9.2 && feature.properties.Poverty <= 15.34) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#f7fbff',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Poverty >= 15.34 && feature.properties.Poverty <= 21.48) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#c7dcef',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Poverty >= 21.48 && feature.properties.Poverty <= 27.62) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#72b2d7',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Poverty >= 27.62 && feature.properties.Poverty <= 33.76) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#2878b8',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Poverty >= 33.76 && feature.properties.Poverty <= 39.9) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#08306b',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_PovertyRateJSON = new L.geoJson(exp_PovertyRate,{
+			onEachFeature: pop_PovertyRate,
+			style: doStylePovertyRate
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		feature_group.addLayer(exp_PovertyRateJSON);
+
+		feature_group.addTo(map);
+		var title = new L.Control();
+		title.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+			this.update();
+			return this._div;
+		};
+		title.update = function () {
+			this._div.innerHTML = '<h2>Athens County Poverty Map</h2>Various metrics showing poverty in Athens County'
+		};
+		title.addTo(map);
+		L.control.layers({},{"PovertyRate": exp_PovertyRateJSON,"AverageIncome": exp_AverageIncomeJSON},{collapsed:false}).addTo(map);
+		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
+	</script>
+</body>
+</html>
