@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Athens County Poverty Map</title>
+		<title>QGIS2leaf webmap</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
 		<link rel="stylesheet" type="text/css" href="css/own_style.css">
@@ -9,85 +9,29 @@
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 		<script src="js/leaflet-hash.js"></script>
 		<script src="js/Autolinker.min.js"></script>
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	</head>
 	<body>
-		<div id="map"></div>
-		<script src="data/exp_PovertyRate.js"></script>
-		<script src="data/exp_AverageIncome.js"></script>
+		<div id="map"><img style="padding-left: 50px;" src="pictures/key.png"></div>
+		<script src="data/exp_Townships.js"></script>
+		<script src="data/exp_CollegeGrad.js"></script>
+		<script src="data/exp_HSGrad.js"></script>
+		<script src="data/exp_FoodStamp.js"></script>
+		<script src="data/exp_Income.js"></script>
 		<script>
 		var map = L.map('map', {
 			zoomControl:true, maxZoom:19
-		}).fitBounds([[40.6932014754,-65.7361653489],[41.5805186157,-62.9620896334]]);
+		}).fitBounds([[40.5195282328,-66.1563048456],[41.7175698614,-62.6895590556]]);
 		var hash = new L.Hash(map);
 		var additional_attrib = 'created w. <a href="https://github.com/geolicious/qgis2leaf" target ="_blank">qgis2leaf</a> by <a href="http://www.geolicious.de" target ="_blank">Geolicious</a> & contributors<br>';
 		var feature_group = new L.featureGroup([]);
 		var raster_group = new L.LayerGroup([]);	
 		var layerOrder=new Array();
-		function pop_AverageIncome(feature, layer) {					
-			var popupContent = '<table><tr><th scope="row">TOWNSHIP_N</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Income</th><td>' + Autolinker.link(String(feature.properties['Income'])) + '</td></tr></table>';
+        		function pop_Townships(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Poverty Rate</th><td>' + Autolinker.link(String(feature.properties['Poverty'])) + '</td></tr></table>';
 			layer.bindPopup(popupContent);
 		}
 
-		function doStyleAverageIncome(feature) {
-			if (feature.properties.Income >= 26800.0 && feature.properties.Income <= 31700.0) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#fcfbfd',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.Income >= 31700.0 && feature.properties.Income <= 36600.0) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#dbdbeb',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.Income >= 36600.0 && feature.properties.Income <= 41500.0) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#a29fcb',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.Income >= 41500.0 && feature.properties.Income <= 46400.0) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#6a51a3',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-			if (feature.properties.Income >= 46400.0 && feature.properties.Income <= 51300.0) {
-				return {
-					color: '#000000',
-					weight: '1.3',
-					fillColor: '#3f007d',
-					opacity: '1.0',
-					fillOpacity: '1.0',
-				}
-			}
-		}
-		var exp_AverageIncomeJSON = new L.geoJson(exp_AverageIncome,{
-			onEachFeature: pop_AverageIncome,
-			style: doStyleAverageIncome
-		});
-		//add comment sign to hide this layer on the map in the initial view.
-		feature_group.addLayer(exp_AverageIncomeJSON);
-		function pop_PovertyRate(feature, layer) {					
-			var popupContent = '<table><tr><th scope="row">TOWNSHIP_N</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Poverty</th><td>' + Autolinker.link(String(feature.properties['Poverty'])) + '</td></tr></table>';
-			layer.bindPopup(popupContent);
-		}
-
-		function doStylePovertyRate(feature) {
+		function doStyleTownships(feature) {
 			if (feature.properties.Poverty >= 9.2 && feature.properties.Poverty <= 15.34) {
 				return {
 					color: '#000000',
@@ -134,12 +78,245 @@
 				}
 			}
 		}
-		var exp_PovertyRateJSON = new L.geoJson(exp_PovertyRate,{
-			onEachFeature: pop_PovertyRate,
-			style: doStylePovertyRate
+		var exp_TownshipsJSON = new L.geoJson(exp_Townships,{
+			onEachFeature: pop_Townships,
+			style: doStyleTownships
 		});
 		//add comment sign to hide this layer on the map in the initial view.
-		feature_group.addLayer(exp_PovertyRateJSON);
+		feature_group.addLayer(exp_TownshipsJSON);
+            
+		function pop_Income(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Average Income:</th><td>' + Autolinker.link(String(feature.properties['Income'])) + '</td></tr>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleIncome(feature) {
+			if (feature.properties.Income >= 26800.0 && feature.properties.Income <= 31700.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#f7fcf5',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 31700.0 && feature.properties.Income <= 36600.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#c9e9c2',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 36600.0 && feature.properties.Income <= 41500.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#7ac77b',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 41500.0 && feature.properties.Income <= 46400.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#29924a',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.Income >= 46400.0 && feature.properties.Income <= 51300.0) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#00441b',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_IncomeJSON = new L.geoJson(exp_Income,{
+			onEachFeature: pop_Income,
+			style: doStyleIncome
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		//feature_group.addLayer(exp_IncomeJSON);
+		function pop_FoodStamp(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Food Stamps:</th><td>' + Autolinker.link(String(feature.properties['FoodStamp'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleFoodStamp(feature) {
+			if (feature.properties.FoodStamp >= 8.6 && feature.properties.FoodStamp <= 13.74) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fff5eb',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.FoodStamp >= 13.74 && feature.properties.FoodStamp <= 18.88) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fdd1a5',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.FoodStamp >= 18.88 && feature.properties.FoodStamp <= 24.02) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fd9243',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.FoodStamp >= 24.02 && feature.properties.FoodStamp <= 29.16) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#de4f05',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.FoodStamp >= 29.16 && feature.properties.FoodStamp <= 34.3) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#7f2704',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_FoodStampJSON = new L.geoJson(exp_FoodStamp,{
+			onEachFeature: pop_FoodStamp,
+			style: doStyleFoodStamp
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		//feature_group.addLayer(exp_FoodStampJSON);
+		function pop_HSGrad(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+ '</td></tr><tr><th scope="row">High School Graduation Rate:</th><td>' + Autolinker.link(String(feature.properties['HSGrad'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleHSGrad(feature) {
+			if (feature.properties.HSGrad >= 72.7 && feature.properties.HSGrad <= 76.4) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fcfbfd',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.HSGrad >= 76.4 && feature.properties.HSGrad <= 80.1) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#dbdbeb',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.HSGrad >= 80.1 && feature.properties.HSGrad <= 83.8) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#a29fcb',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.HSGrad >= 83.8 && feature.properties.HSGrad <= 87.5) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#6a51a3',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.HSGrad >= 87.5 && feature.properties.HSGrad <= 91.2) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#3f007d',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_HSGradJSON = new L.geoJson(exp_HSGrad,{
+			onEachFeature: pop_HSGrad,
+			style: doStyleHSGrad
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		//feature_group.addLayer(exp_HSGradJSON);
+		function pop_CollegeGrad(feature, layer) {					
+			var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+ '</td></tr><tr><th scope="row">Bachleors Degrees</th><td>' + Autolinker.link(String(feature.properties['College'])) + '</td></tr></table>';
+			layer.bindPopup(popupContent);
+		}
+
+		function doStyleCollegeGrad(feature) {
+			if (feature.properties.College >= 4.1 && feature.properties.College <= 13.58) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fff5f0',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.College >= 13.58 && feature.properties.College <= 23.06) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fcbda4',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.College >= 23.06 && feature.properties.College <= 32.54) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#fb7050',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.College >= 32.54 && feature.properties.College <= 42.02) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#d32020',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+			if (feature.properties.College >= 42.02 && feature.properties.College <= 51.5) {
+				return {
+					color: '#000000',
+					weight: '1.3',
+					fillColor: '#67000d',
+					opacity: '1.0',
+					fillOpacity: '1.0',
+				}
+			}
+		}
+		var exp_CollegeGradJSON = new L.geoJson(exp_CollegeGrad,{
+			onEachFeature: pop_CollegeGrad,
+			style: doStyleCollegeGrad
+		});
+		//add comment sign to hide this layer on the map in the initial view.
+		//feature_group.addLayer(exp_CollegeGradJSON);
 
 		feature_group.addTo(map);
 		var title = new L.Control();
@@ -149,10 +326,17 @@
 			return this._div;
 		};
 		title.update = function () {
-			this._div.innerHTML = '<h2>Athens County Poverty Map</h2>Various metrics showing poverty in Athens County'
+			this._div.innerHTML = '<h2>Poverty Rate in Athens</h2>Various metrics showing poverty in Athens'
 		};
 		title.addTo(map);
-		L.control.layers({},{"PovertyRate": exp_PovertyRateJSON,"AverageIncome": exp_AverageIncomeJSON},{collapsed:false}).addTo(map);
+		var legend = L.control({position: 'bottomright'});
+		legend.onAdd = function (map) {
+			var div = L.DomUtil.create('div', 'info legend');
+    		return div;
+		};
+		legend.addTo(map);
+		L.control.layers({},{"Average Income ($)": exp_IncomeJSON,"Food Stamp Rate (%)": exp_FoodStampJSON,"High School Graduation (%)": exp_HSGradJSON,"Number of Bachleors Degrees (%)": exp_CollegeGradJSON,"Poverty Rate (%)": exp_TownshipsJSON},{collapsed:false}).addTo(map);
+
 		L.control.scale({options: {position: 'bottomleft',maxWidth: 100,metric: true,imperial: false,updateWhenIdle: false}}).addTo(map);
 	</script>
 </body>
