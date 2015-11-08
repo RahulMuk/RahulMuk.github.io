@@ -252,7 +252,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+'</td></tr><tr><th scope="row">Avergae Income:</th><td>$' + Autolinker.link(String(feature.properties['Income'])) +'</td></tr></table>';
+            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+'</td></tr><tr><th scope="row">Average Income:</th><td>$' + Autolinker.link(String(feature.properties['Income'])) +'</td></tr></table>';
             layer.bindPopup(popupContent);
         }
 
