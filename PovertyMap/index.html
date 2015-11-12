@@ -57,7 +57,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Households in Poverty:</th><td>' + Autolinker.link(String(feature.properties['Poverty'])) + '%</td></tr></table>';
+            var popupContent = '<table><tr><b>Township Name: </b>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '<br/></tr><tr><b>Households in Poverty: </b>' + Autolinker.link(String(feature.properties['Poverty'])) + '%</tr></table>';
             layer.bindPopup(popupContent);
         }
 
@@ -122,7 +122,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+ '</td></tr><tr><th scope="row">Adults over 25 with a Bachleors Degrees:</th><td>' + Autolinker.link(String(feature.properties['College']))+'%</td></tr></table>';
+            var popupContent = '<table><tr><b>Township Name: </b>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+ '<br/></tr><tr><b>Adults over 25 with a Bachleors Degrees: </b>' + Autolinker.link(String(feature.properties['College']))+'%</tr></table>';
             layer.bindPopup(popupContent);
         }
 
@@ -187,7 +187,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">Households with Food Stamps:</th><td>' + Autolinker.link(String(feature.properties['FoodStamp'])) + '%</td></tr></table>';
+            var popupContent = '<table><tr><b>Township Name:</b> ' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '<br/></tr><tr><b>Households with Food Stamps:</b> ' + Autolinker.link(String(feature.properties['FoodStamp'])) + '%</tr></table>';
             layer.bindPopup(popupContent);
         }
 
@@ -252,7 +252,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+'</td></tr><tr><th scope="row">Average Income:</th><td>$' + Autolinker.link(String(feature.properties['Income'])) +'</td></tr></table>';
+            var popupContent = '<table><tr><b>Township Name: </b>' + Autolinker.link(String(feature.properties['TOWNSHIP_N']))+'</tr><br/><tr><b>Average Income:</b> $' + Autolinker.link(String(feature.properties['Income'])) +'</tr></table>';
             layer.bindPopup(popupContent);
         }
 
@@ -317,7 +317,7 @@
                 },
                 mouseover: highlightFeature,
             });
-            var popupContent = '<table><tr><th scope="row">Township Name:</th><td>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '</td></tr><tr><th scope="row">High School Graduation Rate:</th><td>' + Autolinker.link(String(feature.properties['HSgrad'])) + '%</td></tr></table>';
+            var popupContent = '<table><tr><b>Township Name: </b>' + Autolinker.link(String(feature.properties['TOWNSHIP_N'])) + '<br/></tr><tr><b>High School Graduation Rate:</b> ' + Autolinker.link(String(feature.properties['HSgrad'])) + '%</tr></table>';
             layer.bindPopup(popupContent);
         }
 
@@ -380,7 +380,7 @@
 			return this._div;
 		};
 		title.update = function () {
-			this._div.innerHTML = '<h2>Poverty in Athens</h2>Various metrics showing poverty in Athens County'
+			title._div.innerHTML = '<h2>Poverty in Athens</h2>Various metrics showing poverty in Athens County'
 		};
 		title.addTo(map);
         var baseMaps = {};
