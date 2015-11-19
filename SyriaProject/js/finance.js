@@ -26,8 +26,9 @@
         ]);
 
         var options = {
+          hAxis: {title: 'none'},
           height: 400,
-          legend: 'none',
+          legend: {position: 'none'},
           chart: {
           },
           bars: 'horizontal' // Required for Material Bar Charts.
