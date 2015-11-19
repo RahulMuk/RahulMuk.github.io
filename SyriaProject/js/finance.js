@@ -26,9 +26,12 @@
         ]);
 
         var options = {
+          height: 400,
+          legend: 'none',
           chart: {
           },
           bars: 'horizontal' // Required for Material Bar Charts.
+        
         };
 
         var chart = new google.charts.Bar(document.getElementById('funds'));
