@@ -25,8 +25,8 @@
           ['Ireland', 40958174],    
         ]);
 
+
         var options = {
-          hAxis: {title: 'none'},
           height: 400,
           legend: {position: 'none'},
           chart: {
