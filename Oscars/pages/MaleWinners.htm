@@ -22,7 +22,7 @@ $(function () {
                 type: 'pie'
             },
             title: {
-                text: 'Roles that earn women Oscars'
+                text: 'Roles that earn men Oscars'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -61,35 +61,29 @@ $(function () {
                 name: "Winners",
                 colorByPoint: true,
                 data: [{
-                    name: "Female Family Member",
-                    y: 30.2
-                }, {
                     name: "Historical",
-                    y: 20.9
+                    y: 25.6
                 }, {
                     name: "Other",
+                    y: 20.9
+                }, {
+                    name: "Ill, Disabled, or Challanged",
                     y: 14
                 }, {
-                    name: "Ill, Disabled, or Challenged",
-                    y: 9.4
+                    name: "Law or Military",
+                    y: 10.5
                 }, {
-                    name: "Fictional Performer",
+                    name: "Villan",
                     y: 8.1
                 }, {
-                    name: "Housekeeper or Maid",
-                    y: 4.7
-                },{
-                    name: "Prostitue or Mistress",
-                    y: 4.7
-                },{
-                    name: "Villan",
-                    y: 3.5
-                },{
                     name: "Fictional Character in Historical Event",
-                    y: 2.3
+                    y: 8.1
                 },{
+                    name: "Fictional Performer",
+                    y: 7
+                }, {
                     name: "Career Acheivement",
-                    y: 2.3
+                    y: 5.8
                 }]
             }]
 
@@ -101,7 +95,7 @@ $(function () {
 	<body>
 <script src="js/highcharts.js"></script>
 
-<div id="container" style="min-width: 310px; height: 500px; max-width: 600px; margin: 0 auto"></div>
+<div id="container" style="height: 100%; width: 100%; margin: 0 auto"></div>
 
 	</body>
 </html>
