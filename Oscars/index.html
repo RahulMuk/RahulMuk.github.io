@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Oscars by the Numbers</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+    
+  <!-- Javascript -->
+    
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="js/highcharts.js"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div align="center" class="twelve columns" style="margin-top: 5%">
+        <h4>Oscars by the Numbers</h4>
+        <p>Click on these buttons to see the Oscars by the Numbers!</p>
+      </div>
+    </div>
+    <div class="row">
+      <button class="four columns" id="genre">Winners by Genre</button>
+      <button class="four columns" id="female">Female Winners</button>
+      <button class="four columns" id="male">Male Winners</button>
+    </div>
+    <div class="row">
+        <div id="container"></div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+    <script>
+        $( "#genre" ).click(function() {
+            $( "#container" ).load( "Genre.htm" );
+        });
+        $( "#female" ).click(function() {
+            $( "#container" ).load( "FemaleWinners.htm" );
+        });
+        $( "#male" ).click(function() {
+            $( "#container" ).load( "MaleWinners.htm" );
+        });
+    </script>
+</html>

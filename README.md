@@ -9,3 +9,4 @@ Here, you will find many of the projects I have worked on independently and for 
 <a href="sportstowatch/index.html">Matches to Watch</a><br>
     <a href="PollGraphic/index.html">Voter Turnout in Ohio</a><br>
     <a href="SyriaProject/refugeesbycountry.html">Syria Refugee Stats</a>
+<a href=“Oscars/index.html">Oscars by the Numbers</a>

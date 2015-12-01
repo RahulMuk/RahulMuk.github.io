@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Roles that earn men Oscars'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            colors: [
+                '#d64700',
+                '#002849',
+                '#16607c',
+                '#c6c8ca',
+                '#fff2ce',
+                '#ff9311',
+                '#7b7d7f'
+            ],
+	        legend: {
+	            enabled: true,
+	            layout: 'vertical',
+	            align: 'right',
+	            width: 290,
+	            verticalAlign: 'middle',
+	            useHTML: true,
+	            labelFormatter: function() {
+	                return '<div style="padding-bottom: 20px">' + this.name + ' ' + this.y + '%</div>';
+	            }
+	        },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: "Winners",
+                colorByPoint: true,
+                data: [{
+                    name: "Historical",
+                    y: 25.6
+                }, {
+                    name: "Other",
+                    y: 20.9
+                }, {
+                    name: "Ill, Disabled, or Challanged",
+                    y: 14
+                }, {
+                    name: "Law or Military",
+                    y: 10.5
+                }, {
+                    name: "Villan",
+                    y: 8.1
+                }, {
+                    name: "Fictional Character in Historical Event",
+                    y: 8.1
+                },{
+                    name: "Fictional Performer",
+                    y: 7
+                }, {
+                    name: "Career Acheivement",
+                    y: 5.8
+                }]
+            }]
+
+        });
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="js/highcharts.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+	</body>
+</html>
