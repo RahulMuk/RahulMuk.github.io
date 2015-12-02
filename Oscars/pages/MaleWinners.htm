@@ -14,12 +14,13 @@ $(function () {
     $(document).ready(function () {
 
         // Build the chart
-        $('#container').highcharts({
+        var chart = new Highcharts.Chart({
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                renderTo: 'container'
             },
             title: {
                 text: 'Roles that earn men Oscars'
