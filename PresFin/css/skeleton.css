@@ -28,6 +28,10 @@
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+#graph  {
+    margin-left: 0%;
+}
+
 .container {
   position: relative;
   width: 100%;
