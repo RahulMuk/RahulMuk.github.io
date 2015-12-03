@@ -16,12 +16,11 @@
           [ 'Coding', 'FIRST Robotics',    new Date(2010, 9, 1),  new Date(2014, 2, 4) ],
           [ 'Design and Coding',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
           [ 'Journalism',  'WOUB Public Media', new Date(2014, 3, 28),  new Date(2015, 12, 1) ],
-          [ 'Design Research', 'Research Associate', new Date(2014, 8, 25), new Date(2015, 12, 1) ]]);
+          [ 'Design', 'Research Associate', new Date(2015, 8, 25), new Date(2015, 12, 1) ]]);
           
-//          var options   {
-//              avoidOverlappingGridLines: false
-//          };
-              
-                      chart.draw(dataTable);
+        var options = {
+            timeline: { colorByRowLabel: true }
+        };  
+                      chart.draw(dataTable, options);
 
       }

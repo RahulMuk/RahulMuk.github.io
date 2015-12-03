@@ -8,7 +8,8 @@ function drawBarColors() {
         ['Photoshop', 23],
         ['Indesign', 18],
         ['HTML', 25],
-        ['CSS', 25]
+        ['CSS', 25],
+        ['Javascript', 12]
       ]);
 
       var options = {
@@ -16,8 +17,10 @@ function drawBarColors() {
         colors: ['#393939'],
         legend: {position: 'none'},
         hAxis: {
-          title: 'Number of Projects Worked on'
+          title: 'Number of Projects Worked on',
+            minValue: 0
         }
+          
       };
       var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
       chart.draw(data, options);
