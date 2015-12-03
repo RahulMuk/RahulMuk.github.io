@@ -12,9 +12,12 @@
         dataTable.addColumn({ type: 'date', id: 'End' });
         dataTable.addRows([
           [ 'Design', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 4, 1) ],
-          [ 'Journalism', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 4, 1) ],
           [ 'Design', 'Procter and Gamble', new Date(2014, 6, 8), new Date(2014, 8, 15) ],
+          [ 'Design', 'Backdrop Magazine', new Date(2014, 9, 8), new Date(2015, 3, 12) ],
+          [ 'Design', 'Habitat for Humanity', new Date(2014, 8, 25), new Date(2015, 9, 1) ],
           [ 'Coding', 'FIRST Robotics',    new Date(2010, 9, 1),  new Date(2014, 2, 4) ],
+          [ 'Journalism', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 4, 1) ],
+          [ 'Journalism', 'Backdrop Magazine', new Date(2014, 9, 8), new Date(2015, 3, 12) ],
           [ 'Design',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
           [ 'Coding',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
           [ 'Journalism',  'WOUB Public Media', new Date(2015, 3, 28),  new Date(2015, 12, 1) ],
@@ -27,7 +30,7 @@
           
         var options = {
             timeline: { colorByRowLabel: true },
-            colors: ['#7cb5ec','#434348','#90ed7d']
+            colors: ['#90ed7d','#7cb5ec','#f7a35c']
         };  
                       chart.draw(dataTable, options);
 

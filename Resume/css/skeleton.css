@@ -24,7 +24,13 @@
 - Clearing
 - Media Queries
 */
+a > i   {
+    color: black;
+}
 
+a > i:hover   {
+    color: inherit;
+}
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
