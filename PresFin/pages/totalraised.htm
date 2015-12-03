@@ -9,6 +9,7 @@ ${demo.css}
 		</style>
 		<script type="text/javascript">
 $(function () {
+    $(document).ready(function () {
     var chart = new Highcharts.Chart({
         chart: {
             type: 'bar',
@@ -63,6 +64,7 @@ $(function () {
             name: 'Other Groups',
             data: [0, 0, 0, 15.8, 0, 11.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }]
+        });
     });
 });
 </script>

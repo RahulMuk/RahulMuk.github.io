@@ -42,8 +42,8 @@
       <div class="twelve column" style="margin-top: 5%">
         <h4>Millions raised and spent so far</h4>
         <p>Numbers reported to the Federal Election Commission are in bold, the other numbers have been announced to the media. Totals include money raised by the candidates and outside groups that are supporting them.</p>
-        <label>Select:        
-            <select>
+        <label>Select: 
+            <select id="dropdown">
               <option value="nat">National</option>
               <option value="flo">Florida</option>
             </select>
@@ -58,4 +58,9 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+    <script>
+        $( "select" ).click(function() {
+            $( "#container" ).load( "pages/totalraised.htm"         );
+        });
+    </script>
 </html>
