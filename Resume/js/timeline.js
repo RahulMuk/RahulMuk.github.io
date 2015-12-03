@@ -26,7 +26,8 @@
           [ 'Design', 'Research Associate', new Date(2015, 8, 25), new Date(2015, 12, 1) ]]);
           
         var options = {
-            timeline: { colorByRowLabel: true }
+            timeline: { colorByRowLabel: true },
+            colors: ['#7cb5ec','#434348','#90ed7d']
         };  
                       chart.draw(dataTable, options);
 
