@@ -22,7 +22,7 @@ $(function () {
             text: 'Sources: Federal Election Commission, campaigns, news reports New York Times'
         },
         xAxis: {
-            categories: ['Jeb Bush', 'Hillary Rodham Clinton', 'Ted Cruz', 'Marco Rubio', 'Bernie Sanders','John Kasich','Ben Carson','Mike Huckabee','Rand Paul','Carly Fiorina','Lindsey Graham',"Martin O'Malley","Martin O'Malley",'Donald Trump','Rick Santorum' ],
+            categories: ['Jeb Bush', 'Hillary Rodham Clinton', 'Marco Rubio'],
             title: {
                 text: null
             }
@@ -55,14 +55,21 @@ $(function () {
             enabled: false
         },
         series: [{
-            name: 'Candidate Raised',
-            data: [14.4, 47.5, 14.3, 8.9, 15.2, 0, 10.6, 2, 6.9, 1.7, 3.7, 2, 1.9, .6, .3]
+            name: 'Tampa Bay',
+            data: [314050, 271523.01, 63036.92]
         }, {
-            name: 'Super Pacs Raised',
-            data: [103, 15.6, 38, 16.1, 0, 0, 0, 6, 0, 3.4, 0, 0, 0, 0, 0]
+            name: 'Hillsborough',
+            data: [153050, 177518.87, 38341.92]
         }, {
-            name: 'Other Groups',
-            data: [0, 0, 0, 15.8, 0, 11.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            name: 'Pinellas',
+            data: [130200,88216.75,22120]
+        }, {
+            name: 'Pasco',
+            data: [30800,4937.39,2070]
+        },
+        {
+            name: 'Hernando',
+            data: [0,850,505]
         }]
         });
     });

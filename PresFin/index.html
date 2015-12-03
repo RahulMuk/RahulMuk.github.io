@@ -43,10 +43,14 @@
         <h4>Millions raised and spent so far</h4>
         <p>Numbers reported to the Federal Election Commission are in bold, the other numbers have been announced to the media. Totals include money raised by the candidates and outside groups that are supporting them.</p>
         <label>Select: 
+            <button id="flo">Florida</button>
+            <button id="nat">National</button>
+<!--
             <select id="dropdown">
               <option value="nat">National</option>
               <option value="flo">Florida</option>
             </select>
+-->
           </label>
       </div>
       <div class="twelve column" id="graph">
@@ -59,8 +63,12 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
     <script>
-        $( "select" ).click(function() {
-            $( "#container" ).load( "pages/totalraised.htm"         );
+        $( "#flo" ).click(function() {
+            $( "#container" ).load( "pages/floridaraised.htm");
         });
+        $( "#nat" ).click(function() {
+            $( "#container" ).load("pages/totalraised.htm");
+        });
+
     </script>
 </html>
