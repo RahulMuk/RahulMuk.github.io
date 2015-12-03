@@ -11,11 +11,18 @@
         dataTable.addColumn({ type: 'date', id: 'Start' });
         dataTable.addColumn({ type: 'date', id: 'End' });
         dataTable.addRows([
-          [ 'Design', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 5, 1) ],
+          [ 'Design', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 4, 1) ],
+          [ 'Journalism', 'Spark Magazine', new Date(2012, 8, 25), new Date(2014, 4, 1) ],
           [ 'Design', 'Procter and Gamble', new Date(2014, 6, 8), new Date(2014, 8, 15) ],
           [ 'Coding', 'FIRST Robotics',    new Date(2010, 9, 1),  new Date(2014, 2, 4) ],
-          [ 'Design and Coding',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
-          [ 'Journalism',  'WOUB Public Media', new Date(2014, 3, 28),  new Date(2015, 12, 1) ],
+          [ 'Design',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
+          [ 'Coding',  'Flashstarts Inc.', new Date(2015, 5, 26),  new Date(2015, 8, 15) ],
+          [ 'Journalism',  'WOUB Public Media', new Date(2015, 3, 28),  new Date(2015, 12, 1) ],
+          [ 'Coding',  'WOUB Public Media', new Date(2015, 3, 28),  new Date(2015, 12, 1) ],
+          [ 'Design',  'WOUB Public Media', new Date(2015, 3, 28),  new Date(2015, 12, 1) ],
+          [ 'Journalism',  'The Post Athens', new Date(2014, 8, 25),  new Date(2015, 9, 15) ],
+          [ 'Coding',  'The Post Athens', new Date(2015, 1, 16),  new Date(2015, 9, 15) ],
+          [ 'Design',  'The Post Athens', new Date(2014, 8, 25),  new Date(2015, 9, 15) ],
           [ 'Design', 'Research Associate', new Date(2015, 8, 25), new Date(2015, 12, 1) ]]);
           
         var options = {
