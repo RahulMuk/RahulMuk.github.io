@@ -50,47 +50,32 @@ $(function () {
                 name: "Visual Communication",
                 id: "Visual Communication",
                 data: [
-                    ["Introduction to Studies in Visual Communication", 3],
-                    ["Introduction to Basic Publication Design", 3],
-                    ["Introduction to Visual Communication Skills: Photography", 3],
-                    ["Visual Communication Design I", 3],
-                    ["Interactive I: Web Design", 3],
-                    ["Interactive II: Advanced Web Design", 3],
-                    ["Design II: Informational Graphics", 3],
-                    ["JavaScript & jQuery", 3],
-                    ["Interactive III: Interactive Media", 3],
-                    ["Multimedia Production for Visual Communication", 3],
-                    ["Interactive Capstone: Advanced Interactive Media", 3],
+                    ["Print Design", 9],
+                    ["Web Design/Deveopment", 15],
+                    ["Other", 9],
                 ]
             }, {
                 name: "Business",
                 id: "Business",
                 data: [
-                    ["Introduction to Information Analysis and Design", 3],
-                    ["Business Information Systems Nonmajor", 3],
-                    ["Systems Analysis and Design", 3],
-                    ["Business Intelligence and Information Management", 3],
-                    ["Foundations of Accounting", 3],
-                    ["Introduction to the College of Business", 1],
+                    ["Data Analytics", 12],
+                    ["Accounting", 3],
+                    ["Other", 1],
                 ]
             }, {
                 name: "Journalism",
                 id: "Journalism",
                 data: [
-                    ["Precision Language for Journalists", 3],
-                    ["Fundamentals of Online Journalism", 3],
-                    ["Independent Study", 2],
-                    ["Data Journalism", 3]
+                    ["Digital Journalism", 8],
+                    ["Other", 3],
                 ]
             }, {
                 name: "Other",
                 id: "Other",
                 data: [
-                    ["Introduction to Sociology", 3],
-                    ["Plants and the Global Environment", 3],
-                    ["Themes in Global Politics", 3],
-                    ["Introduction to Cultural Anthropology", 3],
-                    ["Introduction to Graphic Design", 4]
+                    ["Social Sciences", 9],
+                    ["Natural Sciences", 3],
+                    ["Other", 4],
                 ]
             }]
         }
