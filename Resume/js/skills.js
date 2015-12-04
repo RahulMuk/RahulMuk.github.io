@@ -3,7 +3,7 @@ $(function () {
     $('#chart_div').highcharts({
         chart: {
             type: 'column',
-            inverted: true
+            inverted: false
         },
         title: {
             text: ''
