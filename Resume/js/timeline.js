@@ -30,7 +30,7 @@
           
         var options = {
             timeline: { colorByRowLabel: true },
-            colors: ['#90ed7d','#7cb5ec','#f7a35c']
+            colors: ['#0395af','#06b9dc','#07d8fd']
         };  
                       chart.draw(dataTable, options);
 
