@@ -14,7 +14,7 @@ $(function () {
     $(document).ready(function () {
 
         // Build the chart
-        var chart = new Highcharts.Chart({
+        var options = {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -61,34 +61,16 @@ $(function () {
             series: [{
                 name: "Winners",
                 colorByPoint: true,
-                data: [{
-                    name: "Historical",
-                    y: 25.6
-                }, {
-                    name: "Other",
-                    y: 20.9
-                }, {
-                    name: "Ill, Disabled, or Challanged",
-                    y: 14
-                }, {
-                    name: "Law or Military",
-                    y: 10.5
-                }, {
-                    name: "Villan",
-                    y: 8.1
-                }, {
-                    name: "Fictional Character in Historical Event",
-                    y: 8.1
-                },{
-                    name: "Fictional Performer",
-                    y: 7
-                }, {
-                    name: "Career Acheivement",
-                    y: 5.8
-                }]
+                data: []
             }]
 
-        });
+        };
+        
+        $.getJSON("data/men.json", function(json) {
+            options.series = json;
+            var chart = new Highcharts.Chart(options);
+         });
+
     });
 });
 		</script>

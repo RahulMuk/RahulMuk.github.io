@@ -1,0 +1,48 @@
+[
+     {
+          "type" : "pie",
+          "name" : "Winners",
+          "data" : [
+               [
+                    "Female Family Member",
+                     30.2
+               ],
+               [  
+                    "Historical",
+                    20.9
+               ],
+               [  
+                    "Other",
+                    14
+               ],
+               [  
+                    "Ill, Disabled, or Challenged",
+                    9.4
+               ],
+               [  
+                    "Fictional Performer",
+                    8.1
+               ],
+               [  
+                    "Housekeeper or Maid",
+                    4.7
+               ],
+               [  
+                    "Prostitue or Mistress",
+                    4.7
+               ],
+               [  
+                    "Villan",
+                    3.5
+               ],
+               [  
+                    "Fictional Character in Historical Event",
+                    2.3
+               ],
+               [  
+                    "Career Acheivement",
+                    2.3
+               ]
+           ]
+     }
+]

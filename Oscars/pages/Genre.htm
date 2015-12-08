@@ -14,7 +14,7 @@ $(function () {
     $(document).ready(function () {
 
         // Build the chart
-        var chart = new Highcharts.Chart({
+        var options = {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -61,31 +61,15 @@ $(function () {
             series: [{
                 name: "Winners",
                 colorByPoint: true,
-                data: [{
-                    name: "Dramas",
-                    y: 48
-                }, {
-                    name: "Comedy",
-                    y: 18
-                }, {
-                    name: "Historical/Epic",
-                    y: 10
-                }, {
-                    name: "Musicial",
-                    y: 8
-                }, {
-                    name: "Action/Adventure",
-                    y: 6
-                }, {
-                    name: "War/Suspense",
-                    y: 5
-                }, {
-                    name: "Western",
-                    y: 5
-                }]
+                data: []
             }]
 
-        });
+        };
+        
+         $.getJSON("data/genre.json", function(json) {
+            options.series = json;
+            var chart = new Highcharts.Chart(options);
+         });
     });
 });
 		</script>

@@ -1,0 +1,40 @@
+[
+     {
+          "type" : "pie",
+          "name" : "Winners",
+          "data" : [
+               [
+                    "Historical",
+                     25.6
+               ],
+               [  
+                    "Other",
+                    20.9
+               ],
+               [  
+                    "Ill, Disabled, or Challanged",
+                    14
+               ],
+               [  
+                    "Law or Military",
+                    10.5
+               ],
+               [  
+                    "Villan",
+                    8.1
+               ],
+               [  
+                    "Fictional Character in Historical Event",
+                    8.1
+               ],
+               [  
+                    "Fictional Performer",
+                    7
+               ],
+               [  
+                    "Career Acheivement",
+                    5.8
+               ]
+           ]
+     }
+]
