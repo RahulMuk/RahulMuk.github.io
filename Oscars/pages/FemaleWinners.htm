@@ -24,7 +24,7 @@ $(function () {
                 renderTo: 'container'
             },
             title: {
-                text: 'Roles that earn women Oscars'
+                text: 'Female Winners'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -42,9 +42,9 @@ $(function () {
                 '#35393A'
             ],
 	        legend: {
-	            enabled: true,
-	            layout: 'vertical',
-	            align: 'right',
+	            enabled: false,
+	            layout: 'horizontal',
+	            align: 'center',
 	            width: 290,
 	            verticalAlign: 'middle',
 	            useHTML: true,
@@ -57,7 +57,7 @@ $(function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true
                     },
                     showInLegend: true
                 }

@@ -23,7 +23,7 @@ $(function () {
                 renderTo: 'container'
             },
             title: {
-                text: 'Oscar Winners by Genre'
+                text: 'Total Winners'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -38,7 +38,7 @@ $(function () {
                 '#7b7d7f'
             ],
 	        legend: {
-	            enabled: true,
+	            enabled: false,
 	            layout: 'vertical',
 	            align: 'right',
 	            width: 200,
@@ -53,7 +53,7 @@ $(function () {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true
                     },
                     showInLegend: true
                 }
