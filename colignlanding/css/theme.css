@@ -2,10 +2,11 @@ body {
   overflow-x: hidden;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .container {
     width: 95%;
-  }
+      
+    }
 }
 .text-muted {
   color: #777777;
