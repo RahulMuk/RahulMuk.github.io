@@ -1818,6 +1818,11 @@ article img.pull-right, article .align-right{
 
 @media (max-width: 767px) {
 
+        .navbar-brand img   {
+        margin-top: -100px;
+    }
+
+    
   body {
     padding-right: 0;
     padding-left: 0;
