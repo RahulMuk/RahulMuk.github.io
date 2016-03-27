@@ -1,0 +1,70 @@
+/*
+
+style.css
+
+Beige: #d9ceba
+Teal: #7fa492
+Black: #414042
+Gold: #d99951
+Red: #8b1d1c
+	Darker red: #7b1a19
+
+Header: Oswald
+Body: Volkorn
+
+*/
+	
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700|Vollkorn:400,400italic);
+
+.video_responsive {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    z-index: -1;
+}
+
+#textatt    {
+    text-align: right;
+}
+
+.navbar-inverse {
+    background: #414042;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #d9ceba;
+    font-family: 'Oswald', sans-serif;
+}
+
+.light h1, .light h2, .light h3, .light h4  {
+    color: #8b1d1c;
+}
+
+.light  {
+    color: #8b1d1c;
+}
+
+h1, h2, h3, h4, h5, h6  {
+    font-family: Oswald;
+}
+
+body    {
+    font-family: 'Vollkorn', serif;
+}
+
+.navbar-inverse .navbar-nav > li:hover {
+    background: #8b1d1c;
+    font-style: italic;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover  {
+    color: #d99951;
+}
+
+#logo   {
+    z-index: 1;
+}
+.testimonials {
+    font-size: 16px;
+}
