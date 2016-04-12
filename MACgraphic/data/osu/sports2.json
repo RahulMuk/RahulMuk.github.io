@@ -1,0 +1,28 @@
+[
+     {
+          "type" : "bar",
+          "name" : "Sports",
+          "data" : [
+               [  
+                    "Football (M)",
+                    79939136
+               ],
+               [  
+                    "Basketball (M)",
+                    24059213
+               ],
+               [  
+                    "Basketball (W)",
+                    1002566
+               ],
+               [  
+                    "Ice Hockey (M)",
+                    844126
+               ],
+               [  
+                    "Lacrosse (M)",
+                    775846
+               ]
+           ]
+     }
+]

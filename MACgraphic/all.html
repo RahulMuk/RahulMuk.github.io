@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>MAC Sports Data - All Schools</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+    
+    <!-- Javascript -->
+    <script src="js/jquery.js"></script>
+    <script src="js/highcharts.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper" class="toggled">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Sports Infomation
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html">Individual Schools</a>
+                </li>
+                <li>
+                    <a href="all.html">All Schools</a>
+                </li>
+                <li>
+                    <a href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid" id='content'>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">☰</a>
+                        <h1>All Schools</h1>
+                        <p>This data will let you compare all the MAC schools in Ohio, as well as Ohio State.</p>
+                        <button id="rev" class="btn btn-primary">Revenue</button>
+                        <button id="exp" class="btn btn-primary">Expenses</button>
+                        <button id="sub" class="btn btn-primary">Subsidy % of Budget</button>
+                        <button id="attn" class="btn btn-primary">Attendance</button>
+                        <button id="stu" class="btn btn-primary">Subsidy Cost Per Student</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="container" class="col-lg-12">
+                    </div>
+                </div>
+                <hr>
+<!--
+                <div class="row">
+                    <div class="col-md-6" id="sports"></div>
+                    <div class="col-md-6" id="sports2"></div>
+                </div>
+-->
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/countUp.js"></script>
+    <script src="js/counts.js"></script>
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    $("#all").click(function(e){
+        $('#content').load("pages/index.htm");
+    });
+    </script>
+    
+    <script>
+    
+    </script>
+    
+</body>
+    <script>
+        $( "#container" ).load( "pages/all/revenue.htm");
+        $( "#rev" ).click(function() {
+            $( "#container" ).load( "pages/all/revenue.htm");
+        });
+        $( "#exp" ).click(function() {
+            $( "#container" ).load("pages/all/expenses.htm");
+        });
+        $( "#sub" ).click(function() {
+            $( "#container" ).load("pages/all/subsidy.htm");
+        });
+        $( "#attn" ).click(function() {
+            $( "#container" ).load("pages/all/attendance.htm");
+        });
+        $( "#stu" ).click(function() {
+            $( "#container" ).load("pages/all/student.htm");
+        });
+    </script>
+
+
+</html>

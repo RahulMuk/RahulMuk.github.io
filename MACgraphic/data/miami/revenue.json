@@ -1,0 +1,36 @@
+[
+     {
+          "type" : "pie",
+          "name" : "Revenue",
+          "data" : [
+               [
+                    "Ticket Sales",
+                     1210725
+               ],
+               [  
+                    "Contributions",
+                    1615928
+               ],
+               [  
+                    "Contributions",
+                    1615928
+               ],
+               [  
+                    "Student Fees",
+                    15735046
+               ],
+               [  
+                    "Rights/Licensing",
+                    2096074
+               ],
+               [  
+                    "School Funds",
+                    5380079
+               ],
+               [  
+                    "Other",
+                    3355276
+               ]
+           ]
+     }
+]

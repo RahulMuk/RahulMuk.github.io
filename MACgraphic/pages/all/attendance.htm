@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+    $(document).ready(function () {
+    var chart = new Highcharts.Chart({
+        chart: {
+            type: 'column',
+            renderTo: 'container'
+        },
+        title: {
+            text: 'Attendance proportional to Student Body'
+        },
+            colors: [
+                '#d64700',
+                '#002849',
+                '#16607c',
+
+                '#fff2ce',
+                '#ff9311',
+                '#7b7d7f'
+            ],
+        xAxis: {
+            categories: ['Ohio State', 'Ohio University', 'Kent State University','Miami University','Bowling Green State University','University of Toledo','University of Akron'],
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Ratio of Attendance',
+            },
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            data: [1.69, .60, .39, .78,.79,.84,.31]
+        }]
+        });
+    });
+});
+</script>
+	</head>
+	<body>
+<div id="container" style="height: 100%; width: 100%; margin: 0 auto"></div>
+
+	</body>
+</html>

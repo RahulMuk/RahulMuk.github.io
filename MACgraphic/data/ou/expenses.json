@@ -1,0 +1,25 @@
+[
+     {
+          "type" : "pie",
+          "name" : "Expenses",
+          "data" : [
+               [
+                    "Coaching/Staff",
+                     7940453
+               ],
+               [
+                    "Scholarships",
+                     7174844
+               ],
+               [
+                    "Building/Grounds",
+                     1996925
+               ],
+               [
+                    "Other",
+                     10186497
+               ]
+           ]
+     }
+    
+]

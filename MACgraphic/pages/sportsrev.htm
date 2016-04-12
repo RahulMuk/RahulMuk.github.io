@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+$(function () {
+
+    $(document).ready(function () {
+
+        // Build the chart
+        var options = {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'bar',
+                renderTo: 'sports2'
+            },
+            title: {
+                text: 'Top 5 Sports By Revenue'
+            },
+        xAxis: {
+            categories: ['Sport 1', 'Sport 2', 'Sport 3', 'Sport 4', 'Sport 5']
+        },
+            colors: [
+                '#d64700',
+                '#002849',
+                '#16607c',
+
+                '#fff2ce',
+                '#ff9311',
+                '#7b7d7f',
+                '#35393A'
+            ],
+	        legend: {
+	            enabled: false,
+	            layout: 'vertical',
+	            align: 'right',
+	            width: 290,
+	            verticalAlign: 'middle',
+	            useHTML: true,
+	            labelFormatter: function() {
+	                return '<div style="padding-bottom: 20px">' + this.name + ' ' + this.y + '%</div>';
+	            }
+	        },
+            plotOptions: {
+                bar: {
+                    size:'100%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: "Sports",
+                colorByPoint: true,
+                data: []
+            }]
+
+        };
+        
+        $.getJSON("/data/osu/sports2.json", function(json) {
+            options.series = json;
+            var chart = new Highcharts.Chart(options);
+         });
+        
+            $("#mam").click(function(){
+            $.getJSON("/data/miami/sports2.json", function(json) {
+            options.series = json;
+            var chart = new Highcharts.Chart(options);
+         });
+            })
+            
+            $("#osu").click(function(){
+            $.getJSON("/data/osu/sports2.json", function(json) {
+            options.series = json;
+            var chart = new Highcharts.Chart(options);
+         });
+            })
+    });
+});
+		</script>
+	</head>
+	<body>
+
+<div id="sports" style="height: 3000px; width: 100%; margin: 0 auto"></div>
+
+	</body>
+</html>
