@@ -63,55 +63,55 @@ $(function () {
 
         };
         
-         $.getJSON("/data/osu/revenue.json", function(json) {
+         $.getJSON("data/osu/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
         
             $("#mam").click(function(){
-            $.getJSON("/data/miami/revenue.json", function(json) {
+            $.getJSON("data/miami/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#osu").click(function(){
-            $.getJSON("/data/osu/revenue.json", function(json) {
+            $.getJSON("data/osu/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#ou").click(function(){
-            $.getJSON("/data/ou/revenue.json", function(json) {
+            $.getJSON("data/ou/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#bgsu").click(function(){
-            $.getJSON("/data/bgsu/revenue.json", function(json) {
+            $.getJSON("data/bgsu/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#ua").click(function(){
-            $.getJSON("/data/akron/revenue.json", function(json) {
+            $.getJSON("data/akron/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#ut").click(function(){
-            $.getJSON("/data/toledo/revenue.json", function(json) {
+            $.getJSON("data/toledo/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
             })
             
             $("#ksu").click(function(){
-            $.getJSON("/data/kent/revenue.json", function(json) {
+            $.getJSON("data/kent/revenue.json", function(json) {
             options.series = json;
             var chart = new Highcharts.Chart(options);
          });
