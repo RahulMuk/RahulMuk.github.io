@@ -13,6 +13,7 @@
     <link href="css/progress-northcentral.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
     <link href="css-menu/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bbplayer-minimal.css"/>   
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -241,10 +242,30 @@
 <!--user-driven slideshow with audio-->
 <div class="col-lg-12" id="storymap">
     <!--slideshow 1--> 
-    
+        <div class="bbplayer">
+      <span class="bb-play"></span>
+      <div class="playerWindow">
+        <div class="bb-track-display">
+          <span class="bb-trackTime">--:--</span>/
+          <span class="bb-trackTitle">&nbsp;</span>
+          <span class="bb-trackLength">--:--</span>
+        </div>
+      </div>
+      <!--
+      <span class="bb-albumCover">&nbsp;</span>
+      -->
+      <audio loop>
+        <source
+           src="audio/trailangles/GrahamCounty/GrahamCounty_Audio_final.mp3" type="audio/mpeg"/>
+        HTML5 Audio Not Available
+      </audio>
+              <!--
+      <div>Optional debug panel:</div>
+      <div class="bb-debug"></div>
+      -->
+    </div>
       <!-- masterslider -->
 <div class="master-slider ms-skin-default" id="masterslider">
-    
     
     
     <!-- new slide -->
@@ -439,6 +460,7 @@ Using a rake to clear the Appalachian Trail, Cynthia Post helps with maintenance
     <script src="js/bootstrap.min.js"></script>
     <script src="js/progress.js"></script>
     <script src="css-menu/script.js"></script>
+    <script src="js/bbplayer.js"></script>
 
         <script>
         $('#nav-toggle').click(function () {
