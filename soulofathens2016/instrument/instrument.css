@@ -19,9 +19,11 @@ text-align: center;
 ul li span {
 display: inline-block;
 vertical-align: middle;
+/*
 width: 100px;
 height: 100px;
 background: black;
+*/
 }
 .slider-arrow {
 position: absolute;
