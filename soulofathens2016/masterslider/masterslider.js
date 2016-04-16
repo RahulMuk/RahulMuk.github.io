@@ -4412,7 +4412,7 @@ MSSliderEvent.DESTROY				= 'ms_destroy';
 				}
 
 			}
-			
+            			
 			// previous slides
 			if(l > this.view.slideList.length/2) 
 				l = Math.floor(this.view.slideList.length/2);
