@@ -16,6 +16,13 @@
 	margin: -25px 0 0 -25px;
 }
 
+
+.ms-layer .ms-caption .ms-fraction  {
+    font-size: 18px;
+    left: 10%;
+    padding-top: 10px;
+}
+
 .ms-skin-default .ms-slide .ms-slide-vcbtn {
 	width: 30px;
 	height: 30px;
@@ -40,9 +47,15 @@
 	z-index: 110;
 }
 .ms-skin-default .ms-nav-next {
-	right: 30px;
+	right: -20%;
 	left: auto;
 	background-position: -89px -103px;
+}
+
+.ms-skin-default .ms-nav-prev {
+	left: -20%;
+	right: auto;
+	background-position: -89px -26px;
 }
 
 
