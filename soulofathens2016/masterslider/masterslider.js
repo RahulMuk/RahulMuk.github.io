@@ -4848,7 +4848,7 @@ MSSliderEvent.DESTROY				= 'ms_destroy';
 			loop 				: false,	  // Enables the continuous sliding mode.
 			mouse				: true,		  // Whether the user can use mouse drag navigation.
 			swipe				: true,		  // Whether the drag/swipe navigation is enabled.
-			grabCursor			: true,		  // Whether the slider uses grab mouse cursor.
+			grabCursor			: false,		  // Whether the slider uses grab mouse cursor.
 			space  				: 0,		  // The spacing value between slides in pixels.
 			fillMode			: 'fill',  	  // Specifies the slide background scaling method. Its acceptable values are "fill", "fit", "stretch", "center" and "tile".
 			start				: 1,		  // The slider starting slide number.
@@ -7299,7 +7299,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 					.bind('click' , function(){
 						that.slider.api.previous(true);
 					});
-		
+        		
 		_super.setup.call(this);
 
 		this.cont.append(this.$next);

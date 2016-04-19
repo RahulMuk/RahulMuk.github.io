@@ -124,6 +124,7 @@ It was established by the Ohio Central Coal Company in 1879 and incorporated on 
     <!-- new slide -->
     <div class="ms-slide">
         
+        <img id="info" src="img/caption_button.png"/>
          
         <!-- slide background -->
         <img src="masterslider/blank.gif" data-duration="200" data-src="img/rendville/1_Rendville_Town.jpg" alt="lorem ipsum dolor sit"/>     
@@ -346,7 +347,7 @@ Rendville, Ohio, 1956, Gelatin silver print; printed c.1956; Collection of Kenne
               <div class="col-lg-10">
                 <div class="master-slider ms-skin-default" id="masterslider2">
          
-       
+       <img id="info" src="img/caption_button.png"/>
      
     <!-- new slide -->
     <div class="ms-slide">
@@ -592,6 +593,11 @@ Rendville, Ohio, 1956, Gelatin silver print; printed c.1956; Collection of Kenne
     // adds Arrows navigation control to the slider.
     slider.control('arrows');
 
+    </script>
+        <script>
+        $('#info').click(function(){
+            $('.ms-caption').fadeToggle();
+        });
     </script>
   </body>
 </html>

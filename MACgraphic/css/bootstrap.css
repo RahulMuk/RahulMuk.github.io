@@ -6761,3 +6761,7 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+#menu-toggle {
+    font-size: 1.25em;
+}

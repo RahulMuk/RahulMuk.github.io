@@ -12,7 +12,7 @@
     <title>MAC Sports Data - By School</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
@@ -61,31 +61,48 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">☰</a>
-                        <h1>About</h1>
-                        <hr>
+                        <h1>MAC Ohio Schools</h1>
+                        <p>Toggle the dropdown menu to experiment with data from different schools</p>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose a School
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                              <li onclick="osuCount()" id="osu"><a href="#">The Ohio State University</a></li>
+                              <li onclick="ouCount()" id="ou"><a href="#">Ohio University</a></li>
+                              <li onclick="ksuCount()" id="ksu"><a href="#">Kent State University</a></li>
+                              <li onclick="mamCount()" id="mam"><a href="#">Miami University</a></li>
+                              <li onclick="bgsuCount()" id="bgsu"><a href="#">Bowling Green State University</a></li>
+                              <li onclick="utCount()" id="ut"><a href="#">University of Toledo</a></li>
+                              <li onclick="uaCount()" id="ua"><a href="#">University of Akron</a></li>
+                            </ul>
+                          </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <h3>Why was this tool created?</h3>
-                        <p>This website was created to help people explore athletic finances at schools in the Mid-Atlantic Conference. The current way to access data isn't very helpful for people to understand the impact of financials, so this side-by-side comparison hopes to give insight on how much monentary impact sports programs have on universities.</p>
+                    <div class="col-md-3">
+                        <h3>Percent Subsidy of Budget:</h3>
+                        <h2 id="sub" style="color:#3A4E75"></h2>
+                        <h3>Attendance Proportion to Student Body:</h3>
+                        <h2 id="atten" style="color:#3A4E75"></h2>
+                        <h3>Subsidy Cost Per Student:</h3>
+                        <h2 id="stud" style="color:#3A4E75"></h2>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="revenue"></div>
+                        <h3 id="revCountUp"></h3>
+                    </div>
+                    <div class="col-md-4">
+                         <div id="expenses"></div>
+                         <h3 id="expCountUp"></h3>
                     </div>
                 </div>
                 <hr>
+<!--
                 <div class="row">
-                    <div class="col-md-6">
-                        <h3>Where was the data curitated from?</h3>
-                        <p>Some of the data was pulled from an <a href="http://sports.usatoday.com/ncaa/finances/">USA Today Table</a>, while others were collected from the <a href="http://www.ncaa.com/">NCAA website</a> and the
-                        <a href="https://nces.ed.gov/">National Institution of Educational Statistics</a>.</p>
-                    </div>
+                    <div class="col-md-6" id="sports"></div>
+                    <div class="col-md-6" id="sports2"></div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3>Will this tool be build upon for the future?</h3>
-                        <p>Yes. We are planning to show these schools expenses and revenues over time, the cost of each sports, as well as adding other conferences.</p>
-                    </div>
-                </div>
+-->
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -116,8 +133,6 @@
     <script>
             $( "#revenue" ).load( "pages/revenue.htm" );
             $( "#expenses" ).load( "pages/expenses.htm" );
-            $( "#sports" ).load( "pages/sports.htm" );
-            $( "#sports2" ).load( "pages/sportsrev.htm" );
     </script>
 
 
