@@ -201,6 +201,10 @@ th {
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
   }
+    
+    h6{
+        color: #999;
+    }
   a,
   a:visited {
     text-decoration: underline;
@@ -1226,7 +1230,7 @@ h2,
 .h2,
 h3,
 .h3 {
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 h1 small,
