@@ -1,0 +1,31 @@
+/*
+#vs {
+    margin-top: 30px;
+}*/
+h4 {
+    font-weight: 700;
+}
+
+#stud, #sub, #atten {
+    font-weight: 400;
+    color: lightskyblue;
+    margin-top: -15px;
+}
+
+.col-lg-8 > h4  {
+    padding-top: 30px;
+}
+
+tspan   {
+    font-size: 1.5em;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.c3-legend-item  > text {
+        font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.15em;
+}
+
+.c3-axis-x  {
+    font-weight: 600;
+}
