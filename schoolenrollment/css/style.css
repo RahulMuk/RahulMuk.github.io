@@ -29,3 +29,7 @@ tspan   {
 .c3-axis-x  {
     font-weight: 600;
 }
+
+#data   {
+    padding-top: 20px;
+}

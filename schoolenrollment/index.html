@@ -48,7 +48,7 @@
     <div class="row">
         <div class="four columns offset-by-four">
             <select class="u-full-width" id="list">
-                <option value="osu">Ohio State University</option>
+                <option value="osu" selected="selected">Ohio State University</option>
                 <option value="ou">Ohio University</option>
                 <option value="mam">Miami University</option>
 <!--                <option value="ksu">Kent State University</option>-->
@@ -76,20 +76,20 @@
     <div class="row">
         <div class="four columns">
             <h5>Percentage of <br/> Out-of-State Students:</h5>
-            <h4 id="sub"></h4>
+            <h5 id="sub"></h5>
         </div>
         <div class="four columns">
             <h5>Total Out-of-State <br/> Tuition Dollars:</h5>
-            <h4 id="stud"></h4>
+            <h5 id="stud"></h5>
         </div>
         <div class="four columns">
             <h5>Acceptance Rate for Out-of-State Students:</h5>
-            <h4 id="atten"></h4>
+            <h5 id="atten"></h5>
         </div>    
     </div>
-      <div class="row">
+      <div class="row" id="data">
         <div class="col-lg-8">
-            <h4>Enrolled Students Over Time</h4>
+            <h5>Enrolled Students Over Time</h5>
             <div id="chart"></div>
         </div>
       </div>
@@ -100,6 +100,10 @@
 <script src="js/counts.js"></script>
 <script src="js/charts.js"></script>    
 <script>
+        osuCount();
+        osuCount2();
+    
+    
 document.getElementById("list").onchange = function() {
 switch (this.value) {
     case "osu":
