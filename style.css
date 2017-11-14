@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700');
+
+body    {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+.intro  {
+    margin-left: 10%;
+}
+
+.intro  > h1    {
+    margin-bottom: -10px;
+    font-size: 3em;
+    line-height: 45px;
+}
+
+.intro  > p {
+    font-size: 1.25em;
+    font-weight: 300;
+}
+
+.introchatter   {
+    width: 85%;
+    line-height: 140%;
+}
+
+.introchatter > a   {
+    color: white;
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+}
+
+.introchatter > a:hover   {
+    background-color: white;
+    color: #B72900;
+    text-decoration: none;
+}
+
+p.action {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 1.35em;
+}
+
+.fp-controlArrow    {
+    display: none !important;
+}
+
+.content    {
+    text-align: center;
+}
+
+.portfolioImg   {
+    width: 500px;
+}
+
+.liveLink   {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 1em;
+    padding: 5px 15px;
+}
+
+.liveLink:hover {
+    background-color: white;
+    color: black;
+}
+
+.projectTitle   {
+    margin-bottom: 0px;
+    font-weight: 500;
+    font-size: 1.6em;
+}
+
+.chatter    {
+    margin: 0 auto;    
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-weight: 300;
+    width: 450px;
+}
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span  {
+    background: #fff;
+}
+
+.ContactTitle   {
+    font-size: 3em;
+}
+
+.contact    {
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+.conIc  {
+    list-style: none;
+    padding: 0;
+}
+
+.conIc > li  {
+    display: inline-block;
+    padding: 5px 3px;
+    padding-bottom: 0px;
+    font-size: 24px;
+}
+
+i:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+a   {
+    color: white;
+}
+
+p.credit    {
+    margin-top: 50px;
+}
+
+@media only screen and (max-width: 500px) {
+    .portfolioImg {
+
+    width: 70%;
+        
+    }
+    
+    .projectTitle, .chatter   {
+        max-width: 70%;
+        margin-left: 15%;
+    }
+    
+    .projectTitle   {
+            line-height: 1.1em;
+    }
+    
+    .chatter    {
+        width: 300px;
+    }
+}
