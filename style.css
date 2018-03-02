@@ -169,7 +169,7 @@ p.credit    {
     height: 100vh;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 991px) {
     .projectTitle, .chatter,  .liveLink   {
         text-align: center;
     }
