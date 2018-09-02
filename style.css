@@ -14,7 +14,6 @@ img {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-    text-align: center;
 }
 
 .intro  > h1    {
@@ -27,6 +26,8 @@ img {
     font-size: 1.25em;
     font-weight: 300;
     color: #444;    
+    margin-top: 0px;
+    width: 60vw;
 }
 
 .introchatter   {
@@ -52,6 +53,14 @@ p.action {
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 1.35em;
+}
+
+.conIc, h1  {
+    display: inline-block;
+}
+
+.conIc  {
+    margin-left: 20px;
 }
 
 .fp-controlArrow    {
@@ -118,6 +127,8 @@ hr  {
     margin-top: 10px;
     text-align: left;
     color: #444;
+    line-height: 1.3em;
+    margin-bottom: 30px;
 }
 
 #fp-nav ul li a span,
@@ -170,9 +181,6 @@ p.credit    {
 }
 
 @media only screen and (max-width: 991px) {
-    .projectTitle, .chatter,  .liveLink   {
-        text-align: center;
-    }
     
 img {
     width: 100%;
@@ -186,7 +194,7 @@ img {
     }
     
     .centerClass    {
-        text-align: center;
+        margin-top: 20px;
     }
         
     .col-md-4 {
@@ -194,7 +202,7 @@ img {
     }
     
     .projectTitle   {
-        margin-top: 20px;
+        margin-top: 45px;
         margin-bottom: 5px;
     }
     
@@ -206,6 +214,15 @@ img {
         width: 140%;
         margin-left: -20%;
     }
+    
+    .conIc, h1  {
+        display: block;
+    }
+
+    .conIc  {
+        margin-left: 0px;
+    }
+    
 
 }
 
@@ -216,16 +233,21 @@ img {
         
     }
     
-    .projectTitle, .chatter   {
-        max-width: 70%;
-        margin-left: 15%;
+    .intro >h1  {
+        line-height: 1.3em;
+        margin-bottom: 0px;
     }
     
+    .intro >p   {
+        width: 95vw;
+    }
+            
     .projectTitle   {
             line-height: 1.1em;
     }
     
     .chatter    {
+        margin: 0;
         width: 300px;
     }
 }
