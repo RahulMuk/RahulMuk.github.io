@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
 
 <body>
   <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
@@ -14,6 +14,8 @@
 
 
 <script>
+
+parent.postMessage(document.body.clientHeight, "*")
 
 let dateHeader = document.getElementById('date');
 
