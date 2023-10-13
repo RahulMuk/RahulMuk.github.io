@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Globe with D3.js</title>
+    <style>
+        #globe-container {
+            width: 800px;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <div id="globe-container"></div>
+    <div id="tooltip" style="display: none;"></div>
+
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script>
+        var width = 800;
+        var height = 800;
+
+        let markers = [
+        { name: "Boston", lat: 42.3601, long: -71.0589, company:"Temu", category: "Headquarters" },
+    { name: "Singapore", lat: 1.3521, long: 103.8198, company:"Shein", category: "Headquarters" },
+    { name: "Dublin", lat: 53.3498, long: -6.2603, company:"PPD Holdings", category: "Headquarters" },
+    { name: "Los Angeles", lat: 34.0522, long: -118.2437, company:"TikTok", category: "Headquarters" }
+];
+
+// Define a function to check if a point is within the visible map bounds
+function isPointInBounds(point, path, projection) {
+    var projectedPoint = projection([point.long, point.lat]);
+    return path.bounds({type: "Point", coordinates: [projectedPoint]})[0][0] !== null;
+}
+
+// Update the position of points based on visibility
+function updatePointPositions() {
+    svg.selectAll(".point")
+        .style("display", function (d) {
+            return isPointInBounds(d, path, projection) ? "block" : "none";
+        })
+        .style("opacity", function (d) {
+            return isPointInBounds(d, path, projection) ? 1 : 0;
+        })
+
+        .attr("transform", function (d) {
+            var coords = projection([d.long, d.lat]);
+            return "translate(" + coords + ")";
+        });
+}
+
+function returnData(d){
+    return `<div>
+        <p><b>Location:</b>${d.name}</p>
+        <p><b>Company:</b>${d.company}</p>    
+        <p><b>Category:</b>${d.category}</p>   
+     </div>
+        `
+}
+
+function showTooltip(d) {
+    // Get the coordinates for the tooltip
+    var [x, y] = projection([d.long, d.lat]);
+
+
+    // Show the tooltip at the coordinates
+    d3.select("#tooltip")
+        .style("display", "block")
+        .style("left", (x + 20) + "px")
+        .style("top", (y + 20) + "px")
+        .html(returnData(d));
+}
+
+// Define a function to hide the tooltip
+function hideTooltip() {
+    d3.select("#tooltip")
+        .style("display", "none");
+}
+
+
+        var svg = d3.select("#globe-container").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        var projection = d3.geoOrthographic()
+            .scale(300)
+            .translate([width / 2, height / 2]);
+
+    //         projection.fitExtent(
+    //   [
+    //     [10, 10],
+    //     [width, height],
+    //   ],
+    //   markers
+    // );
+
+
+        var path = d3.geoPath().projection(projection);
+
+        
+
+        var globe = svg.append("path")
+            .datum({ type: "Sphere" })
+            .attr("class", "globe")
+            .attr("d", path)
+            .style("fill", "#eee");
+
+
+        d3.json("world.json").then(function (world) {
+            svg.selectAll(".country")
+                .data(world.features)
+                .enter().append("path")
+                .attr("class", "country")
+                .attr("d", path)
+                .attr("fill", "white")
+                .style('stroke', 'black')
+                .style('stroke-width', 0.3)
+                .style("opacity",1)
+
+
+
+                var points = svg.selectAll(".point")
+    .data(markers)
+    .enter()
+    .append("circle")
+    .attr("class", "point")
+    .attr("r", 5) // Radius of the circle
+    .attr("transform", function (d) {
+        var coords = projection([d.long, d.lat]);
+        return "translate(" + coords + ")";
+    })
+    .style("fill", "red"); // Color of the points
+
+// Add event listeners to the points
+svg.selectAll(".point")
+    .on("mouseover", function (event, d) {
+        showTooltip(d);
+    })
+    .on("mouseout", hideTooltip);
+
+
+
+    updatePointPositions();
+
+
+        });
+
+
+
+
+        var isDragging = false;
+
+        var drag = d3.drag()
+    .subject(function () {
+        var r = projection.rotate();
+        return { x: r[0] / -2, y: -r[1] };
+    })
+    .on("start", function () {
+        isDragging = true;
+        clearInterval(rotationInterval); // Stop the rotation animation
+        updatePointPositions();
+    })
+    .on("drag", function (event) {
+        var rotation = projection.rotate();
+        projection.rotate([(event.x*.75), (-event.y*.75)]);
+        globe.attr("d", path);
+        svg.selectAll(".country").attr("d", path);
+        updatePointPositions();
+    })
+    .on("end", function () {
+        isDragging = false;
+        rotationInterval = setInterval(rotateGlobe, 30); // Resume the rotation animation
+    });
+
+    
+svg.call(drag);
+
+function rotateGlobe() {
+    // Rotate the globe by a small increment
+    var currentRotation = projection.rotate();
+    var newRotation = [currentRotation[0] + 0.1, currentRotation[1]]; // Adjust the increment to control the rotation speed
+    projection.rotate(newRotation);
+    globe.attr("d", path);
+    svg.selectAll(".country").attr("d", path);
+    updatePointPositions();
+}
+
+var rotationInterval = setInterval(rotateGlobe, 30); // Adjust the time interval (in milliseconds)
+
+
+    </script>
+</body>
+<style>
+    #tooltip {
+        background-color: white;
+        padding: 10px;
+        border: 1px solid black;
+        display: inline-block;
+        position: fixed;
+    }
+    circle {
+        cursor: pointer;
+    }
+</style>
+</html>

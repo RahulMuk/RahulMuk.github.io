@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<!-- Create an element where the map will take place -->
+<svg id="my_dataviz" width="760" height="500"></svg>
+
+<script>
+
+const svg = d3.select("svg#my_dataviz"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+d3.json("countries.geojson").then( function(countries){
+
+
+const projection = d3.geoNaturalEarth1().fitSize([width - 100, height], countries)
+
+let path = d3.geoPath().projection(projection)
+
+
+let country_group = svg.append("g");
+  country_group
+    .selectAll("path")
+    .data(countries.features)
+    .join("path")
+    .attr("d", path)
+    .attr("data-pop", (d) => console.log(d.properties.POP_EST))
+    .attr("fill", "#eee")
+    .attr("stroke", "black")
+    .attr("stroke-width", 1);
+
+  // Draw the bubbles.
+  let max_pop = d3.max(countries.features.map((o) => o.properties.POP_EST));
+  let bubble_group = svg.append("g");
+  bubble_group
+    .selectAll("circle")
+    .data(countries.features)
+    .join("circle")
+    .attr("cx", (d) => path.centroid(d)[0])
+    .attr("cy", (d) => path.centroid(d)[1])
+    .transition()
+    .attr("r", (d) => 20 * Math.sqrt(d.properties.POP_EST / max_pop))
+    .attr("fill", "lightblue")
+    .attr("stroke", "black");
+
+//     return Object.assign(svg.node(), {
+//     update(data) {
+//      if (data) {
+//       bubble_group.data(data, d => d.name)
+//           .sort((a, b) => d3.descending(a.bubbleSize, b.bubbleSize))
+//           .attr("cx", d => x(d.xVariable))
+//           .attr("cy", d => y(d.yVariable))
+//           .attr("r", d => radius(d.bubbleSize));
+       
+//        bubble_group.on("mouseover", (event, d) => tooltip.show(d))
+//           .on("mouseout", () => tooltip.hide())
+//     }
+//     }
+//   });
+})
+
+
+
+
+</script>

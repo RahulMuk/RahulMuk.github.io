@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<body>
+  <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
+  <h2 id="date">October 2022</h2>
+<!-- Create an element where the map will take place -->
+  <svg id="my_dataviz" width="760" height="500"></svg>
+
+</body>
+
+
+<script>
+
+let dateHeader = document.getElementById('date');
+
+const svg = d3.select("svg#my_dataviz"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+let country_data = []
+let path;
+let filter_num = 0;
+
+
+d3.json("countries.geojson").then( function(countries){
+
+
+country_data = countries.features;
+
+const projection = d3.geoNaturalEarth1().fitSize([width - 100, height], countries)
+
+path = d3.geoPath().projection(projection)
+
+
+let country_group = svg.append("g");
+  country_group
+    .selectAll("path")
+    .data(countries.features)
+    .join("path")
+    .attr("d", path)
+    // .attr("data-pop", (d) => console.log(d.properties.POP_EST))
+    .attr("fill", "#eee")
+    .attr("stroke", "#dfdfdf")
+    .attr("stroke-width", 1);
+
+
+//     return Object.assign(svg.node(), {
+//     update(data) {
+//      if (data) {
+//       bubble_group.data(data, d => d.name)
+//           .sort((a, b) => d3.descending(a.bubbleSize, b.bubbleSize))
+//           .attr("cx", d => x(d.xVariable))
+//           .attr("cy", d => y(d.yVariable))
+//           .attr("r", d => radius(d.bubbleSize));
+       
+//        bubble_group.on("mouseover", (event, d) => tooltip.show(d))
+//           .on("mouseout", () => tooltip.hide())
+//     }
+//     }
+//   });
+
+function return_Centeroid(name){
+
+
+country = country_data.find(function(person) {
+  return person.properties.SOVEREIGNT === name;
+});
+
+
+return country;
+
+}
+
+
+d3.csv("newData.csv").then( function(data){
+
+
+
+    let parseDate = d3.timeParse('%m/%Y');
+
+data.forEach(function(d) {
+    d['gmv_RMB'] = +d['gmv_RMB'];
+    // d.month_date = parseDate(d.month_date);
+  });
+
+  function onlyUnique(value, index, array) {
+    return array.indexOf(value) === index;
+  }
+
+
+  let nuvalue = data.map(d => d.month_date)
+
+  let nestedData = nuvalue.filter(onlyUnique);
+
+  console.log(nestedData)
+
+
+  // let firstDate = nestedData[0];
+
+  // let filteredData = data.filter(function(person) {
+  //   return person.month_date >= firstDate;
+  //   });
+
+
+
+  let firstDate = nestedData[0];
+
+let filteredData = data.filter(function(person) {
+  return person.month_date == firstDate;
+});
+
+
+function formatNumberToShort(number) {
+  const suffixes = ["", "k", "M", "B", "T"]; // Abbreviations for thousands, millions, billions, etc.
+  let suffixNum = 0;
+
+  while (number >= 1000 && suffixNum < suffixes.length - 1) {
+    number /= 1000;
+    suffixNum++;
+  }
+
+  // Round to 1 decimal place and add the abbreviation
+  return number.toFixed(1) + suffixes[suffixNum];
+}
+
+
+
+let max_pop = d3.max(data.map((o) => o.gmv_RMB));
+let bubble_group = svg.append("g");
+bubble_group
+.selectAll("circle")
+.data(filteredData)
+.join("circle")
+.attr("cx", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
+.attr("cy", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+.transition(1000)
+.attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop))
+.attr("fill", "#0DCC6C")
+.attr("opacity", 0.75);
+
+
+let text_group = svg.append("g");
+
+text_group
+  .selectAll("text")
+  .data(filteredData)
+  .enter()
+  .append("text")
+  .attr("x", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
+  .attr("y", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+  .attr("dy", 5) // Adjust the vertical position of the text
+  .style("text-anchor", "middle") // Center the text horizontally
+  .text((d) => formatNumberToShort(d.gmv_RMB));
+
+
+function updateData(newData) {
+      var bubble_group = svg.selectAll("circle")
+        .data(newData);
+
+        bubble_group.transition()
+        .duration(1000)  // Animation duration in milliseconds
+        .attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop));
+
+
+        bubble_group.enter()
+        .append("circle")
+        .merge(bubble_group)
+        .attr("cx", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
+      .attr("cy", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+  .attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop))
+  .attr("fill", "#0DCC6C")
+.attr("opacity", 0.75);
+
+bubble_group.exit().remove();
+
+            var text_group = svg.selectAll("text").data(newData);
+
+
+
+            text_group.enter()
+  .append("text")
+  .merge(text_group)
+  .attr("x", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
+  .attr("y", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+  .attr("dy", 5) // Adjust the vertical position of the text
+  .style("text-anchor", "middle") // Center the text horizontally
+  .text((d) => formatNumberToShort(d.gmv_RMB));
+
+  text_group.exit().remove();
+
+
+
+
+    }
+
+
+
+      function returnDate(date) {
+        const inputDate = new Date(date);
+        // inputDate.setMonth(inputDate.getMonth() + 1);
+        const options = { year: 'numeric', month: 'long' };
+        const formattedDate = inputDate.toLocaleDateString('en-US', options);
+        if (formattedDate == "Invalid Date") {
+          return "August 2023"
+        }
+        else {
+          return formattedDate;
+        }
+      }
+
+
+      const intervalID = setInterval(function() {
+
+        updateData(filteredData)
+
+
+
+      if (filter_num <= 10) {
+        filter_num += 1;
+      }
+
+      else {
+        clearInterval(intervalID);
+      }
+      
+
+
+      firstDate = nestedData[filter_num];
+
+
+
+
+
+
+
+      dateHeader.innerHTML = returnDate(firstDate);
+
+      filteredData = data.filter(function(person) {
+        return person.month_date == firstDate;
+      });
+
+
+
+
+}, 750);
+
+
+
+
+
+})
+
+
+
+
+
+})
+
+
+
+
+
+</script>
