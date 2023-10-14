@@ -23,4 +23,3 @@ function updateCounter() {
 setInterval(updateCounter, 1000);
 
 //
-parent.postMessage(document.body.clientHeight, "*")
