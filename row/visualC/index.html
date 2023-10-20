@@ -17,7 +17,7 @@
 
 
 <!-- Create an element where the map will take place -->
-  <svg id="my_dataviz" width="760" height="500"></svg>
+  <svg id="my_dataviz" width="660" height="500"></svg>
 
 </body>
 
@@ -75,7 +75,14 @@ d3.json("countries.geojson").then( function(countries){
 
 country_data = countries.features;
 
-const projection = d3.geoNaturalEarth1().fitSize([width - 100, height], countries)
+const extent = [80.880885, 27.548636, 154.354626, -9.898752]; 
+
+const projection = d3.geoNaturalEarth1().fitSize([width, height], countries)
+
+// const projection = d3.geoNaturalEarth1()
+//   .clipAngle(extent)
+//   .fitSize([width, height], countries);
+
 
 path = d3.geoPath().projection(projection)
 
@@ -90,7 +97,7 @@ let country_group = svg.append("g");
     .join("path")
     .attr("d", path)
     // .attr("data-pop", (d) => console.log(d.properties.POP_EST))
-    .attr("fill",(d) => (d.properties.selected === true ? "#555555" : "#eee"))
+    .attr("fill",(d) => (d.properties.selected === true ? "#999999" : "#eee"))
     .attr("stroke", "#fff")
     .attr("stroke-width", 1);
 
@@ -217,21 +224,21 @@ function updateData(newData) {
         .data(newData);
 
         bubble_group
-        //.transition()
-       // .duration(1000)  // Animation duration in milliseconds
+        .transition()
+       .duration(200)  // Animation duration in milliseconds
         .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
 
 
-        bubble_group.enter()
-        .append("circle")
-        .merge(bubble_group)
-        .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
-      .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-  .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
-  .attr("fill", "#E45E00")
-.attr("opacity", 0.75);
+//         bubble_group.enter()
+//         .append("circle")
+//         .merge(bubble_group)
+//         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+//       .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+//   .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+//   .attr("fill", "#E45E00")
+// .attr("opacity", 0.75);
 
-bubble_group.exit().remove();
+// bubble_group.exit().remove();
 
             var text_group = svg.selectAll("text").data(newData);
 
@@ -400,7 +407,8 @@ updateData(filteredData);
   }
 
   text {
-    font-family:"Input Mono",sans-serif;
+   font-family:"Input Mono",sans-serif;
+   /* text-shadow: 1px 1px 2px #cdcdcd; */
   }
 
   .slider-container {
