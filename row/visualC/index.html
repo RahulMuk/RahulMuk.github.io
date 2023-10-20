@@ -223,22 +223,22 @@ function updateData(newData) {
       var bubble_group = svg.selectAll("circle")
         .data(newData);
 
-        bubble_group
-        .transition()
-       .duration(200)  // Animation duration in milliseconds
-        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
+      //   bubble_group
+      //   .transition()
+      //  .duration(200)  // Animation duration in milliseconds
+      //   .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
 
 
-//         bubble_group.enter()
-//         .append("circle")
-//         .merge(bubble_group)
-//         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
-//       .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-//   .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
-//   .attr("fill", "#E45E00")
-// .attr("opacity", 0.75);
+        bubble_group.enter()
+        .append("circle")
+        .merge(bubble_group)
+        .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+      .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+  .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+  .attr("fill", "#E45E00")
+.attr("opacity", 0.75);
 
-// bubble_group.exit().remove();
+ bubble_group.exit().remove();
 
             var text_group = svg.selectAll("text").data(newData);
 
@@ -347,6 +347,7 @@ dateHeader.innerHTML = returnDate(firstDate);
 filteredData = data.filter(function(person) {
   return person.month_date == firstDate;
 });
+
 
 updateData(filteredData);
 
