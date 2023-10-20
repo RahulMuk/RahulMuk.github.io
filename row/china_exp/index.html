@@ -1,68 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://restofworld.org/wp-content/themes/orbis/static-assets/external/fonts.css">
+
     <meta charset="UTF-8">
-    <title>3D Globe with D3.js</title>
+    <title>Chinese E commerce locations</title>
     <style>
         #globe-container {
-            width: 800px;
-            height: 800px;
+            width: 400px;
+            height: 400px;
+            margin-top: 20px;
+        }
+        p {
+            font-family: "GT Sectra";
+        }
+
+        p > b {
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1></h1>
+    <h1>Chinese e-commerce companies moving out of China</h1>
+    <h2>Drag the globe and hover over sites for more infomation</h2>
+    <div id="filter-container"></div>
+    
     <div id="globe-container"></div>
     <div id="tooltip" style="display: none;"></div>
 
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
-        parent.postMessage(document.body.clientHeight, "*")
-        var width = 800;
-        var height = 800;
 
-        let markers = [
-        { name: "Boston", lat: 42.3601, long: -71.0589, company:"Temu", category: "Headquarters" },
-    { name: "Singapore", lat: 1.3521, long: 103.8198, company:"Shein", category: "Headquarters" },
-    { name: "Dublin", lat: 53.3498, long: -6.2603, company:"PPD Holdings", category: "Headquarters" },
-    { name: "Los Angeles", lat: 34.0522, long: -118.2437, company:"TikTok", category: "Headquarters" }
-];
+        let filterContainer = document.getElementById('filter-container');
+
+        function makeButtons(companyNames) {
+            let element = 'All'
+            let button = document.createElement('button');
+                button.className = `filter selected`;
+                button.id = `${element}`;
+                button.textContent = element;
+                filterContainer.appendChild(button);
+
+            for (let index = 0; index < companyNames.length; index++) {
+                let element = companyNames[index];
+                let button = document.createElement('button');
+                button.className = `filter`;
+                button.id = `${element}`;
+                button.textContent = element;
+                filterContainer.appendChild(button);
+            }
+
+        }
+
+
+        parent.postMessage(document.body.clientHeight, "*")
+        var width = 400;
+        var height = width;
+
+        let updatePointPositions, return_Centeroid;
+
+//         let markers = [
+//         { name: "Boston", lat: 42.3601, long: -71.0589, company:"Temu", category: "Headquarters" },
+//     { name: "Singapore", lat: 1.3521, long: 103.8198, company:"Shein", category: "Headquarters" },
+//     { name: "Dublin", lat: 53.3498, long: -6.2603, company:"PPD Holdings", category: "Headquarters" },
+//     { name: "Los Angeles", lat: 34.0522, long: -118.2437, company:"TikTok", category: "Headquarters" }
+// ];
+
 
 // Define a function to check if a point is within the visible map bounds
-function isPointInBounds(point, path, projection) {
-    var projectedPoint = projection([point.long, point.lat]);
-    return path.bounds({type: "Point", coordinates: [projectedPoint]})[0][0] !== null;
+function isPointInBounds(point) {
+    var projectedPoint = return_Centeroid(point.Location);
+    return isNaN(projectedPoint[0]);
 }
 
 // Update the position of points based on visibility
-function updatePointPositions() {
-    svg.selectAll(".point")
-        .style("display", function (d) {
-            return isPointInBounds(d, path, projection) ? "block" : "none";
-        })
-        .style("opacity", function (d) {
-            return isPointInBounds(d, path, projection) ? 1 : 0;
-        })
 
-        .attr("transform", function (d) {
-            var coords = projection([d.long, d.lat]);
-            return "translate(" + coords + ")";
-        });
-}
 
 function returnData(d){
-    return `<div>
-        <p><b>Location:</b>${d.name}</p>
-        <p><b>Company:</b>${d.company}</p>    
-        <p><b>Category:</b>${d.category}</p>   
+
+    // console.log(d);
+
+    return `<div class="container ${d.Grouping}">
+        <p class="description">${d.Description}</p>   
+        <div class="table">
+        <p class="attr"><span class="label">App</span> ${d.App}</p>
+        <p class="attr"><span class="label">Company</span> ${d['Parent company']}</p>    
+        <p class="attr"><span class="label">Location</span> ${d.Location}</p>   
+        <p class="attr"><span class="label">Year</span> ${d.Year}</p>   
+        <p class="attr"><span class="label">Function</span> ${d.Classification}</p>  
+        </div>
      </div>
         `
 }
 
 function showTooltip(d) {
     // Get the coordinates for the tooltip
-    var [x, y] = projection([d.long, d.lat]);
+    var [x, y] = return_Centeroid(d.Location);
 
 
     // Show the tooltip at the coordinates
@@ -80,13 +114,18 @@ function hideTooltip() {
 }
 
 
+
+
+
         var svg = d3.select("#globe-container").append("svg")
             .attr("width", width)
             .attr("height", height);
 
         var projection = d3.geoOrthographic()
-            .scale(300)
+            .scale(200)
             .translate([width / 2, height / 2]);
+
+            path = d3.geoPath().projection(projection)
 
     //         projection.fitExtent(
     //   [
@@ -95,6 +134,34 @@ function hideTooltip() {
     //   ],
     //   markers
     // );
+
+    function redrawDots(data){
+
+        svg.selectAll(".point").remove();
+
+// console.log(markers);
+var points = svg.selectAll(".point")
+.data(data)
+.enter()
+.append("circle")
+.attr("class", "point")
+.attr('data-city', (d) => d.Location)
+.attr("r", 5)                
+.attr("transform", function (d) {
+var coords = return_Centeroid(d.Location);
+return "translate(" + coords + ")";
+})
+.style("fill", "#E45E00"); // Color of the points
+
+svg.selectAll(".point")
+    .on("mouseover", function (event, d) {
+        showTooltip(d);
+    })
+    .on("mouseout", hideTooltip);
+
+
+}
+
 
 
         var path = d3.geoPath().projection(projection);
@@ -105,7 +172,9 @@ function hideTooltip() {
             .datum({ type: "Sphere" })
             .attr("class", "globe")
             .attr("d", path)
-            .style("fill", "#eee");
+            .style("fill", "#eee")
+            .style("stroke", "#999")
+            .style('stroke-width', 0.3);
 
 
         d3.json("world.json").then(function (world) {
@@ -115,34 +184,110 @@ function hideTooltip() {
                 .attr("class", "country")
                 .attr("d", path)
                 .attr("fill", "white")
-                .style('stroke', 'black')
+                .style('stroke', '#dfdfdf')
                 .style('stroke-width', 0.3)
                 .style("opacity",1)
 
+                return_Centeroid = function(country_name){
 
 
-                var points = svg.selectAll(".point")
-    .data(markers)
-    .enter()
-    .append("circle")
-    .attr("class", "point")
-    .attr("r", 5) // Radius of the circle
-    .attr("transform", function (d) {
-        var coords = projection([d.long, d.lat]);
-        return "translate(" + coords + ")";
-    })
-    .style("fill", "red"); // Color of the points
+                    // if (country_name == 'Singapore'){
+                    //     return projection([103.8198, 1.3521]);
+                    // }
+                    // else {
+                    simp_country = world.features.find(function(nation) {
+                    return nation.properties.name === country_name;
+                    });
+
+                    country = path.centroid(simp_country)
+                    return country;
+                    
+
+
+
+                }
+
+                updatePointPositions = function() {
+                    svg.selectAll(".point")
+                        .style("display", function (d) {
+                            return isPointInBounds(d) ? "none" : "block";
+                        })
+                        .style("opacity", function (d) {
+                            return isPointInBounds(d) ? 0 : 1;
+                        })
+
+                        .attr("transform", function (d) {
+                            var coords = return_Centeroid(d.Location);
+                            return "translate(" + coords + ")";
+                        });
+                }
+
+
+                d3.csv("sites.csv").then( function(markers){
+
+                    let uniqueGroupings = [];
+
+                    markers.forEach(item => {
+                    // Step 3: Check if the 'grouping' value is not already in the uniqueGroupings array
+                        if (!uniqueGroupings.includes(item.Grouping)) {
+                            // Step 4: Add the 'grouping' value to the uniqueGroupings array
+                            uniqueGroupings.push(item.Grouping);
+                        }
+                    });
+
+                    makeButtons(uniqueGroupings);
+
+                    let buttons = document.querySelectorAll('.filter');
+
+                    buttons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            const selectedGrouping = button.getAttribute('id');
+
+                            // Filter the dataset based on the selected grouping
+
+                            buttons.forEach(btn => btn.classList.remove('selected'));
+
+                            button.classList.add('selected');
+
+                            let filteredData = [];
+
+                            if (selectedGrouping == "All") {
+                                filteredData = markers
+                            }
+                            else {
+                                filteredData = markers.filter(item => item.Grouping === selectedGrouping);
+                            }
+
+
+                            console.log(filteredData);
+
+                            // Redraw the dots with the filtered data
+                            redrawDots(filteredData);
+
+                            updatePointPositions();
+                        });
+                    });
+
+                    redrawDots(markers);
+
+
+
+
+
 
 // Add event listeners to the points
-svg.selectAll(".point")
-    .on("mouseover", function (event, d) {
-        showTooltip(d);
-    })
-    .on("mouseout", hideTooltip);
-
-
-
     updatePointPositions();
+
+
+                });
+
+
+
+
+
+
+
+
 
 
         });
@@ -151,31 +296,51 @@ svg.selectAll(".point")
 
 
         var isDragging = false;
+        var dragStartPoint = null; 
 
         var drag = d3.drag()
     .subject(function () {
         var r = projection.rotate();
         return { x: r[0] / -2, y: -r[1] };
     })
-    .on("start", function () {
-        isDragging = true;
-        clearInterval(rotationInterval); // Stop the rotation animation
+    .on("start", function (event) {
+        dragStartPoint = { x: event.x, y: event.y };
+       // isDragging = true;
+      //  clearInterval(rotationInterval); // Stop the rotation animation
         updatePointPositions();
     })
     .on("drag", function (event) {
-        var rotation = projection.rotate();
-        projection.rotate([(event.x*.75), (-event.y*.75)]);
-        globe.attr("d", path);
-        svg.selectAll(".country").attr("d", path);
-        updatePointPositions();
+
+        document.body.classList.add('grabbing');
+
+        if (dragStartPoint) {
+            // Calculate the difference in drag positions
+            var dx = dragStartPoint.x - event.x;
+            var dy = event.y - dragStartPoint.y;
+
+            // Update the rotation based on the difference
+            var rotation = projection.rotate();
+            projection.rotate([rotation[0] + dx * -2, rotation[1] - dy]);
+            globe.attr("d", path);
+            svg.selectAll(".country").attr("d", path);
+            updatePointPositions();
+
+            // Update the drag start point
+            dragStartPoint = { x: event.x, y: event.y };
+        }
     })
     .on("end", function () {
-        isDragging = false;
-        rotationInterval = setInterval(rotateGlobe, 30); // Resume the rotation animation
+
+        document.body.classList.remove('grabbing');
+       // isDragging = false;
+        dragStartPoint = null;
+        // rotationInterval = setInterval(rotateGlobe, 30); // Resume the rotation animation
     });
 
     
 svg.call(drag);
+
+
 
 function rotateGlobe() {
     // Rotate the globe by a small increment
@@ -187,18 +352,106 @@ function rotateGlobe() {
     updatePointPositions();
 }
 
-var rotationInterval = setInterval(rotateGlobe, 30); // Adjust the time interval (in milliseconds)
+// var rotationInterval = setInterval(rotateGlobe, 30); // Adjust the time interval (in milliseconds)
 
 
     </script>
 </body>
 <style>
+
+.grabbing {
+  cursor: grabbing;
+}
+
+.filter.selected {
+    color: #fff;
+    background-color: #E45E00;
+}
+
+p.description {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+p.attr {
+    font-size: 14px;
+}
+
+#filter-container {
+    display: flex;
+    gap: 5px;
+}
+
+.filter {
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    padding: 7px 11px 6px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: none;
+    background: rgb(230,230,230);
+    width: max-content;
+    transition: all .2s ease;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+}
+
+.filter:hover:not(.selected) {
+    background-color: rgba(228, 94, 0,0.5);
+}
+
+      h1, h2, p{
+    font-family: "Moderat",sans-serif;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+  }
+
+
+  div.container {
+    margin: 0;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  div.table {
+    padding: 0;
+    display: flex;
+    width: fit-content;
+    flex-wrap: wrap;
+  }
+
+  div.table > p {
+    margin: 5px 0;
+    flex: 0 0 calc(50% - 10px);
+  }
+
+  span.label {
+    font-size: 11px;
+    display: block;
+    color: #494949
+  }
+
     #tooltip {
         background-color: white;
         padding: 10px;
-        border: 1px solid black;
+        border: 1px solid #a8a8a8;
+        border-top: 5px solid #E45E00;
+        border-radius: 4px;
         display: inline-block;
         position: fixed;
+        width: fit-content;
+        max-width: 300px;
     }
     circle {
         cursor: pointer;

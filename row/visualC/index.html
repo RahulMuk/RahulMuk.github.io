@@ -1,12 +1,21 @@
-<!DOCTYPE html>
+<!DOCTYPE html>	
+<link rel="stylesheet" href="https://restofworld.org/wp-content/themes/orbis/static-assets/external/fonts.css">
+
 <meta charset="utf-8">
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
 <body>
-  <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
-  <h2 id="date">October 2022</h2>
+  <div class="topContainer">
+    <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
+    <h2 id="date">October 2022</h2>
+    <div class="slider-container">
+      <button id="toggleButton">Play</button> <input type="range" id="monthSlider" min="0" max="10" step="1" value="0">
+    </div>  
+  </div>
+
+
 <!-- Create an element where the map will take place -->
   <svg id="my_dataviz" width="760" height="500"></svg>
 
@@ -15,17 +24,50 @@
 
 <script>
 
+  // Define a function to update the map size
+
+
+
+
+
 parent.postMessage(document.body.clientHeight, "*")
 
 let dateHeader = document.getElementById('date');
 
-const svg = d3.select("svg#my_dataviz"),
+let svg = d3.select("svg#my_dataviz"),
     width = +svg.attr("width"),
     height = +svg.attr("height");
+
+//     let viewBox = "600 300 360 500";
+
+// svg.attr("viewBox", viewBox);
+
+
+
+//     function updateMapSize() {
+//    width = window.innerWidth;
+//    height = window.innerHeight;
+
+//   // Set the SVG's width and height based on the window dimensions
+//   svg.attr("width", width)
+//      .attr("height", height);
+
+
+// }
+
+// // Call the function to set the initial size
+// updateMapSize();
+
+// // Attach an event listener for window resize
+
+// window.onresize = updateMapSize;
+
 
 let country_data = []
 let path;
 let filter_num = 0;
+
+let circle_radius = 60;
 
 
 d3.json("countries.geojson").then( function(countries){
@@ -38,6 +80,9 @@ const projection = d3.geoNaturalEarth1().fitSize([width - 100, height], countrie
 path = d3.geoPath().projection(projection)
 
 
+
+
+
 let country_group = svg.append("g");
   country_group
     .selectAll("path")
@@ -45,8 +90,8 @@ let country_group = svg.append("g");
     .join("path")
     .attr("d", path)
     // .attr("data-pop", (d) => console.log(d.properties.POP_EST))
-    .attr("fill", "#eee")
-    .attr("stroke", "#dfdfdf")
+    .attr("fill",(d) => (d.properties.selected === true ? "#555555" : "#eee"))
+    .attr("stroke", "#fff")
     .attr("stroke-width", 1);
 
 
@@ -68,10 +113,16 @@ let country_group = svg.append("g");
 function return_Centeroid(name){
 
 
-country = country_data.find(function(person) {
-  return person.properties.SOVEREIGNT === name;
-});
+  if (name == 'Singapore'){
+    country = projection([103.8198,1.3521])
+  }
+  else {
+    simp_country = country_data.find(function(person) {
+      return person.properties.SOVEREIGNT === name;
+    });
 
+    country = path.centroid(simp_country)
+  }
 
 return country;
 
@@ -98,7 +149,6 @@ data.forEach(function(d) {
 
   let nestedData = nuvalue.filter(onlyUnique);
 
-  console.log(nestedData)
 
 
   // let firstDate = nestedData[0];
@@ -137,11 +187,14 @@ bubble_group
 .selectAll("circle")
 .data(filteredData)
 .join("circle")
-.attr("cx", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
-.attr("cy", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
-.transition(1000)
-.attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop))
-.attr("fill", "#0DCC6C")
+// .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+// .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+.attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+.attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+
+// .transition(1000)
+.attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+.attr("fill", "#E45E00")
 .attr("opacity", 0.75);
 
 
@@ -152,8 +205,8 @@ text_group
   .data(filteredData)
   .enter()
   .append("text")
-  .attr("x", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
-  .attr("y", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+  .attr("x", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+  .attr("y", (d) => return_Centeroid(d.SOVEREIGNT)[1])
   .attr("dy", 5) // Adjust the vertical position of the text
   .style("text-anchor", "middle") // Center the text horizontally
   .text((d) => formatNumberToShort(d.gmv_RMB));
@@ -163,18 +216,19 @@ function updateData(newData) {
       var bubble_group = svg.selectAll("circle")
         .data(newData);
 
-        bubble_group.transition()
-        .duration(1000)  // Animation duration in milliseconds
-        .attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop));
+        bubble_group
+        //.transition()
+       // .duration(1000)  // Animation duration in milliseconds
+        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
 
 
         bubble_group.enter()
         .append("circle")
         .merge(bubble_group)
-        .attr("cx", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
-      .attr("cy", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
-  .attr("r", (d) => 20 * Math.sqrt(d.gmv_RMB / max_pop))
-  .attr("fill", "#0DCC6C")
+        .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+      .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+  .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+  .attr("fill", "#E45E00")
 .attr("opacity", 0.75);
 
 bubble_group.exit().remove();
@@ -186,8 +240,8 @@ bubble_group.exit().remove();
             text_group.enter()
   .append("text")
   .merge(text_group)
-  .attr("x", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[0])
-  .attr("y", (d) => path.centroid(return_Centeroid(d.SOVEREIGNT))[1])
+  .attr("x", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+  .attr("y", (d) => return_Centeroid(d.SOVEREIGNT)[1])
   .attr("dy", 5) // Adjust the vertical position of the text
   .style("text-anchor", "middle") // Center the text horizontally
   .text((d) => formatNumberToShort(d.gmv_RMB));
@@ -201,54 +255,114 @@ bubble_group.exit().remove();
 
 
 
-      function returnDate(date) {
-        const inputDate = new Date(date);
-        // inputDate.setMonth(inputDate.getMonth() + 1);
-        const options = { year: 'numeric', month: 'long' };
-        const formattedDate = inputDate.toLocaleDateString('en-US', options);
-        if (formattedDate == "Invalid Date") {
-          return "August 2023"
-        }
-        else {
-          return formattedDate;
-        }
+      function returnDate(dateString) {
+        const dateParts = dateString.split('-');
+        const year = dateParts[0];
+        const monthIndex = parseInt(dateParts[1]) - 1; // Adjust for zero-based index
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        const month = monthNames[monthIndex];
+        return `${month} ${year}`;
       }
 
 
-      const intervalID = setInterval(function() {
+        let monthSlider = document.getElementById("monthSlider");
 
-        updateData(filteredData)
+  // Function to update the selected month and trigger animation
+
+  let monthIndex = 0;
+  let nu_value;
+
+  
+
+  function updateMonth() {
+    monthIndex = parseInt(monthSlider.value);
+    firstDate = nestedData[monthIndex];
+    // dateHeader.innerHTML = returnDate(firstDate);
+    // date.textContent = returnDate(firstDate);
+
+    // filteredData = data.filter(function(person) {
+    //   return person.month_date == firstDate;
+    // });
+    
+
+    // Trigger your animation logic here based on the selected month
+  }
+
+  // Add an event listener to the slider input
+  monthSlider.addEventListener("change", sliderChanged);
+
+  let isSliderChange = false;
+
+  function sliderChanged() {
+    isSliderChange = true;
+    doSomething();
+  }
+ 
+
+  // Initialize with the default month
+
+  function nextMonth() {
+    if (isSliderChange) {
+      isSliderChange = false;
+      filter_num = monthSlider.value;
+    }
+    else {
+      monthSlider.value = (filter_num + 1) % 11;
+      filter_num = (filter_num + 1) % 11;
+    }
+    // nu_value = (monthIndex + 1) % 10;
+    // console.log(nu_value)
+  }
+
+
+          // clearInterval(intervalID);
+
+  
 
 
 
-      if (filter_num <= 10) {
-        filter_num += 1;
-      }
+      // const intervalID = setInterval(function() {}, 500);
 
-      else {
-        clearInterval(intervalID);
-      }
-      
+    let intervalID = null;
+    let isIntervalRunning = false;
 
+    // Function to perform an action at a regular interval
+    function doSomething() {
+
+      nextMonth();
 
       firstDate = nestedData[filter_num];
 
+dateHeader.innerHTML = returnDate(firstDate);
 
+// dateHeader.innerHTML = firstDate;
 
+filteredData = data.filter(function(person) {
+  return person.month_date == firstDate;
+});
 
+updateData(filteredData);
 
+    }
 
+    // Function to start or stop the interval
+    function toggleInterval() {
+      if (isIntervalRunning) {
+        clearInterval(intervalID);
+        isIntervalRunning = false;
+        toggleButton.textContent = "Play";
+        
+      } else {
+        intervalID = setInterval(doSomething, 1000); // Start the interval (e.g., every 1 second)
+        isIntervalRunning = true;
+        toggleButton.textContent = "Pause";
 
-      dateHeader.innerHTML = returnDate(firstDate);
+      }
+    }
 
-      filteredData = data.filter(function(person) {
-        return person.month_date == firstDate;
-      });
+    const toggleButton = document.getElementById("toggleButton");
+    toggleButton.addEventListener("click", toggleInterval);
 
-
-
-
-}, 750);
 
 
 
@@ -267,3 +381,89 @@ bubble_group.exit().remove();
 
 
 </script>
+
+<style>
+  h1, h2, p{
+    font-family: "Moderat",sans-serif;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  #date {
+    font-weight: 100;
+  }
+
+  text {
+    font-family:"Input Mono",sans-serif;
+  }
+
+  .slider-container {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 650px;
+}
+
+input[type="range"] {
+  width: 100%;
+  background: #808080; /* Bar color */
+  height: 2px; /* Bar height */
+  border: none; /* Remove the default border */
+  border-radius: 0; /* Remove rounded edges */
+  cursor: pointer; /* Show pointer cursor */
+  -webkit-appearance: none;
+}
+
+/* Style the slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Hide default thumb appearance on Webkit browsers (Chrome, Safari) */
+  width: 16px; /* Thumb width */
+  height: 16px; /* Thumb height */
+  background-color: #E45E00; /* Thumb color */
+  border: 2px solid #808080; /* Thumb border color */
+  border-radius: 50%; /* Make the thumb circular */
+  cursor: pointer; /* Show pointer cursor */
+  outline: none; /* Remove the blue highlight on focus */
+  color: green;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px; /* Thumb width */
+  height: 16px; /* Thumb height */
+  background: #E45E00; /* Thumb color */
+  border: 2px solid #808080; /* Thumb border color */
+  border-radius: 50%; /* Make the thumb circular */
+  cursor: pointer; /* Show pointer cursor */
+  outline: none; /* Remove the blue highlight on focus */
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+      height: 2px;
+    }
+    
+    /* Set a specific color for the slider thumb (slider knob) */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+      margin-top: -7px;
+    }
+
+    /* For non-WebKit browsers */
+
+    /* Additional styling for cross-browser compatibility */
+    input[type="range"] {
+      width: 100%; /* Set the desired width for the slider */
+    }
+
+
+</style>
