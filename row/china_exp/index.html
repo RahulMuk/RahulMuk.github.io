@@ -7,8 +7,8 @@
     <title>Chinese E commerce locations</title>
     <style>
         #globe-container {
-            width: 400px;
-            height: 400px;
+            width: fit-content;
+            height: fit-content;
             margin-top: 20px;
         }
         p {
@@ -24,10 +24,10 @@
     <h1>Chinese e-commerce companies moving out of China</h1>
     <h2>Drag the globe and hover over sites for more infomation</h2>
     <div id="filter-container"></div>
+    <p class="sentence"><span id="number">28</span> Internatinal Sites</p>
     
     <div id="globe-container"></div>
     <div id="tooltip" style="display: none;"></div>
-    <p class="sentence"><span id="number">28</span> Internatinal Sites</p>
 
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -74,7 +74,7 @@ function distanceToCircumference(point, radius) {
 
 
         parent.postMessage(document.body.clientHeight, "*")
-        var width = 400;
+        var width = window.innerWidth; //400
         var height = width;
 
 
@@ -149,9 +149,7 @@ function hideTooltip() {
             .attr("width", width)
             .attr("height", height);
 
-        var projection = d3.geoOrthographic().rotate([-100, -30])
-            .scale(200)
-            .translate([width / 2, height / 2]);
+        var projection = d3.geoOrthographic().rotate([-100, -30]);
 
             path = d3.geoPath().projection(projection)
 
@@ -630,8 +628,7 @@ p.attr {
     }
 
     .sentence {
-        width: 400px;
-        text-align: center;
+        text-align: left;
         font-size: 24px;
     }
 
