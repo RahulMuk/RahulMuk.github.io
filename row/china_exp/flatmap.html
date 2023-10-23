@@ -19,8 +19,8 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
 // Create an SVG element and set its dimensions
-const width = window.innerWidth;
-const height = window.innerHeight;
+const width = 500; //window.innerWidth
+const height = 400; //window.innerHeight
 
 const chinaCenter = [104.1954, 35.8617]; 
 
@@ -36,7 +36,7 @@ const svg = d3.select("#map")
 }
 
 // Create a Mercator projection for the map
-const projection = d3.geoNaturalEarth1(); //.rotate([-100, -15]);
+const projection = d3.geoNaturalEarth1().scale(100).translate([width/2, height/2]);; //.rotate([-100, -15]);
 
 // Create a path generator
 const path = d3.geoPath().projection(projection);
