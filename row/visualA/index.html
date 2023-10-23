@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Parallel Chart</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      /* Add your CSS styles here */
+      .line {
+        fill: none;
+        stroke-width: 2;
+        cursor: pointer;
+      }
+
+      .axis line, .axis text, g.tick {
+        opacity: 0;
+        display: none; /* Hide tick marks and axis lines */
+
+      }
+      .hover-text {
+        font-size: 12px;
+        text-anchor: middle;
+      }
+
+
+      
+
+    </style>
+  </head>
+  <body>
+    <div id="chart-container"></div>
+
+    <script>
+      // Data for your parallel coordinates chart
+      const data = [
+        { name: 'Data Point 1', attr1: 10, attr2: 30 },
+        { name: 'Data Point 2', attr1: 20, attr2: 10 },
+        { name: 'Data Point 3', attr1: 30, attr2: 40 },
+        // Add more data points as needed
+      ];
+
+      const margin = { top: 30, right: 80, bottom: 30, left: 60 };
+      const width = 600 - margin.left - margin.right;
+      const height = 800 - margin.top - margin.bottom;
+
+      const svg = d3
+        .select('#chart-container')
+        .append('svg')
+        .attr('width', width + margin.left + margin.right)
+        .attr('height', height + margin.top + margin.bottom)
+        .append('g')
+        .attr('transform', `translate(${margin.left},${margin.top})`);
+
+      // Define the dimensions (attributes) you want to visualize
+      const dimensions = Object.keys(data[0]).filter(key => key !== 'name');
+
+      // Set a consistent domain for all dimensions
+      const commonDomain = [0, 40]; // Adjust the domain based on your data range
+
+      // Create X scales for the left and right axes
+      const xLeft = {};
+      const xRight = {};
+      dimensions.forEach((dim, i) => {
+        xLeft[dim] = d3.scaleLinear()
+          .domain(commonDomain)
+          .range([0, height / 2]);
+
+        xRight[dim] = d3.scaleLinear()
+          .domain(commonDomain)
+          .range([0, height / 2]);
+
+        svg.append('g')
+          .attr('class', 'axis')
+          .attr('transform', `translate(${i * (width / (dimensions.length - 1)), 0})`)
+          .call(d3.axisLeft(xLeft[dim]));
+
+        svg.append('g')
+          .attr('class', 'axis')
+          .attr('transform', `translate(${i * (width / (dimensions.length - 1)), width})`)
+          .call(d3.axisRight(xRight[dim]));
+
+
+
+      });
+
+      // Create a line generator for each data point
+      const line = d3.line()
+        .x((d, i) => i * (width / (dimensions.length - 1)))
+        .y((d, i) => i < 3 ? xLeft[dimensions[i]](d) : xRight[dimensions[i]](d));
+
+        const hoverText = svg.append('text')
+        .attr('class', 'hover-text')
+        .attr('x', width / 2)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('display', 'none'); // Initially hide the hover text
+
+
+
+      // Draw the lines
+      svg.selectAll('.line')
+        .data(data)
+        .enter()
+        .append('path')
+        .attr('class', 'line')
+        .attr('d', d => line(dimensions.map(dim => d[dim])))
+        .style('stroke', (d, i) => d3.schemeCategory10[i])
+        .on('mouseover', function (event, d) {
+          // Calculate the y-position based on whether the line is on the left or right axis
+          const yPosition = event.target.classList.contains('line-left') ? xLeft[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10 : xRight[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10;
+
+          // Show the name when hovering over the line
+          hoverText
+            .attr('y', yPosition)
+            .text(d.name)
+            .style('display', 'block');
+        })
+        .on('mouseout', function () {
+          // Remove the name when not hovering over the line
+          hoverText.style('display', 'none');
+        });
+
+    </script>
+  </body>
+</html>
