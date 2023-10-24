@@ -17,6 +17,11 @@
         /* display: none; Hide tick marks and axis lines */
 
       }
+
+      g.tick > line {
+        stroke: #afafaf;
+      }
+
       .hover-text {
         font-size: 12px;
         text-anchor: middle;
@@ -64,7 +69,7 @@
   },
   {
     name: "Japan",
-    attr1: 0,
+    attr1: 1,
     attr2: 2920755,
   },
   {
@@ -129,6 +134,15 @@
       // Set a consistent domain for all dimensions
       const commonDomain = [d3.max(data, d => d.attr2), 0]; // Adjust the domain based on your data range
 
+      const customTickValues = [1, 100, 10000, 10000000];
+
+        // const customTickFormat = d3.formatPrefix(".0", 1e6);
+
+        let dotDim = d3.scaleLog()
+            .domain([d3.max(data, d => d.attr2), 1])
+            .range([0, height / 2]);
+
+
       // Create X scales for the left and right axes
       const xLeft = {};
       const xRight = {};
@@ -141,10 +155,15 @@
           .domain([d3.max(data, d => d.attr2), 1])
           .range([0, height / 2]);
 
-        svg.append('g')
-          .attr('class', 'axis')
-          .attr('transform', `translate(${i * (width / (dimensions.length - 1)), 0})`)
-          .call(d3.axisLeft(xLeft[dim]));
+          svg.append('g')
+    .attr('class', 'axis')
+    .attr('transform', `translate(${i * (width / (dimensions.length - 1)), 0})`)
+    .call(d3.axisLeft(xLeft[dim]).tickValues(customTickValues))
+    .select('.domain').remove()
+
+    svg.selectAll('g.tick > line')
+    .attr('x2', width); // Extend the tick lines to span the entire chart
+
 
 
 
@@ -165,7 +184,7 @@
 
 
 
-      // Draw the lines
+        let startCircles, endCircles;
       // Draw the lines
       const lines = svg.selectAll('.line')
         .data(data)
@@ -177,8 +196,14 @@
         .on('mouseover', function (event, d) {
 
           lines.style('opacity', 0.3);
-          // Highlight the hovered line
-          d3.select(this).style('opacity', 1);
+          startCircles.style('opacity', 0.3);
+
+            endCircles.style('opacity', 0.3);
+
+            // Highlight the hovered line
+            d3.select(this).style('opacity', 1);
+            d3.selectAll(`circle.${d.name.replace(' ','.')}`).style('opacity', 1);
+
 
           // Calculate the y-position based on whether the line is on the left or right axis
           const yPosition = event.target.classList.contains('line-left') ? xLeft[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10 : xRight[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10;
@@ -193,9 +218,34 @@
           // Remove the name when not hovering over the line
           lines.style('opacity', 1);
           hoverText.style('display', 'none');
+          startCircles.style('opacity', 1);
+            endCircles.style('opacity', 1);
+
         });
 
 
+// Redraw the circles at the start and end of the lines
+startCircles = svg.selectAll('.circle-start')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('class', 'circle-start')
+  .attr('class', d => d.name)
+  .attr('cx', d => 0) // X position at the start of the line
+  .attr('cy', d => dotDim(d.attr1)) // Y position at the start of the line
+  .attr('r', 4) // Radius of the circle
+  .style('fill', '#E45E00'); // Fill color of the circle
+
+endCircles =svg.selectAll('.circle-end')
+  .data(data)
+  .enter()
+  .append('circle')
+  .attr('class', 'circle-end')
+  .attr('class', d => d.name)
+  .attr('cx', width) // X position at the start of the line
+  .attr('cy', d => dotDim(d.attr2)) // Y position at the start of the line
+  .attr('r', 4) // Radius of the circle
+  .style('fill', '#E45E00'); // Fill color of the circle
 
       
 
