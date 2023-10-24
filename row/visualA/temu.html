@@ -13,8 +13,8 @@
       }
 
       .axis line, .axis text, g.tick {
-        opacity: 0;
-        display: none; /* Hide tick marks and axis lines */
+        opacity: 1;
+        /* display: none; Hide tick marks and axis lines */
 
       }
       .hover-text {
@@ -28,45 +28,117 @@
     </style>
   </head>
   <body>
-    <div id="chart-container"></div>
-
+    <div id="temu"></div>
     <script>
       // Data for your parallel coordinates chart
       const data = [
-        { name: 'Data Point 1', attr1: 10, attr2: 30 },
-        { name: 'Data Point 2', attr1: 20, attr2: 10 },
-        { name: 'Data Point 3', attr1: 30, attr2: 40 },
-        // Add more data points as needed
-      ];
+  {
+    name: "Australia",
+    attr1: 225400,
+    attr2: 2961542,
+  },
+  {
+    name: "Belgium",
+    attr1: 7095,
+    attr2: 730180,
+  },
+  {
+    name: "Canada",
+    attr1: 1849423,
+    attr2: 3980334,
+  },
+  {
+    name: "France",
+    attr1: 2809,
+    attr2: 5395460,
+  },
+  {
+    name: "Germany",
+    attr1: 22550,
+    attr2: 6822943,
+  },
+  {
+    name: "Italy",
+    attr1: 39142,
+    attr2: 5357205,
+  },
+  {
+    name: "Japan",
+    attr1: 0,
+    attr2: 2920755,
+  },
+  {
+    name: "Mexico",
+    attr1: 86734,
+    attr2: 12359935,
+  },
+  {
+    name: "Netherlands",
+    attr1: 11601,
+    attr2: 1086326,
+  },
+  {
+    name: "Poland",
+    attr1: 7631,
+    attr2: 1667558,
+  },
+  {
+    name: "Portugal",
+    attr1: 2974,
+    attr2: 758265,
+  },
+  {
+    name: "Spain",
+    attr1: 21095,
+    attr2: 3955503,
+  },
+  {
+    name: "Sri Lanka",
+    attr1: 1,
+    attr2: 1769249,
+  },
+  {
+    name: "United Kingdom",
+    attr1: 195817,
+    attr2: 7492687,
+  },
+  {
+    name: "United States",
+    attr1: 31225222,
+    attr2: 56699638,
+  },
+];
+
 
       const margin = { top: 30, right: 80, bottom: 30, left: 60 };
       const width = 600 - margin.left - margin.right;
       const height = 800 - margin.top - margin.bottom;
 
       const svg = d3
-        .select('#chart-container')
+        .select('#temu')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
+
       // Define the dimensions (attributes) you want to visualize
       const dimensions = Object.keys(data[0]).filter(key => key !== 'name');
 
       // Set a consistent domain for all dimensions
-      const commonDomain = [0, 40]; // Adjust the domain based on your data range
+      const commonDomain = [d3.max(data, d => d.attr2), 0]; // Adjust the domain based on your data range
 
       // Create X scales for the left and right axes
       const xLeft = {};
       const xRight = {};
       dimensions.forEach((dim, i) => {
-        xLeft[dim] = d3.scaleLinear()
-          .domain(commonDomain)
+        xLeft[dim] = d3.scaleLog()
+          .domain([d3.max(data, d => d.attr2), 1])
           .range([0, height / 2]);
 
-        xRight[dim] = d3.scaleLinear()
-          .domain(commonDomain)
+        xRight[dim] = d3.scaleLog()
+          .domain([d3.max(data, d => d.attr2), 1])
           .range([0, height / 2]);
 
         svg.append('g')
@@ -74,10 +146,6 @@
           .attr('transform', `translate(${i * (width / (dimensions.length - 1)), 0})`)
           .call(d3.axisLeft(xLeft[dim]));
 
-        svg.append('g')
-          .attr('class', 'axis')
-          .attr('transform', `translate(${i * (width / (dimensions.length - 1)), width})`)
-          .call(d3.axisRight(xRight[dim]));
 
 
 
@@ -98,14 +166,20 @@
 
 
       // Draw the lines
-      svg.selectAll('.line')
+      // Draw the lines
+      const lines = svg.selectAll('.line')
         .data(data)
         .enter()
         .append('path')
         .attr('class', 'line')
         .attr('d', d => line(dimensions.map(dim => d[dim])))
-        .style('stroke', (d, i) => d3.schemeCategory10[i])
+        .style('stroke', "#E45E00")
         .on('mouseover', function (event, d) {
+
+          lines.style('opacity', 0.3);
+          // Highlight the hovered line
+          d3.select(this).style('opacity', 1);
+
           // Calculate the y-position based on whether the line is on the left or right axis
           const yPosition = event.target.classList.contains('line-left') ? xLeft[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10 : xRight[dimensions[dimensions.length - 1]](d[dimensions[dimensions.length - 1]]) - 10;
 
@@ -117,8 +191,13 @@
         })
         .on('mouseout', function () {
           // Remove the name when not hovering over the line
+          lines.style('opacity', 1);
           hoverText.style('display', 'none');
         });
+
+
+
+      
 
     </script>
   </body>
