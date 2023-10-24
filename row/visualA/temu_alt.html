@@ -134,7 +134,9 @@
       // Set a consistent domain for all dimensions
       const commonDomain = [d3.max(data, d => d.attr2), 0]; // Adjust the domain based on your data range
 
-      const customTickValues = [1, 100, 10000, 10000000];
+      // const customTickValues = [1, 100, 10000, 10000000];
+
+      const customTickValues = [0, 4000000,8000000,12000000];
 
         // const customTickFormat = d3.formatPrefix(".0", 1e6);
 
@@ -142,8 +144,8 @@
         //     .domain([d3.max(data, d => d.attr2), 1])
         //     .range([0, height / 2]);
 
-            let dotDim = d3.scaleLog()
-            .domain([d3.max(data, d => d.attr2), 1])
+            let dotDim = d3.scaleLinear()
+            .domain(commonDomain)
             .range([0, height / 2]);
 
 
@@ -152,13 +154,23 @@
       const xLeft = {};
       const xRight = {};
       dimensions.forEach((dim, i) => {
-        xLeft[dim] = d3.scaleLog()
-          .domain([d3.max(data, d => d.attr2), 1])
+        // xLeft[dim] = d3.scaleLog()
+        //   .domain([d3.max(data, d => d.attr2), 1])
+        //   .range([0, height / 2]);
+
+        // xRight[dim] = d3.scaleLog()
+        //   .domain([d3.max(data, d => d.attr2), 1])
+        //   .range([0, height / 2]);
+
+
+        xLeft[dim] = d3.scaleLinear()
+          .domain(commonDomain)
           .range([0, height / 2]);
 
-        xRight[dim] = d3.scaleLog()
-          .domain([d3.max(data, d => d.attr2), 1])
+        xRight[dim] = d3.scaleLinear()
+          .domain(commonDomain)
           .range([0, height / 2]);
+
 
           svg.append('g')
     .attr('class', 'axis')
