@@ -11,7 +11,7 @@
     <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
     <h2 id="date">October 2022</h2>
     <div class="slider-container">
-      <button id="toggleButton">Play</button> <input type="range" id="monthSlider" min="0" max="10" step="1" value="0">
+      <button id="toggleButton"><img id="imgID" alt="play" src="Play.png"/></button> <input type="range" id="monthSlider" min="0" max="10" step="1" value="0">
     </div>  
   </div>
 
@@ -33,6 +33,8 @@
 parent.postMessage(document.body.clientHeight, "*")
 
 let dateHeader = document.getElementById('date');
+
+let imageButton = document.getElementById('imgID');
 
 let svg = d3.select("svg#my_dataviz"),
     width = +svg.attr("width"),
@@ -77,7 +79,28 @@ country_data = countries.features;
 
 const extent = [80.880885, 27.548636, 154.354626, -9.898752]; 
 
-const projection = d3.geoNaturalEarth1().fitSize([width, height], countries)
+const xmin = 80.880885;
+const ymin = -9.898752;
+const xmax = 150.769743;
+const ymax = 27.548636;
+
+
+// Calculate the center of the bounding box.
+const centerX = (xmin + xmax) / 2;
+const centerY = (ymin + ymax) / 2;
+
+// Calculate the scale to fit the bounding box within the map dimensions.
+const xScale = width / (xmax - xmin);
+const yScale = height / (ymax - ymin);
+const scale = Math.min(xScale, yScale);
+
+// const projection = d3.geoNaturalEarth1().fitSize([width, height], countries)
+
+const projection = d3.geoMercator()
+    .center([120,5  ])
+    .scale(650)
+    .translate([width / 2, height / 2]);
+
 
 // const projection = d3.geoNaturalEarth1()
 //   .clipAngle(extent)
@@ -85,6 +108,8 @@ const projection = d3.geoNaturalEarth1().fitSize([width, height], countries)
 
 
 path = d3.geoPath().projection(projection)
+
+
 
 
 
@@ -333,6 +358,8 @@ function updateData(newData) {
     let intervalID = null;
     let isIntervalRunning = false;
 
+    let timeToRun = 1000;
+
     // Function to perform an action at a regular interval
     function doSomething() {
 
@@ -340,16 +367,23 @@ function updateData(newData) {
 
       firstDate = nestedData[filter_num];
 
-dateHeader.innerHTML = returnDate(firstDate);
+      dateHeader.innerHTML = returnDate(firstDate);
 
-// dateHeader.innerHTML = firstDate;
+      // dateHeader.innerHTML = firstDate;
 
-filteredData = data.filter(function(person) {
-  return person.month_date == firstDate;
-});
+      filteredData = data.filter(function(person) {
+        return person.month_date == firstDate;
+      });
 
 
-updateData(filteredData);
+      updateData(filteredData);
+
+
+      if(firstDate == nestedData[nestedData.length - 1]){
+        clearInterval(intervalID); // Clear the interval
+        isIntervalRunning = false;
+        imageButton.src = "Play.png"
+      }
 
     }
 
@@ -358,12 +392,12 @@ updateData(filteredData);
       if (isIntervalRunning) {
         clearInterval(intervalID);
         isIntervalRunning = false;
-        toggleButton.textContent = "Play";
+        imageButton.src = "Play.png"
         
       } else {
-        intervalID = setInterval(doSomething, 1000); // Start the interval (e.g., every 1 second)
+        intervalID = setInterval(doSomething, timeToRun); // Start the interval (e.g., every 1 second)
         isIntervalRunning = true;
-        toggleButton.textContent = "Pause";
+        imageButton.src = "Pause.png"
 
       }
     }
@@ -405,6 +439,31 @@ updateData(filteredData);
 
   #date {
     font-weight: 100;
+  }
+
+  #toggleButton {
+    background-color: #fff;
+    border: none;
+    height: 15px;
+    width: 15px;
+    /* padding: 10px; */
+    position: relative;
+    margin-right: 10px;
+  }
+
+  #toggleButton:hover {
+    cursor: pointer;
+  }
+
+  #imgID {
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: 0px;
+  }
+
+  #my_dataviz {
+    margin-top: 10px;
   }
 
   text {
