@@ -2,11 +2,141 @@
 <link rel="stylesheet" href="https://restofworld.org/wp-content/themes/orbis/static-assets/external/fonts.css">
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
+<style>
+  #map-container {
+    width: 100%;
+    max-width: 980px; /* Set a max-width to control the map's maximum size */
+    height: 400px;
+}
+
+#map {
+  margin-top: 10px;
+    width: 100%;
+    height: inherit; /* Make the height responsive based on the width */
+}
+
+h1, h2, p{
+    font-family: "Moderat",sans-serif;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  #date {
+    font-weight: 100;
+  }
+
+  #toggleButton {
+    background-color: #fff;
+    border: none;
+    height: 15px;
+    width: 15px;
+    /* padding: 10px; */
+    position: relative;
+    margin-right: 10px;
+  }
+
+  #toggleButton:hover {
+    cursor: pointer;
+  }
+
+  #imgID {
+    height: inherit;
+    width: inherit;
+    position: absolute;
+    top: 0px;
+  }
+
+
+  /* #map {
+    margin-top: 10px;
+    width: 100%;
+    height: 400px;
+    max-width: 980px;
+  } */
+
+  text {
+   font-family:"Input Mono",sans-serif;
+   /* text-shadow: 1px 1px 2px #cdcdcd; */
+  }
+
+  .slider-container {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 650px;
+}
+
+input[type="range"] {
+  width: 100%;
+  background: #808080; /* Bar color */
+  height: 2px; /* Bar height */
+  border: none; /* Remove the default border */
+  border-radius: 0; /* Remove rounded edges */
+  cursor: pointer; /* Show pointer cursor */
+  -webkit-appearance: none;
+}
+
+/* Style the slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Hide default thumb appearance on Webkit browsers (Chrome, Safari) */
+  width: 16px; /* Thumb width */
+  height: 16px; /* Thumb height */
+  background-color: #E45E00; /* Thumb color */
+  border: 2px solid #808080; /* Thumb border color */
+  border-radius: 50%; /* Make the thumb circular */
+  cursor: pointer; /* Show pointer cursor */
+  outline: none; /* Remove the blue highlight on focus */
+  color: green;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px; /* Thumb width */
+  height: 16px; /* Thumb height */
+  background: #E45E00; /* Thumb color */
+  border: 2px solid #808080; /* Thumb border color */
+  border-radius: 50%; /* Make the thumb circular */
+  cursor: pointer; /* Show pointer cursor */
+  outline: none; /* Remove the blue highlight on focus */
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+      height: 2px;
+    }
+    
+    /* Set a specific color for the slider thumb (slider knob) */
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+      margin-top: -7px;
+    }
+
+    /* For non-WebKit browsers */
+
+    /* Additional styling for cross-browser compatibility */
+    input[type="range"] {
+      width: 100%; /* Set the desired width for the slider */
+    }
+</style>
+
 <body>
+  <div id="map-container">
+
   <div class="topContainer">
     <h1>TikTok Shop GMV in Southeast from Oct 2022 to Aug 2023, by country</h1>
     <h2 id="date">October 2022</h2>
@@ -14,10 +144,8 @@
       <button id="toggleButton"><img id="imgID" alt="play" src="Play.png"/></button> <input type="range" id="monthSlider" min="0" max="10" step="1" value="0">
     </div>  
   </div>
-
-
-<!-- Create an element where the map will take place -->
-  <svg id="my_dataviz" width="660" height="500"></svg>
+  <svg id="map"></svg>
+</div>
 
 </body>
 
@@ -28,54 +156,45 @@
 
 
 
-
-
-parent.postMessage(document.body.clientHeight, "*")
-
 let dateHeader = document.getElementById('date');
 
 let imageButton = document.getElementById('imgID');
 
-let svg = d3.select("svg#my_dataviz"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
-
-//     let viewBox = "600 300 360 500";
-
-// svg.attr("viewBox", viewBox);
 
 
 
-//     function updateMapSize() {
-//    width = window.innerWidth;
-//    height = window.innerHeight;
+function updateMapSize(){
 
-//   // Set the SVG's width and height based on the window dimensions
-//   svg.attr("width", width)
-//      .attr("height", height);
+  let country_data = []
+
+  let path;
 
 
-// }
-
-// // Call the function to set the initial size
-// updateMapSize();
-
-// // Attach an event listener for window resize
-
-// window.onresize = updateMapSize;
-
-
-let country_data = []
-let path;
-let filter_num = 0;
+  let filter_num = 0;
 
 let circle_radius = 60;
 
 
+
+
+  let svg = d3.select("svg#map"),
+    width = svg.node().clientWidth,
+    height = svg.node().clientHeight;
+
+
+
+
 d3.json("countries.geojson").then( function(countries){
+
+  let intervalID = null;
+    let isIntervalRunning = false;
+    clearInterval(intervalID);
+
 
 
 country_data = countries.features;
+
+console.log("countries",country_data.length)
 
 const extent = [80.880885, 27.548636, 154.354626, -9.898752]; 
 
@@ -86,19 +205,26 @@ const ymax = 27.548636;
 
 
 // Calculate the center of the bounding box.
-const centerX = (xmin + xmax) / 2;
-const centerY = (ymin + ymax) / 2;
+const centerX = 120;
+const centerY = 5;
+const maxWidth = 980;
+const maxHeight = 400;
+
 
 // Calculate the scale to fit the bounding box within the map dimensions.
 const xScale = width / (xmax - xmin);
 const yScale = height / (ymax - ymin);
 const scale = Math.min(xScale, yScale);
 
+
+const adjustedScale = (scale * Math.min(maxWidth / (xmax - xmin), maxHeight / (ymax - ymin))) * 5.7;
+
+
 // const projection = d3.geoNaturalEarth1().fitSize([width, height], countries)
 
 const projection = d3.geoMercator()
-    .center([120,5  ])
-    .scale(650)
+    .center([centerX,centerY])
+    .scale(adjustedScale)
     .translate([width / 2, height / 2]);
 
 
@@ -118,7 +244,7 @@ path = d3.geoPath().projection(projection)
 let country_group = svg.append("g");
   country_group
     .selectAll("path")
-    .data(countries.features)
+    .data(country_data)
     .join("path")
     .attr("d", path)
     // .attr("data-pop", (d) => console.log(d.properties.POP_EST))
@@ -160,9 +286,7 @@ return country;
 
 }
 
-
 d3.csv("newData.csv").then( function(data){
-
 
 
     let parseDate = d3.timeParse('%m/%Y');
@@ -171,6 +295,8 @@ data.forEach(function(d) {
     d['gmv_RMB'] = +d['gmv_RMB'];
     // d.month_date = parseDate(d.month_date);
   });
+
+  console.log("dots",data.length);
 
   function onlyUnique(value, index, array) {
     return array.indexOf(value) === index;
@@ -219,8 +345,6 @@ bubble_group
 .selectAll("circle")
 .data(filteredData)
 .join("circle")
-// .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
-// .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
 .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
 .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
 
@@ -245,40 +369,44 @@ text_group
 
 
 function updateData(newData) {
-      var bubble_group = svg.selectAll("circle")
-        .data(newData);
+  const circles = bubble_group.selectAll("circle")
+        .data(newData, (d) => d.SOVEREIGNT);
 
-      //   bubble_group
-      //   .transition()
-      //  .duration(200)  // Animation duration in milliseconds
-      //   .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
-
-
-        bubble_group.enter()
-        .append("circle")
-        .merge(bubble_group)
+    // Update the existing circles
+    circles
+        .transition()
+        .duration(200)  // Animation duration in milliseconds
         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
-      .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-  .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
-  .attr("fill", "#E45E00")
-.attr("opacity", 0.75);
+        .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
 
- bubble_group.exit().remove();
+    // Handle the entering circles
+    circles.enter()
+        .append("circle")
+        .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
+        .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
+        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+        .attr("fill", "#E45E00")
+        .attr("opacity", 0.75);
 
-            var text_group = svg.selectAll("text").data(newData);
+          // Remove any exiting circles
+    circles.exit().remove();
 
 
+// Update the text elements based on new data
+const textElements = text_group.selectAll("text")
+  .data(newData);
 
-            text_group.enter()
+textElements.enter()
   .append("text")
-  .merge(text_group)
+  .merge(textElements)
   .attr("x", (d) => return_Centeroid(d.SOVEREIGNT)[0])
   .attr("y", (d) => return_Centeroid(d.SOVEREIGNT)[1])
   .attr("dy", 5) // Adjust the vertical position of the text
   .style("text-anchor", "middle") // Center the text horizontally
   .text((d) => formatNumberToShort(d.gmv_RMB));
 
-  text_group.exit().remove();
+textElements.exit().remove();
 
 
 
@@ -355,8 +483,6 @@ function updateData(newData) {
 
       // const intervalID = setInterval(function() {}, 500);
 
-    let intervalID = null;
-    let isIntervalRunning = false;
 
     let timeToRun = 1000;
 
@@ -420,118 +546,29 @@ function updateData(newData) {
 
 
 
+}
+
+let resizeTimer;
+
+
+window.addEventListener("resize", function(){
+  clearTimeout(resizeTimer);
+
+  resizeTimer = setTimeout(function () {
+    document.getElementById("map").innerHTML = "";
+    updateMapSize();
+    parent.postMessage(document.body.clientHeight, "*")
+  }, 100);
+});
+parent.postMessage(document.body.clientHeight, "*")
+
+updateMapSize();
 
 
 </script>
 
 <style>
-  h1, h2, p{
-    font-family: "Moderat",sans-serif;
-  }
 
-  h1 {
-    font-size: 20px;
-  }
-
-  h2 {
-    font-size: 14px;
-  }
-
-  #date {
-    font-weight: 100;
-  }
-
-  #toggleButton {
-    background-color: #fff;
-    border: none;
-    height: 15px;
-    width: 15px;
-    /* padding: 10px; */
-    position: relative;
-    margin-right: 10px;
-  }
-
-  #toggleButton:hover {
-    cursor: pointer;
-  }
-
-  #imgID {
-    height: inherit;
-    width: inherit;
-    position: absolute;
-    top: 0px;
-  }
-
-  #my_dataviz {
-    margin-top: 10px;
-  }
-
-  text {
-   font-family:"Input Mono",sans-serif;
-   /* text-shadow: 1px 1px 2px #cdcdcd; */
-  }
-
-  .slider-container {
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  max-width: 650px;
-}
-
-input[type="range"] {
-  width: 100%;
-  background: #808080; /* Bar color */
-  height: 2px; /* Bar height */
-  border: none; /* Remove the default border */
-  border-radius: 0; /* Remove rounded edges */
-  cursor: pointer; /* Show pointer cursor */
-  -webkit-appearance: none;
-}
-
-/* Style the slider thumb */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Hide default thumb appearance on Webkit browsers (Chrome, Safari) */
-  width: 16px; /* Thumb width */
-  height: 16px; /* Thumb height */
-  background-color: #E45E00; /* Thumb color */
-  border: 2px solid #808080; /* Thumb border color */
-  border-radius: 50%; /* Make the thumb circular */
-  cursor: pointer; /* Show pointer cursor */
-  outline: none; /* Remove the blue highlight on focus */
-  color: green;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 16px; /* Thumb width */
-  height: 16px; /* Thumb height */
-  background: #E45E00; /* Thumb color */
-  border: 2px solid #808080; /* Thumb border color */
-  border-radius: 50%; /* Make the thumb circular */
-  cursor: pointer; /* Show pointer cursor */
-  outline: none; /* Remove the blue highlight on focus */
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-      height: 2px;
-    }
-    
-    /* Set a specific color for the slider thumb (slider knob) */
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-      margin-top: -7px;
-    }
-
-    /* For non-WebKit browsers */
-
-    /* Additional styling for cross-browser compatibility */
-    input[type="range"] {
-      width: 100%; /* Set the desired width for the slider */
-    }
 
 
 </style>

@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Parallel Chart</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
@@ -17,6 +19,13 @@
         opacity: 1;
         /* display: none; Hide tick marks and axis lines */
 
+      }
+
+      #shein {
+        width: 100%;
+        max-width: 600px;
+        height: 90vh;
+        max-height: 800px;
       }
 
       g.tick > line {
@@ -40,6 +49,7 @@
   <body>
     <div id="shein"></div>
     <script>
+
       // Data for your parallel coordinates chart
       const data = [
   {
@@ -120,12 +130,20 @@
 ];
 
 
-      const margin = { top: 30, right: 80, bottom: 30, left: 60 };
-      const width = 600 - margin.left - margin.right;
-      const height = 800 - margin.top - margin.bottom;
+function drawGraph(){
+  
+}
 
-      const svg = d3
-        .select('#shein')
+let svg_container = d3.select("#shein"),
+    temp_width = svg_container.node().clientWidth,
+    temp_height = svg_container.node().clientHeight;
+
+
+      const margin = { top: 30, right: 30, bottom: 30, left: 60 };
+      const width = temp_width - margin.left - margin.right;
+      const height = temp_height - margin.top - margin.bottom;
+
+      const svg = svg_container
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -264,6 +282,18 @@ endCircles =svg.selectAll('.circle-end')
 
 
 
+  window.addEventListener("resize", function(){
+  clearTimeout(resizeTimer);
+
+  resizeTimer = setTimeout(function () {
+    document.getElementById("temu").innerHTML = "";
+    drawChart();
+    parent.postMessage(document.body.clientHeight, "*")
+  }, 100);
+});
+parent.postMessage(document.body.clientHeight, "*")
+
+drawChart();
 
 
 

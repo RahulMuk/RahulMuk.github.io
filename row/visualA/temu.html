@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Parallel Chart</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
@@ -17,6 +18,14 @@
         /* display: none; Hide tick marks and axis lines */
 
       }
+
+      #temu {
+        width: 100%;
+        max-width: 600px;
+        height: 90vh;
+        max-height: 800px;
+      }
+
 
       g.tick > line {
         stroke: #afafaf;
@@ -35,6 +44,7 @@
   <body>
     <div id="temu"></div>
     <script>
+
       // Data for your parallel coordinates chart
       const data = [
   {
@@ -107,20 +117,25 @@
     attr1: 195817,
     attr2: 7492687,
   },
-  // {
-  //   name: "United States",
-  //   attr1: 31225222,
-  //   attr2: 56699638,
-  // },
+  {
+    name: "United States",
+    attr1: 31225222,
+    attr2: 56699638,
+  },
 ];
 
+function drawChart(){
 
-      const margin = { top: 30, right: 80, bottom: 30, left: 60 };
-      const width = 600 - margin.left - margin.right;
-      const height = 800 - margin.top - margin.bottom;
+let svg_container = d3.select("#temu"),
+    temp_width = svg_container.node().clientWidth,
+    temp_height = svg_container.node().clientHeight;
 
-      const svg = d3
-        .select('#temu')
+
+      const margin = { top: 30, right: 30, bottom: 30, left: 60 };
+      const width = temp_width - margin.left - margin.right;
+      const height = temp_height - margin.top - margin.bottom;
+
+      const svg = svg_container
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -134,7 +149,8 @@
       // Set a consistent domain for all dimensions
       const commonDomain = [d3.max(data, d => d.attr2), 0]; // Adjust the domain based on your data range
 
-      const customTickValues = [1, 100, 10000, 10000000];
+
+     const customTickValues = [0, 4000000,8000000,12000000];
 
         // const customTickFormat = d3.formatPrefix(".0", 1e6);
 
@@ -142,8 +158,8 @@
         //     .domain([d3.max(data, d => d.attr2), 1])
         //     .range([0, height / 2]);
 
-            let dotDim = d3.scaleLog()
-            .domain([d3.max(data, d => d.attr2), 1])
+            let dotDim = d3.scaleLinear()
+            .domain(commonDomain)
             .range([0, height / 2]);
 
 
@@ -152,18 +168,29 @@
       const xLeft = {};
       const xRight = {};
       dimensions.forEach((dim, i) => {
-        xLeft[dim] = d3.scaleLog()
-          .domain([d3.max(data, d => d.attr2), 1])
+        // xLeft[dim] = d3.scaleLog()
+        //   .domain([d3.max(data, d => d.attr2), 1])
+        //   .range([0, height / 2]);
+
+        // xRight[dim] = d3.scaleLog()
+        //   .domain([d3.max(data, d => d.attr2), 1])
+        //   .range([0, height / 2]);
+
+
+        xLeft[dim] = d3.scaleLinear()
+          .domain(commonDomain)
           .range([0, height / 2]);
 
-        xRight[dim] = d3.scaleLog()
-          .domain([d3.max(data, d => d.attr2), 1])
+        xRight[dim] = d3.scaleLinear()
+          .domain(commonDomain)
           .range([0, height / 2]);
+
 
           svg.append('g')
     .attr('class', 'axis')
     .attr('transform', `translate(${i * (width / (dimensions.length - 1)), 0})`)
-    .call(d3.axisLeft(xLeft[dim]).tickValues(customTickValues))
+    // .call(d3.axisLeft(xLeft[dim]).tickValues(customTickValues))
+    .call(d3.axisLeft(xLeft[dim]))
     .select('.domain').remove()
 
     svg.selectAll('g.tick > line')
@@ -252,7 +279,24 @@ endCircles =svg.selectAll('.circle-end')
   .attr('r', 4) // Radius of the circle
   .style('fill', '#E45E00'); // Fill color of the circle
 
-      
+}
+
+let resizeTimer;
+
+
+window.addEventListener("resize", function(){
+  clearTimeout(resizeTimer);
+
+  resizeTimer = setTimeout(function () {
+    document.getElementById("temu").innerHTML = "";
+    drawChart();
+    parent.postMessage(document.body.clientHeight, "*")
+  }, 100);
+});
+parent.postMessage(document.body.clientHeight, "*")
+
+drawChart();
+
 
     </script>
   </body>
