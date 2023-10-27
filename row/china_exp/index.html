@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://restofworld.org/wp-content/themes/orbis/static-assets/external/fonts.css">
+
 
     <title>D3.js Map</title>
     <style>
         path {
-            fill: #ccc;
             stroke: #fff;
-            stroke-width: 1;
+            stroke-width: 0.5;
+        }
+
+        .point {
+            stroke: #fff;
+            stroke-width: 0.5;
         }
 
 
@@ -33,7 +39,8 @@
     
     #filter-container {
         display: flex;
-        gap: 5px;
+        gap: 10px;
+        justify-content: center;
     }
     
     .filter {
@@ -43,33 +50,43 @@
         justify-content: center; */
         padding: 7px 11px 6px;
         font-size: 13px;
-        border-radius: 4px;
+        line-height: 13px;
+        border-radius: 10px;
         border: none;
-        background: rgb(230,230,230);
+        background: #fff;
         width: max-content;
         /* transition: all .2s ease; */
         white-space: nowrap;
         cursor: pointer;
         user-select: none;
+        border: 1px solid black;
+        text-transform: uppercase;
+        font-family: "Input Mono", sans-serif;
+        transition: all 0.2 ease;
+
     }
     
     #All:hover:not(.selected) {
         background-color: rgba(0,0,0,0.5);
     }
     #Shein:hover:not(.selected) {
-        background-color: rgba(227, 41, 28,0.5);
+        background-color: #D3221650;
     }
     
     #Temu:hover:not(.selected){
-        background-color: rgba(239, 127, 49,0.5);
+        background-color: #EF7F3150;
     }
     
     #TikTok:hover:not(.selected) {
-        background-color: rgba(58, 176, 145,0.5);
+        background-color: #9F7DFF50;
     }
     
     #Alibaba:hover:not(.selected) {
-        background-color: rgba(255, 151, 254,0.5);
+        background-color: #FF97FE50;
+    }
+
+    .selected {
+        border: none;
     }
     
     #All.selected {
@@ -79,17 +96,17 @@
     
     #Shein.selected {
         color: #fff;
-        background-color: #E3291C;
+        background-color: #D32216;
     }
     
     #Temu.selected {
         color: #fff;
-        background-color: #E45E00;
+        background-color: #EF7F31;
     }
     
     #TikTok.selected {
         color: #fff;
-        background-color: #3AB091;
+        background-color: #9F7DFF;
     }
     
     #Alibaba.selected {
@@ -104,6 +121,8 @@
     
       h1 {
         font-size: 20px;
+        text-align: center;
+
       }
     
       h2 {
@@ -138,7 +157,6 @@
       }
 
       .line {
-        stroke-dasharray: 4, 2;
         stroke-width: 1;
       }
     
@@ -159,10 +177,9 @@
         #body-container {
     width: 100%;
     max-width: 980px; /* Set a max-width to control the map's maximum size */
-    height: 450px;
+    
 }
 #map-container {
-    height: 450px;
     width: inherit;
   overflow-x: auto; /* Enable horizontal scrolling */
   white-space: nowrap; /* Prevent SVG from wrapping to a new line */
@@ -177,17 +194,44 @@
   width: 980px;
     height: inherit; /* Make the height responsive based on the width */
 }
+
+p.dek {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  p.cta {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  p.credit {
+    font-family: "Input Mono",monospace;
+    font-size: 10px;
+    text-align: right;
+    max-width: 500px;
+    display: block;
+    margin-left: auto; 
+margin-right: 0;
+  }
+
     </style>
 </head>
 <body>
     <div id="body-container">
-        <h1>Chinese e-commerce companies moving out of China</h1>
+        <h1>Moving away from China</h1>
+        <p class="dek">Chinese e-commerce companies have become more international, both to operate closer to their customers, and to avoid anti-Chinese scrutiny.</p>
         <div id="filter-container"></div>
         <div id="tooltip" style="display: none;"></div>
+        <p class="cta">Hover over dots for more infomation</p>
         <div id="map-container">
             <svg id="map"></svg>
         </div>
-    </div>
+        <p class="credit">Source: News reports</p>
+        <p class="credit">Data research: Sherry Xiao</p>
+          </div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
 
@@ -195,9 +239,8 @@ function drawMap(){
 
     let svg_container = d3.select("#map"),
     width = 980,
-    height = svg_container.node().clientHeight;
+    height = 450
 
-    console.log(width);
 
 
 // Create an SVG element and set its dimensions
@@ -211,9 +254,9 @@ const svg = svg_container
     .attr("height",height)
 
     let colorDict = {
-    "Shein":"#E3291C",
-    "Temu":"#E45E00",
-    "TikTok":"#3AB091",
+    "Shein":"#D32216",
+    "Temu":"#EF7F31",
+    "TikTok":"#9F7DFF",
     "Alibaba":"#FF97FE"
 }
 
@@ -225,7 +268,6 @@ const path = d3.geoPath().projection(projection);
 
 function returnData(d){
 
-// console.log(d);
 
 return `<div class="container ${d.Grouping}">
     <p class="description">${d.Description}</p>   
@@ -282,7 +324,9 @@ d3.json("world_2.json").then(function (world) {
         .data(world.features)
         .enter()
         .append("path")
-        .attr("d", path);
+        .attr("d", path)
+        .attr('fill',(d) => (d.properties.name == 'China' ? "#000" : "#d4d4d4"))
+
 
         function showTooltip(d) {
     // Get the coordinates for the tooltip
@@ -327,14 +371,54 @@ d3.json("world_2.json").then(function (world) {
 
 }
 
+let listOfCountries = [];
+
+
         function return_Centeroid(country_name){
+
+            let padding = 0;
+
+            let paddingBase = 5;
+            
+            const count = listOfCountries.reduce((accumulator, currentValue) => {
+            if (currentValue === country_name) {
+                console.log(country_name)
+                return accumulator + 1;
+            }
+            return accumulator;
+            }, 0);
+
+
+
+
+            if (count >= 1) {
+            // Value exists in the array
+
+                if(count >= 2) {
+                    padding = -paddingBase;
+                }
+                else {
+                    padding = paddingBase;
+                }
+            } else {
+            // Value does not exist in the array
+                padding = 0;
+            }
+
+            listOfCountries.push(country_name);
+
 
 
 simp_country = world.features.find(function(nation) {
     return nation.properties.name === country_name;
 });
 
+console.log("count",count);
+
 country = path.centroid(simp_country)
+console.log(country[0]);
+country[0] += padding;
+console.log(country[0],country_name);
 return country;
 
 
@@ -351,38 +435,81 @@ svg.selectAll(".line").remove();
     function getArch(source,target) {
         var dx = target[0] - source[0],
             dy = target[1] - source[1],
-            dr = Math.sqrt(dx * dx + dy * dy);
+            dr = Math.sqrt(dx * dx + dy * dy)  * 0.65;
         return "M" + source[0] + "," + source[1] + "A" + dr + "," + dr +
     " 0 0,1 " + target[0] + "," + target[1];
     }
 
+    var previousCoordinatesLineX = {};
+
     svg.selectAll(".line")
-    .data(data)
+    .data(data,  function(d) {
+        return d.Location + d.Grouping; // Use Location and Grouping as the key
+    })
     .enter()
     .append("path")
     .attr("class", "line")
     .attr("d", function(d) {
-            return getArch(projection(chinaCenter),return_Centeroid(d.Location));
+        var coords = return_Centeroid(d.Location);
+
+        if (previousCoordinatesLineX[d.Location]) {
+      // Spread the new point 5 pixels around the previous point
+            coords[0] = previousCoordinatesLineX[d.Location][0] + 2;
+
+        }
+
+        // Store the current coordinates as the previous coordinates
+        previousCoordinatesLineX[d.Location] = coords;
+
+            return getArch(projection(chinaCenter),coords);
         })
-    //   .attr("x1", projection(chinaCenter)[0])
-    //   .attr("y1", projection(chinaCenter)[1])
-    //   .attr("x2", d => return_Centeroid(d.Location)[0])
-    //   .attr("y2", d => return_Centeroid(d.Location)[1])
     .style("stroke", function (d) { return colorDict[d.Grouping]})
     .style('fill',"none");
 
-    // console.log(markers);
+    var previousCoordinates = {};
+
+
     var points = svg.selectAll(".point")
-    .data(data)
+    .data(data,  function(d) {
+        return d.Location + d.Grouping; // Use Location and Grouping as the key
+    })
     .enter()
     .append("circle")
     .attr("class", "point")
     .attr('data-city', (d) => d.Location)
-    .attr("r", 5)                
-    .attr("transform", function (d) {
+    .attr("r", 5)    
+    .attr("cx", function (d) {
     var coords = return_Centeroid(d.Location);
-    return "translate(" + coords + ")";
-    }).style("fill", function (d) { return colorDict[d.Grouping]})
+
+        // Check if coordinates for this location were used before
+    if (previousCoordinates[d.Location]) {
+      // Spread the new point 5 pixels around the previous point
+
+      if(d.Location == "Singapore"){
+        coords[0] = previousCoordinates[d.Location][0] + 5;
+      }
+      else{
+        coords[0] = previousCoordinates[d.Location][0] + 10;
+      }
+
+    }
+
+    // Store the current coordinates as the previous coordinates
+    previousCoordinates[d.Location] = coords;
+
+
+    return coords[0]; // Set the X-coordinate using cx
+  })
+  .attr("cy", function (d) {
+    var coords = return_Centeroid(d.Location);
+    return coords[1]; // Set the Y-coordinate using cy
+  })
+            
+    // .attr("transform", function (d) {
+    // var coords = return_Centeroid(d.Location);
+    // return "translate(" + return_Centeroid(d.Location) + ")";
+    // })
+    .style("fill", function (d) { return colorDict[d.Grouping]})
 
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -452,7 +579,6 @@ buttons.forEach(button => {
         }
 
 
-        console.log(filteredData);
 
         // Redraw the dots with the filtered data
         redrawDots(filteredData);
@@ -472,11 +598,11 @@ let resizeTimer;
 
 window.addEventListener("resize", function(){
   clearTimeout(resizeTimer);
+  parent.postMessage(document.body.clientHeight, "*")
 
   resizeTimer = setTimeout(function () {
     document.getElementById("map").innerHTML = "";
     drawMap();
-    parent.postMessage(document.body.clientHeight, "*")
   }, 100);
 });
 
