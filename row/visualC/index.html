@@ -27,7 +27,9 @@
   gap: 5px;
   margin: 10px;
   font-size: 14px;
-
+  @media screen and (max-width: 480px) {
+    margin: 5px;
+  }
 
 }
 
@@ -44,8 +46,7 @@
 
 #map {
   margin-top: 10px;
-    width: 100%;
-   
+  width: 100%;
 }
 
 h1, h2, p{
@@ -209,7 +210,8 @@ margin-right: 0;
       </div>
     </div>
   </div>
-  <svg id="map"></svg>
+  <svg id="map">
+  </svg>
   <p class="credit">Note: The Indonesian government effectively banned TikTok Shop in early October when it told social media companies to halt direct sales on their platforms.</p>
   <p class="credit">Source: Tabcut.</p>
 </div>
@@ -239,17 +241,19 @@ function updateMapSize(){
 
   let filter_num = 0;
 
-let circle_radius = 60;
 
 
 
 
   let svg = d3.select("svg#map"),
     width = window.innerWidth,
-    height = (window.innerWidth / 3);
+    height = (window.innerWidth / 2.25);
+
+    let circle_radius = height / 7.5;
+
 
     svg.attr("width", window.innerWidth)
-   .attr("height", (window.innerWidth / 3));
+   .attr("height", (window.innerWidth / 2.25));
 
 
 
@@ -567,7 +571,6 @@ textElements.exit().remove();
 
   function nextMonth() {
     if (isSliderChange) {
-      isSliderChange = false;
       filter_num = monthSlider.value;
     }
     else {
@@ -627,8 +630,12 @@ textElements.exit().remove();
         imageButton.src = "Play.png"
         
       } else {
+        if (isSliderChange){
+          isSliderChange = false;
+          filter_num = -1;
+
+        }
         intervalID = setInterval(doSomething, timeToRun); // Start the interval (e.g., every 1 second)
-        filter_num = -1;
         isIntervalRunning = true;
         imageButton.src = "Pause.png"
 
