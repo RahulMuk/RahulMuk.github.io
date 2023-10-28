@@ -13,8 +13,6 @@
 .countryContainer {
   display: flex;
   font-family: "Input Mono", sans-serif;
-  font-size: 14px;
-  color: #666;
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -26,8 +24,10 @@
 .country {
   display: flex;
   align-items: center;
-    gap: 5px;
-    margin: 10px;
+  gap: 5px;
+  margin: 10px;
+  font-size: 14px;
+
 
 }
 
@@ -35,18 +35,16 @@
   border-radius: 50%;
   width: 10px;
   height: 10px;
+  margin-bottom: 3px;
 }
 
   #map-container {
     width: 100%;
-    max-width: 980px; /* Set a max-width to control the map's maximum size */
-    height: 450px;
 }
 
 #map {
   margin-top: 10px;
     width: 100%;
-    height: inherit; /* Make the height responsive based on the width */
    
 }
 
@@ -202,12 +200,12 @@ margin-right: 0;
     </div>  
     <div class="countryKey">
       <div class="countryContainer">
-        <h3 class="country"><div class="circle" style="background-color: #EF7F31;"></div>Indonesia</h3>
-        <h3 class="country"><div class="circle" style="background-color: #D32216;"></div>Vietnam</h3>
-        <h3 class="country"><div class="circle" style="background-color: #FF97FE;"></div>Malaysia</h3>
-        <h3 class="country"><div class="circle" style="background-color: #9F7DFF;"></div>Philippines</h3>
-        <h3 class="country"><div class="circle" style="background-color: #3AB091;"></div>Singapore</h3>
-        <h3 class="country"><div class="circle" style="background-color: #0043EF;"></div>Thailand</h3>
+        <h3 class="country"><div class="circle" style="background-color: #EF7F31;"></div><div>Indonesia</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #D32216;"></div><div>Vietnam</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #FF97FE;"></div><div>Malaysia</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #9F7DFF;"></div><div>Philippines</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #3AB091;"></div><div>Singapore</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #0043EF;"></div><div>Thailand</div></h3>
       </div>
     </div>
   </div>
@@ -247,8 +245,11 @@ let circle_radius = 60;
 
 
   let svg = d3.select("svg#map"),
-    width = svg.node().clientWidth,
-    height = svg.node().clientHeight;
+    width = window.innerWidth,
+    height = (window.innerWidth / 3);
+
+    svg.attr("width", window.innerWidth)
+   .attr("height", (window.innerWidth / 3));
 
 
 
