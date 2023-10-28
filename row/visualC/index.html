@@ -531,7 +531,7 @@ textElements.exit().remove();
 
   let isSliderChange = false;
 
-  const sliderValue = 0;
+  let previousFilterNum = 0;
 
   function sliderChanged() {
     clearInterval(intervalID); // Clear the interval
@@ -539,11 +539,11 @@ textElements.exit().remove();
     isSliderChange = true;
     imageButton.src = "Play.png"
 
-    const sliderValue = monthSlider.value;
+    filter_num = monthSlider.value;
 
     nextMonth();
 
-    firstDate = nestedData[sliderValue];
+    firstDate = nestedData[filter_num];
 
 
     dateHeader.innerHTML = returnDate(firstDate);
@@ -628,6 +628,7 @@ textElements.exit().remove();
         
       } else {
         intervalID = setInterval(doSomething, timeToRun); // Start the interval (e.g., every 1 second)
+        filter_num = -1;
         isIntervalRunning = true;
         imageButton.src = "Pause.png"
 
