@@ -196,7 +196,7 @@ margin-right: 0;
     <p class="dek">TikTok Shop’s Gross Merchandise Value, in USD, grew in each of its markets between October 2022 and August 2023.</p>
     <h2 id="date">October 2022</h2>
     <div class="slider-container">
-      <button id="toggleButton"><img id="imgID" alt="play" src="Play.png"/></button> <input type="range" id="monthSlider" min="0" max="10" step="1" value="0">
+      <button id="toggleButton"><img id="imgID" alt="play" src="Play.png"/></button> <input type="range" id="monthSlider" min="0" max="11" step="1" value="0">
     </div>  
     <div class="countryKey">
       <div class="countryContainer">
@@ -426,7 +426,6 @@ bubble_group
 .join("circle")
 .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
 .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-
 // .transition(1000)
 .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
 .attr("fill", (d) => colorDict[d.SOVEREIGNT])
@@ -465,7 +464,7 @@ function updateData(newData) {
         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
         .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
         .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
-        .attr("fill", "#E45E00")
+        .attr("fill", (d) => colorDict[d.SOVEREIGNT])
         .attr("opacity", 0.75);
 
           // Remove any exiting circles
@@ -546,7 +545,6 @@ textElements.exit().remove();
 
     firstDate = nestedData[sliderValue];
 
-    console.log(firstDate);
 
     dateHeader.innerHTML = returnDate(firstDate);
 
@@ -555,6 +553,9 @@ textElements.exit().remove();
     filteredData = data.filter(function(person) {
       return person.month_date == firstDate;
     });
+
+    console.log(filteredData);
+
 
 
     updateData(filteredData);
@@ -570,7 +571,7 @@ textElements.exit().remove();
       filter_num = monthSlider.value;
     }
     else {
-      filter_num = (filter_num + 1) % 11;
+      filter_num = (filter_num + 1) % 12;
       monthSlider.value = filter_num;
     }
     // nu_value = (monthIndex + 1) % 10;
