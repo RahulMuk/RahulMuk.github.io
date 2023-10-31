@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="https://restofworld.org/wp-content/themes/orbis/static-assets/external/fonts.css">
 
 
-    <title>D3.js Map</title>
     <style>
         path {
             stroke-width: 0.5;
@@ -68,7 +67,7 @@
     }
     
     #All:hover:not(.selected) {
-        background-color: #0043EF50;
+        background-color: #00000050;
     }
     #Shein:hover:not(.selected) {
         background-color: #D3221650;
@@ -92,7 +91,7 @@
     
     #All.selected {
         color: #fff;
-        background-color: #0043EF;
+        background-color: #000000;
     }
     
     #Shein.selected {
@@ -116,7 +115,7 @@
     }
     
     
-          h1, h2, p{
+    h1, h2, p{
         font-family: "Moderat",sans-serif;
       }
     
@@ -177,6 +176,7 @@
         }
         #body-container {
     width: 100%;
+    overflow-x: hidden;
 
      /* max-width: 980px; Set a max-width to control the map's maximum size */
     
@@ -186,7 +186,28 @@
     overflow-x: auto;
     white-space: nowrap;
     direction: rtl; /* Right-to-left direction */
+
+    @media screen and (max-width: 760px) {
+     padding-left: 30%;
+    }
     
+
+}
+
+div#close {
+    text-align: center;
+    border-top: 1px solid #666;
+    padding-top: 5px;
+    font-size: 10px;
+    margin-top: 10px;
+    font-family: "Moderat",sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    color: #666;
+    display: none;
+    @media screen and (max-width: 760px) {
+        display: block;
+    }
 
 }
 
@@ -219,14 +240,11 @@ p.dek {
     font-weight: bold;
   }
   p.credit {
-    font-family: "Input Mono",monospace;
-    font-size: 10px;
-    text-align: right;
+    font-family: "Moderat",sans-serif;
+    font-size: 11px;
+    text-align: left;
     max-width: 500px;
-    display: block;
-    margin-left: auto; 
-margin-right: 0;
-  }
+    display: block;  }
 
     </style>
 </head>
@@ -266,7 +284,7 @@ function drawMap(){
     }
     else {
         svg_container = d3.select("#map").attr("viewBox", null);
-        height = window.innerHeight;
+        height = 450;
         width = 1000;
         svg = svg_container
     .attr("width", width)
@@ -316,6 +334,7 @@ return `<div class="container ${d.Grouping}">
     <p class="attr"><span class="label">Year</span> ${d.Year}</p>   
     <p class="attr"><span class="label">Function</span> ${d.Classification}</p>  
     </div>
+    <div id="close">Close</div>
  </div>
     `
 }
@@ -468,6 +487,8 @@ return country;
 }
 
 function redrawDots(data,key){
+
+    hideTooltip();
 
 svg.selectAll(".point").remove();
 
@@ -650,31 +671,20 @@ svg.selectAll(".line").remove();
 
     function returnColor(d){
         if (countriesSelected.includes(d.properties.name)){
-            return `${country_color}50`;
+            return `#E45E0050`;
         }
         else if (d.properties.name == 'China'){
-            return 'Blue';
+            return '#E45E00';
         }
         else {
             return "#d4d4d4";
         }
     }
 
-    function returnStroke(d){
-        if (countriesSelected.includes(d.properties.name)){
-            return `${country_color}`;
-        }
-        else if (d.properties.name == 'China'){
-            return 'Blue';
-        }
-        else {
-            return "#fff";
-        }
-    }
+ 
 
     svg.selectAll("path.countries")
     .attr('fill',(d) => returnColor(d))
-    .attr('stroke',(d) => returnStroke(d))
     
 
     console.log(multipleSites);
@@ -773,6 +783,21 @@ window.addEventListener("resize", function(){
     drawMap();
   }, 100);
 });
+
+var tooltip = document.getElementById("tooltip");
+
+document.addEventListener("click", function (event) {
+
+
+    var target = event.target;
+
+    // Check if the click target is not a point (circle) element or the tooltip itself
+    if (!target.classList.contains("point") && target !== tooltip) {
+        // Close the tooltip by hiding it
+        tooltip.style.display = "none";
+    }
+});
+
 
 drawMap();
 parent.postMessage(document.body.clientHeight, "*")

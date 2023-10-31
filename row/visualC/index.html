@@ -178,13 +178,11 @@ input[type="range"]::-webkit-slider-runnable-track {
       width: 100%; /* Set the desired width for the slider */
     }
     p.credit {
-    font-family: "Input Mono",monospace;
-    font-size: 10px;
-    text-align: right;
+    font-family: "Moderat",sans-serif;
+    font-size: 11px;
+    text-align: left;
     max-width: 500px;
     display: block;
-    margin-left: auto; 
-margin-right: 0;
   }
 
 </style>
@@ -376,7 +374,7 @@ d3.csv("newData.csv").then( function(data){
     let parseDate = d3.timeParse('%m/%Y');
 
 data.forEach(function(d) {
-    d['gmv_RMB'] = +d['gmv_RMB'];
+    d['gmv_USD'] = +d['gmv_USD'];
     // d.month_date = parseDate(d.month_date);
   });
 
@@ -418,11 +416,11 @@ function formatNumberToShort(number) {
   }
 
   // Round to 1 decimal place and add the abbreviation
-  return number.toFixed(1) + suffixes[suffixNum];
+  return "$" + number.toFixed(1) + suffixes[suffixNum];
 }
 
 
-let max_pop = d3.max(data.map((o) => o.gmv_RMB));
+let max_pop = d3.max(data.map((o) => o.gmv_USD));
 let bubble_group = svg.append("g");
 bubble_group
 .selectAll("circle")
@@ -431,7 +429,7 @@ bubble_group
 .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
 .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
 // .transition(1000)
-.attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+.attr("r", (d) => circle_radius * Math.sqrt(d.gmv_USD / max_pop))
 .attr("fill", (d) => colorDict[d.SOVEREIGNT])
 .attr("opacity", 0.75);
 
@@ -447,7 +445,7 @@ text_group
   .attr("y", (d) => return_Centeroid(d.SOVEREIGNT)[1])
   .attr("dy", 5) // Adjust the vertical position of the text
   .style("text-anchor", "middle") // Center the text horizontally
-  .text((d) => formatNumberToShort(d.gmv_RMB));
+  .text((d) => formatNumberToShort(d.gmv_USD));
 
 
 function updateData(newData) {
@@ -460,14 +458,14 @@ function updateData(newData) {
         .duration(200)  // Animation duration in milliseconds
         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
         .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop));
+        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_USD / max_pop));
 
     // Handle the entering circles
     circles.enter()
         .append("circle")
         .attr("cx", (d) => return_Centeroid(d.SOVEREIGNT)[0])
         .attr("cy", (d) => return_Centeroid(d.SOVEREIGNT)[1])
-        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_RMB / max_pop))
+        .attr("r", (d) => circle_radius * Math.sqrt(d.gmv_USD / max_pop))
         .attr("fill", (d) => colorDict[d.SOVEREIGNT])
         .attr("opacity", 0.75);
 
@@ -486,7 +484,7 @@ textElements.enter()
   .attr("y", (d) => return_Centeroid(d.SOVEREIGNT)[1])
   .attr("dy", 5) // Adjust the vertical position of the text
   .style("text-anchor", "middle") // Center the text horizontally
-  .text((d) => formatNumberToShort(d.gmv_RMB));
+  .text((d) => formatNumberToShort(d.gmv_USD));
 
 textElements.exit().remove();
 
