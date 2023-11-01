@@ -7,6 +7,11 @@
 
 
     <style>
+
+        body {
+            margin: 0;
+        }
+
         path {
             stroke-width: 0.5;
             stroke: #fff;
@@ -33,7 +38,7 @@
     }
     
     p.attr {
-        font-size: 14px;
+        font-size: 12px;
     }
     
     #filter-container {
@@ -183,7 +188,7 @@
     }
 #map-container {
     width: inherit;
-    overflow-x: auto;
+    overflow-x: scroll;
     white-space: nowrap;
     direction: rtl; /* Right-to-left direction */
 
@@ -215,7 +220,7 @@ div#close {
   margin-top: 10px;
   margin: 0 auto;
   /* float: right; */
-  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-x: scroll; /* Enable horizontal scrolling */
   overflow-y: visible;
   /* background-color: #262626; */
 
@@ -246,6 +251,31 @@ p.dek {
     max-width: 500px;
     display: block;  }
 
+    @media screen and (max-width: 760px) {
+
+
+     p.description {
+        font-size: 14px;
+     }
+
+     div.table > p {
+        flex: 1 33%;
+     }
+
+     div.table > p:last-child {
+        flex: 2 66%; /* The last item takes up 66% (twice the size of the first four) */
+     }
+
+     div.container {
+        width: 100%;
+     }
+
+     #tooltip {
+        width: 100%;
+     }
+    }
+
+
     </style>
 </head>
 <body>
@@ -254,7 +284,7 @@ p.dek {
         <p class="dek">Chinese e-commerce companies have become more international, both to operate closer to their customers, and to avoid anti-Chinese scrutiny.</p>
         <div id="filter-container"></div>
         <div id="tooltip" style="display: none;"></div>
-        <p class="cta">Hover over dots for more infomation.</p>
+        <p class="cta">Use dots for more information.</p>
         <div id="map-container">
             <svg id="map"></svg>
         </div>
@@ -388,23 +418,37 @@ d3.json("world_2.json").then(function (world) {
 
         function showTooltip(event,d) {
     // Get the coordinates for the tooltip
-    let x = event.clientX + 10;
-    let y = event.clientY + 10;
+    let x, y, where_pos;
+
+    if (isTouchDevice){
+        x = 0;
+        y = 0;
+        where_pos = 'bottom';
+    }
+
+    else {
+        x = event.clientX + 10;
+        y = event.clientY + 10;
+        where_pos = "top";
+
+        let containerWidth = document.getElementById('map-container').clientWidth;
+
+        if (x > containerWidth / 2) {
+            x = x - 280;
+        }
+
+    }
 
     
     // Show the tooltip at the coordinates
+    
 
-    let containerWidth = document.getElementById('map-container').clientWidth;
-
-    if (x > containerWidth / 2) {
-        x = x - 280;
-    }
 
 
     d3.select("#tooltip")
         .style("display", "block")
         .style("left", (x) + "px")
-        .style("top", (y) + "px")
+        .style(where_pos, (y) + "px")
         .html(returnData(d));
 
 
@@ -486,9 +530,14 @@ return country;
 
 }
 
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+
 function redrawDots(data,key){
 
-    hideTooltip();
+
+
+    // hideTooltip();
 
 svg.selectAll(".point").remove();
 
@@ -544,8 +593,6 @@ svg.selectAll(".line").remove();
     .attr("r", 5)    
     .attr("cx", function (d) {
     var coords = return_Centeroid(d.Location);
-
-    console.log(countriesSelected);
     
 
         // Check if coordinates for this location were used before
@@ -689,7 +736,6 @@ svg.selectAll(".line").remove();
 
     console.log(multipleSites);
 
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (isTouchDevice) {
     // Handle touch events (e.g., tap or touchstart)

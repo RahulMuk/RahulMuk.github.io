@@ -207,8 +207,7 @@ input[type="range"]::-webkit-slider-runnable-track {
         <h3 class="country"><div class="circle" style="background-color: #D32216;"></div><div>Vietnam</div></h3>
         <h3 class="country"><div class="circle" style="background-color: #FF97FE;"></div><div>Malaysia</div></h3>
         <h3 class="country"><div class="circle" style="background-color: #9F7DFF;"></div><div>Philippines</div></h3>
-        <h3 class="country"><div class="circle" style="background-color: #3AB091;"></div><div>Singapore</div></h3>
-        <h3 class="country"><div class="circle" style="background-color: #0043EF;"></div><div>Thailand</div></h3>
+        <h3 class="country"><div class="circle" style="background-color: #3AB091;"></div><div>Thailand</div></h3>
       </div>
     </div>
   </div>
@@ -243,20 +242,35 @@ function updateMapSize(){
 
   let filter_num = 0;
 
+  let svg, width, height;
 
 
 
 
-  let svg = d3.select("svg#map"),
-    width = window.innerWidth,
+
+
+  if (window.innerWidth > 760){
+     svg = d3.select("svg#map");
+    width = window.innerWidth;
     height = (window.innerWidth / 2.25);
-
-    let circle_radius = height / 7.5;
-
 
     svg.attr("width", window.innerWidth)
    .attr("height", (window.innerWidth / 2.25));
 
+  }
+
+  else {
+     svg = d3.select("svg#map");
+    width = window.innerWidth;
+    height = (window.innerWidth / 1.8);
+
+    svg.attr("width", window.innerWidth)
+   .attr("height", (window.innerWidth / 1.8));
+
+  }
+
+
+   let circle_radius = height / 7.5;
 
 
 
@@ -317,8 +331,7 @@ let colorDict ={
   "Vietnam":"#D32216",
   "Malaysia":"#FF97FE",
   "Philippines":"#9F7DFF",
-  "Singapore":"#3AB091",
-  "Thailand":"#0043EF"
+  "Thailand":"#3AB091",
 } 
 
 
