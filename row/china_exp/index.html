@@ -451,9 +451,17 @@ d3.json("world_2.json").then(function (world) {
 
         let containerWidth = document.getElementById('map-container').clientWidth;
 
+        let containerHeight = document.getElementById('map-container').clientHeight;
+
+
         if (x > containerWidth / 2) {
             x = x - 280;
         }
+
+        if (y > containerHeight / 2) {
+            y = y - 200;
+        }
+
 
     }
 
