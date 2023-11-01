@@ -10,6 +10,19 @@
 
 <style>
 
+#map-container {
+  padding-bottom: 4em;
+  position: relative;
+}
+
+
+.credit-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
 .countryContainer {
   display: flex;
   font-family: "Input Mono", sans-serif;
@@ -213,8 +226,10 @@ input[type="range"]::-webkit-slider-runnable-track {
   </div>
   <svg id="map">
   </svg>
-  <p class="credit">Note: The Indonesian government effectively banned TikTok Shop in early October when it told social media companies to halt direct sales on their platforms.</p>
-  <p class="credit">Source: Tabcut.</p>
+  <div class="credit-container">
+    <p class="credit">Note: The Indonesian government effectively banned TikTok Shop in early October when it told social media companies to halt direct sales on their platforms.</p>
+    <p class="credit">Source: Tabcut.</p>  
+  </div>
 </div>
 
 </body>

@@ -8,6 +8,13 @@
 
     <style>
 
+
+        .credit-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
         body {
             margin: 0;
         }
@@ -182,6 +189,7 @@
         #body-container {
     width: 100%;
     overflow-x: hidden;
+    position: relative;
 
      /* max-width: 980px; Set a max-width to control the map's maximum size */
     
@@ -230,6 +238,12 @@ div#close {
     }
 
 
+}
+
+.credit-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 
 p.dek {
@@ -287,9 +301,12 @@ p.dek {
         <p class="cta">Use dots for more information.</p>
         <div id="map-container">
             <svg id="map"></svg>
+            <div class="credit-container">
+
+                <p class="credit">Source: News reports</p>
+                <p class="credit">Data research: Sherry Xiao</p>
+                </div>        
         </div>
-        <p class="credit">Source: News reports</p>
-        <p class="credit">Data research: Sherry Xiao</p>
           </div>
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script>
